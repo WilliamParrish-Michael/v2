@@ -3,1354 +3,719 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insurance Benefits Calculator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Ernesto Paz LMFT - Marriage & Family Therapy | California</title>
+    <meta name="description" content="Licensed Marriage & Family Therapist specializing in anxiety, depression, relationships, and holistic mental health. Serving California with telehealth and in-person sessions.">
+    
     <style>
-        body { 
-            margin: 0; 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .calculator-container { 
-            animation: fadeIn 0.5s ease-in; 
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
         }
-        @keyframes fadeIn { 
-            from { opacity: 0; } 
-            to { opacity: 1; } 
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        .service-card.selected {
-            border-color: #3B82F6;
-            background-color: #EFF6FF;
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f0f8ff;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .credentials {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            background: white;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .philosophy-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .philosophy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .philosophy-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Services Section */
+        .services {
+            background: #f8f9fa;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Specializations */
+        .specializations {
+            background: white;
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .spec-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .spec-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        /* Insurance Section */
+        .insurance {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .insurance-highlight {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .insurance-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: white;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus states */
+        a:focus, button:focus {
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
         }
     </style>
 </head>
+
 <body>
-    <div class="min-h-screen bg-gray-50 calculator-container">
-        <div class="max-w-6xl mx-auto p-4">
-            <!-- Header -->
-            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                <div class="flex items-center justify-between flex-wrap gap-4">
-                    <div>
-                        <h1 class="text-2xl font-bold text-gray-800 mb-2">Insurance Benefits Calculator</h1>
-                        <p class="text-gray-600">Calculate client responsibility for treatment services and negotiate payment options</p>
-                    </div>
-                    <button onclick="resetCalculator()" class="px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors">
-                        Reset Calculator
-                    </button>
+    <header>
+        <nav class="container">
+            <div class="logo">Ernesto Paz, LMFT</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#specializations">Specializations</a></li>
+                <li><a href="#insurance">Insurance</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Ernesto Paz</h1>
+                    <p class="subtitle">Licensed Marriage & Family Therapist</p>
+                    <p class="credentials">LMFT #115411 | California Licensed</p>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">Creating balanced, joyful, and fulfilling lives through holistic psychotherapy focused on happiness and your unique recipe for well-being.</p>
+                    <a href="#contact" class="cta-button">Start Your Journey</a>
                 </div>
             </div>
+        </section>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Input Section -->
-                <div class="space-y-6">
-                    <!-- Benefits Information -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Insurance Benefits</h2>
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Ernesto</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <span>EP</span>
+                    </div>
+                    <div class="about-text">
+                        <p>Welcome! I'm Ernesto Paz, a Licensed Marriage and Family Therapist with over six years of clinical experience serving individuals, couples, and families throughout California. My approach to therapy is centered on <span class="highlight">holistic well-being and happiness</span> rather than simply managing symptoms.</p>
                         
-                        <div class="space-y-4">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Annual Deductible ($)</label>
-                                    <input type="number" id="deductible" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="5000" oninput="calculate()" onchange="calculate()">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Deductible Met ($)</label>
-                                    <input type="number" id="deductibleMet" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="1500" oninput="calculate()" onchange="calculate()">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Out-of-Pocket Max ($)</label>
-                                    <input type="number" id="oopMax" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="8000" oninput="calculate()" onchange="calculate()">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">OOP Met ($)</label>
-                                    <input type="number" id="oopMet" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="2000" oninput="calculate()" onchange="calculate()">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Coinsurance (%)</label>
-                                    <input type="number" id="coinsurance" min="0" max="100" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="20" oninput="updateInsurancePortionDirect()" onchange="updateInsurancePortionDirect()" onkeyup="updateInsurancePortionDirect()">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Insurance Portion (%)</label>
-                                    <input type="number" id="insurancePortion" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600" placeholder="80" readonly>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Treatment Services -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-lg font-semibold text-gray-800">Treatment Services</h2>
-                            <button onclick="setDefaultRates()" class="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                                Set Default Rates for Selected
-                            </button>
-                        </div>
-
-                        <div class="space-y-3">
-                            <!-- Detox -->
-                            <div class="border rounded-lg p-4 service-card cursor-pointer" id="detox-card" onclick="toggleServiceDirect('detox')">
-                                <div class="flex items-start">
-                                    <input type="checkbox" id="detox-checkbox" class="h-4 w-4 text-blue-600 rounded mt-1" onclick="event.stopPropagation(); toggleServiceDirect('detox')">
-                                    <div class="ml-3 flex-1">
-                                        <div class="font-medium text-gray-800">Medical Detoxification</div>
-                                        <div class="text-sm text-gray-600">Medically supervised withdrawal management</div>
-                                    </div>
-                                </div>
-                                <div class="ml-7 mt-3 grid grid-cols-2 gap-3" id="detox-inputs" style="display: none;">
-                                    <div>
-                                        <label class="block text-xs font-medium text-gray-700 mb-1">Daily Rate ($)</label>
-                                        <input type="number" id="detox-rate" class="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm" placeholder="2600" onclick="event.stopPropagation()" oninput="calculate()" onchange="calculate()">
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-medium text-gray-700 mb-1">Number of Days</label>
-                                        <input type="number" id="detox-days" min="1" value="7" class="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm" onclick="event.stopPropagation()" oninput="calculate()" onchange="calculate()">
-                                    </div>
-                                    <div class="col-span-2 space-y-2" id="detox-totals"></div>
-                                </div>
-                            </div>
-
-                            <!-- Residential -->
-                            <div class="border rounded-lg p-4 service-card cursor-pointer" id="residential-card" onclick="toggleServiceDirect('residential')">
-                                <div class="flex items-start">
-                                    <input type="checkbox" id="residential-checkbox" class="h-4 w-4 text-blue-600 rounded mt-1" onclick="event.stopPropagation(); toggleServiceDirect('residential')">
-                                    <div class="ml-3 flex-1">
-                                        <div class="font-medium text-gray-800">Residential Treatment Center</div>
-                                        <div class="text-sm text-gray-600">Inpatient residential treatment program</div>
-                                    </div>
-                                </div>
-                                <div class="ml-7 mt-3 grid grid-cols-2 gap-3" id="residential-inputs" style="display: none;">
-                                    <div>
-                                        <label class="block text-xs font-medium text-gray-700 mb-1">Daily Rate ($)</label>
-                                        <input type="number" id="residential-rate" class="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm" placeholder="2000" onclick="event.stopPropagation()" oninput="calculate()" onchange="calculate()">
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-medium text-gray-700 mb-1">Number of Days</label>
-                                        <input type="number" id="residential-days" min="1" value="21" class="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm" onclick="event.stopPropagation()" oninput="calculate()" onchange="calculate()">
-                                    </div>
-                                    <div class="col-span-2 space-y-2" id="residential-totals"></div>
-                                </div>
-                            </div>
-
-                            <!-- PHP -->
-                            <div class="border rounded-lg p-4 service-card cursor-pointer" id="php-card" onclick="toggleServiceDirect('php')">
-                                <div class="flex items-start">
-                                    <input type="checkbox" id="php-checkbox" class="h-4 w-4 text-blue-600 rounded mt-1" onclick="event.stopPropagation(); toggleServiceDirect('php')">
-                                    <div class="ml-3 flex-1">
-                                        <div class="font-medium text-gray-800">Partial Hospitalization Program</div>
-                                        <div class="text-sm text-gray-600">Intensive day treatment program</div>
-                                    </div>
-                                </div>
-                                <div class="ml-7 mt-3 grid grid-cols-2 gap-3" id="php-inputs" style="display: none;">
-                                    <div>
-                                        <label class="block text-xs font-medium text-gray-700 mb-1">Daily Rate ($)</label>
-                                        <input type="number" id="php-rate" class="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm" placeholder="400" onclick="event.stopPropagation()" oninput="calculate()" onchange="calculate()">
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-medium text-gray-700 mb-1">Number of Days</label>
-                                        <input type="number" id="php-days" min="1" value="30" class="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm" onclick="event.stopPropagation()" oninput="calculate()" onchange="calculate()">
-                                    </div>
-                                    <div class="col-span-2 space-y-2" id="php-totals"></div>
-                                </div>
-                            </div>
-
-                            <!-- IOP -->
-                            <div class="border rounded-lg p-4 service-card cursor-pointer" id="iop-card" onclick="toggleServiceDirect('iop')">
-                                <div class="flex items-start">
-                                    <input type="checkbox" id="iop-checkbox" class="h-4 w-4 text-blue-600 rounded mt-1" onclick="event.stopPropagation(); toggleServiceDirect('iop')">
-                                    <div class="ml-3 flex-1">
-                                        <div class="font-medium text-gray-800">Intensive Outpatient Program</div>
-                                        <div class="text-sm text-gray-600">Structured outpatient treatment</div>
-                                    </div>
-                                </div>
-                                <div class="ml-7 mt-3 grid grid-cols-2 gap-3" id="iop-inputs" style="display: none;">
-                                    <div>
-                                        <label class="block text-xs font-medium text-gray-700 mb-1">Daily Rate ($)</label>
-                                        <input type="number" id="iop-rate" class="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm" placeholder="200" onclick="event.stopPropagation()" oninput="calculate()" onchange="calculate()">
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-medium text-gray-700 mb-1">Number of Days</label>
-                                        <input type="number" id="iop-days" min="1" value="30" class="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm" onclick="event.stopPropagation()" oninput="calculate()" onchange="calculate()">
-                                    </div>
-                                    <div class="col-span-2 space-y-2" id="iop-totals"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Results Section -->
-                <div id="results-section">
-                    <div class="bg-white rounded-lg shadow-sm p-12 text-center">
-                        <div class="text-gray-400 mb-4">
-                            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-medium text-gray-800 mb-2">No Calculation Yet</h3>
-                        <p class="text-gray-600">Enter benefits information and select services to see the cost calculation and payment options</p>
+                        <p>I believe that therapy should focus on <strong>happiness and each person's unique recipe for that</strong>. My goal is to partner with you in creating a life filled with fulfillment, joy, and peace of mind. Together, we'll work collaboratively to develop solutions and build your confidence in achieving your personal goals.</p>
+                        
+                        <p>As a <span class="highlight">Certified Mindfulness-Informed Clinician</span> and <span class="highlight">DBT Skills Training Certified</span> therapist, I integrate evidence-based practices with a warm, authentic approach. I create a safe, non-judgmental space that respects all backgrounds and encourages authentic exploration and growth.</p>
+                        
+                        <p>When I'm not in session, I enjoy an active lifestyle with my wife and three sons - mountain biking, snowboarding, surfing, and exploring the outdoors. This balance in my own life reflects the holistic approach I bring to therapy.</p>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Footer -->
-            <div class="mt-8 text-center text-sm text-gray-500">
-                <p>Free Insurance Benefits Calculator - Streamlined for Treatment Facilities</p>
+        <section id="philosophy" class="philosophy">
+            <div class="container">
+                <h2 class="section-title">My Therapeutic Approach</h2>
+                <div class="philosophy-grid">
+                    <div class="philosophy-card fade-in">
+                        <h3>🌟 Happiness-Focused</h3>
+                        <p>Unlike traditional symptom-reduction models, I focus on helping you experience higher states of fulfillment, joy, and peace of mind.</p>
+                    </div>
+                    <div class="philosophy-card fade-in">
+                        <h3>🤝 Collaborative Partnership</h3>
+                        <p>You're the expert on your own life. I work with you as a partner to develop solutions and build confidence in achieving your goals.</p>
+                    </div>
+                    <div class="philosophy-card fade-in">
+                        <h3>🎯 Solution-Focused</h3>
+                        <p>My action-oriented, mindful approach emphasizes practical solutions and real-world applications of therapeutic insights.</p>
+                    </div>
+                    <div class="philosophy-card fade-in">
+                        <h3>🌍 Culturally Responsive</h3>
+                        <p>I respect all backgrounds and create an inclusive space where everyone feels understood and valued for who they are.</p>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Services Offered</h2>
+                <div class="services-grid">
+                    <div class="service-card fade-in">
+                        <div class="service-icon">👤</div>
+                        <h3>Individual Therapy</h3>
+                        <p>Personalized one-on-one sessions focusing on your unique needs, goals, and path to fulfillment.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon">💑</div>
+                        <h3>Couples Therapy</h3>
+                        <p>Strengthen your relationship using evidence-based approaches including the Gottman Method.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon">👨‍👩‍👧‍👦</div>
+                        <h3>Family Therapy</h3>
+                        <p>Navigate family dynamics, blended family challenges, and parent-child relationships.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon">💻</div>
+                        <h3>Telehealth Sessions</h3>
+                        <p>Convenient, secure video therapy sessions available throughout California.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; text-align: center;">
+                    <h3 style="margin-bottom: 2rem; color: #2c3e50;">Treatment Modalities</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 800px; margin: 0 auto;">
+                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Cognitive Behavioral Therapy (CBT)</div>
+                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Dialectical Behavior Therapy (DBT)</div>
+                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Mindfulness-Based Interventions</div>
+                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Acceptance & Commitment Therapy</div>
+                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Solution-Focused Therapy</div>
+                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Motivational Interviewing</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="specializations" class="specializations">
+            <div class="container">
+                <h2 class="section-title">Areas of Expertise</h2>
+                <div class="spec-grid">
+                    <div class="spec-item fade-in">
+                        <h4>Anxiety & Depression</h4>
+                        <p>Comprehensive treatment for anxiety disorders, panic attacks, depression, and mood disorders.</p>
+                    </div>
+                    <div class="spec-item fade-in">
+                        <h4>Substance Use & Addiction</h4>
+                        <p>Evidence-based addiction treatment with extensive experience in recovery support.</p>
+                    </div>
+                    <div class="spec-item fade-in">
+                        <h4>Relationship Issues</h4>
+                        <p>Marriage counseling, family conflict resolution, and relationship strengthening.</p>
+                    </div>
+                    <div class="spec-item fade-in">
+                        <h4>Life Transitions</h4>
+                        <p>Support through major life changes, grief, loss, and adjustment challenges.</p>
+                    </div>
+                    <div class="spec-item fade-in">
+                        <h4>ADHD & OCD</h4>
+                        <p>Specialized treatment for attention-deficit disorders and obsessive-compulsive disorder.</p>
+                    </div>
+                    <div class="spec-item fade-in">
+                        <h4>Cultural Issues</h4>
+                        <p>Culturally responsive therapy addressing racial stress and identity concerns.</p>
+                    </div>
+                    <div class="spec-item fade-in">
+                        <h4>Workplace Stress</h4>
+                        <p>Managing burnout, workplace challenges, and career-related anxiety.</p>
+                    </div>
+                    <div class="spec-item fade-in">
+                        <h4>Sleep & Phobias</h4>
+                        <p>Treatment for sleep disorders, insomnia, and specific fears or phobias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="insurance" class="insurance">
+            <div class="container" style="text-align: center;">
+                <h2 class="section-title" style="color: white;">Insurance & Accessibility</h2>
+                <div class="insurance-highlight">
+                    Average Client Co-pay: $28
+                </div>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Accepting 40+ major insurance providers to make quality therapy accessible and affordable</p>
+                
+                <div class="insurance-grid">
+                    <div class="insurance-item">Aetna</div>
+                    <div class="insurance-item">Anthem Blue Cross</div>
+                    <div class="insurance-item">Blue Shield of California</div>
+                    <div class="insurance-item">Cigna/Evernorth</div>
+                    <div class="insurance-item">Health Net/MHN</div>
+                    <div class="insurance-item">UnitedHealthcare</div>
+                    <div class="insurance-item">Kaiser Permanente</div>
+                    <div class="insurance-item">TRICARE West</div>
+                    <div class="insurance-item">Optum & Oscar</div>
+                    <div class="insurance-item">+ Many Others</div>
+                </div>
+
+                <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px; backdrop-filter: blur(10px);">
+                    <h3 style="margin-bottom: 1rem;">Payment Options</h3>
+                    <p>In-network insurance • Out-of-network benefits • HSA/FSA • Credit cards • Cash payments</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Get Started Today</h2>
+                <p style="font-size: 1.2rem; color: #666; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">Ready to begin your journey toward greater happiness and fulfillment? I'm here to support you every step of the way.</p>
+                
+                <div class="contact-info">
+                    <div class="contact-card fade-in">
+                        <div class="contact-icon">📞</div>
+                        <h3>Phone</h3>
+                        <p>(760) 799-9767</p>
+                        <p style="font-size: 0.9rem; color: #666;">Primary contact number</p>
+                    </div>
+                    <div class="contact-card fade-in">
+                        <div class="contact-icon">✉️</div>
+                        <h3>Email</h3>
+                        <p>Ernestopazlmft@gmail.com</p>
+                        <p style="font-size: 0.9rem; color: #666;">For appointment requests</p>
+                    </div>
+                    <div class="contact-card fade-in">
+                        <div class="contact-icon">🌍</div>
+                        <h3>Service Area</h3>
+                        <p>California Statewide</p>
+                        <p style="font-size: 0.9rem; color: #666;">Telehealth & in-person sessions</p>
+                    </div>
+                    <div class="contact-card fade-in">
+                        <div class="contact-icon">🏥</div>
+                        <h3>Networks</h3>
+                        <p>Octave • Evernorth</p>
+                        <p style="font-size: 0.9rem; color: #666;">Behavioral Care Group</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    <h3 style="color: #2c3e50; margin-bottom: 1rem;">Session Information</h3>
+                    <p style="color: #666; margin-bottom: 0.5rem;">• 60-minute individual therapy sessions</p>
+                    <p style="color: #666; margin-bottom: 0.5rem;">• Couples and family therapy available</p>
+                    <p style="color: #666; margin-bottom: 0.5rem;">• Video and phone sessions offered</p>
+                    <p style="color: #666;">• English language services</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ernesto Paz, LMFT. Licensed Marriage & Family Therapist #115411. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">This website provides general information and is not intended as a substitute for professional medical advice, diagnosis, or treatment.</p>
         </div>
-    </div>
+    </footer>
 
     <script>
-        const serviceDefaults = {
-            detox: { rate: 2600, days: 7 },
-            residential: { rate: 2000, days: 21 },
-            php: { rate: 400, days: 30 },
-            iop: { rate: 200, days: 30 }
-        };
-
-        function formatNumber(num) {
-            return new Intl.NumberFormat().format(Math.round(num));
-        }
-
-        function updateInsurancePortion() {
-            const coinsuranceValue = document.getElementById('coinsurance').value;
-            const coinsurance = parseFloat(coinsuranceValue);
-            let insurancePortion = '';
-            
-            // Only calculate if there's a valid number entered
-            if (coinsuranceValue !== '' && !isNaN(coinsurance) && coinsurance >= 0 && coinsurance <= 100) {
-                insurancePortion = 100 - coinsurance;
-            }
-            
-            document.getElementById('insurancePortion').value = insurancePortion;
-        }
-
-        function toggleServiceDirect(service) {
-            var checkbox = document.getElementById(service + '-checkbox');
-            var inputs = document.getElementById(service + '-inputs');
-            var card = document.getElementById(service + '-card');
-            var rateInput = document.getElementById(service + '-rate');
-            
-            // Toggle the checkbox
-            checkbox.checked = !checkbox.checked;
-            
-            // Show/hide inputs
-            if (checkbox.checked) {
-                inputs.style.display = 'grid';
-                card.classList.add('selected');
-                // Auto-fill default rate if empty
-                if (!rateInput.value) {
-                    rateInput.value = serviceDefaults[service].rate;
-                }
-            } else {
-                inputs.style.display = 'none';
-                card.classList.remove('selected');
-            }
-            
-            calculate();
-        }
-
-        function handleCheckboxClick(event, service) {
-            // Prevent the label click from firing when checkbox is clicked directly
-            event.stopPropagation();
-            // The checkbox state change will be handled by the browser
-            // We just need to update the UI and calculate
-            setTimeout(() => {
-                const checkbox = document.getElementById(service + '-checkbox');
-                const inputs = document.getElementById(service + '-inputs');
-                const card = document.getElementById(service + '-card');
-                const rateInput = document.getElementById(service + '-rate');
-                
-                if (checkbox.checked) {
-                    inputs.style.display = 'grid';
-                    card.classList.add('selected');
-                    // Auto-fill default rate if empty
-                    if (!rateInput.value) {
-                        rateInput.value = serviceDefaults[service].rate;
-                    }
-                } else {
-                    inputs.style.display = 'none';
-                    card.classList.remove('selected');
-                }
-                
-                calculate();
-            }, 0);
-        }
-
-        function setDefaultRates() {
-            Object.keys(serviceDefaults).forEach(service => {
-                var checkbox = document.getElementById(service + '-checkbox');
-                var rateInput = document.getElementById(service + '-rate');
-                
-                if (checkbox.checked) {
-                    rateInput.value = serviceDefaults[service].rate;
-                }
-            });
-            calculate();
-        }
-
-        function updateServiceTotals(service) {
-            const totalsDiv = document.getElementById(service + '-totals');
-            const checkbox = document.getElementById(service + '-checkbox');
-            const rate = parseFloat(document.getElementById(service + '-rate').value) || 0;
-            const days = parseInt(document.getElementById(service + '-days').value) || 0;
-            const coinsurance = parseFloat(document.getElementById('coinsurance').value) || 0;
-            
-            if (!checkbox.checked || !rate || !days) {
-                totalsDiv.innerHTML = '';
-                return;
-            }
-            
-            const total = rate * days;
-            const deductible = parseFloat(document.getElementById('deductible').value) || 0;
-            const deductibleMet = parseFloat(document.getElementById('deductibleMet').value) || 0;
-            const remainingDeductible = Math.max(0, deductible - deductibleMet);
-            
-            let clientDaily, insuranceDaily;
-            if (remainingDeductible > 0) {
-                clientDaily = rate;
-                insuranceDaily = 0;
-            } else {
-                clientDaily = rate * (coinsurance / 100);
-                insuranceDaily = rate * ((100 - coinsurance) / 100);
-            }
-            
-            totalsDiv.innerHTML = `
-                <div class="text-center p-2 bg-white rounded border border-blue-200">
-                    <span class="text-sm text-gray-600">Service Total: </span>
-                    <span class="font-semibold text-blue-600">$${formatNumber(total)}</span>
-                </div>
-                ${coinsurance ? `
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                    <div class="text-center p-2 bg-red-50 rounded border border-red-200">
-                        <div class="text-red-600 font-medium">Client Daily Rate</div>
-                        <div class="font-semibold">$${formatNumber(clientDaily)}</div>
-                    </div>
-                    <div class="text-center p-2 bg-green-50 rounded border border-green-200">
-                        <div class="text-green-600 font-medium">Insurance Daily Rate</div>
-                        <div class="font-semibold">$${formatNumber(insuranceDaily)}</div>
-                    </div>
-                </div>
-                ` : ''}
-            `;
-        }
-
-        function getSelectedServices() {
-            const services = [];
-            Object.keys(serviceDefaults).forEach(service => {
-                const checkbox = document.getElementById(service + '-checkbox');
-                const rate = parseFloat(document.getElementById(service + '-rate').value) || 0;
-                const days = parseInt(document.getElementById(service + '-days').value) || 0;
-                
-                if (checkbox.checked && rate && days) {
-                    services.push({
-                        name: service,
-                        rate: rate,
-                        days: days,
-                        total: rate * days
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
-            return services;
-        }
+        });
 
-        function calculate() {
-            // Update service totals
-            Object.keys(serviceDefaults).forEach(service => {
-                updateServiceTotals(service);
-            });
-            
-            const services = getSelectedServices();
-            
-            if (services.length === 0) {
-                showNoCalculation();
-                return;
-            }
-            
-            const deductible = parseFloat(document.getElementById('deductible').value) || 0;
-            const deductibleMet = parseFloat(document.getElementById('deductibleMet').value) || 0;
-            const oopMax = parseFloat(document.getElementById('oopMax').value) || 0;
-            const oopMet = parseFloat(document.getElementById('oopMet').value) || 0;
-            const coinsurance = parseFloat(document.getElementById('coinsurance').value) || 0;
-            
-            const totalCharges = services.reduce((sum, service) => sum + service.total, 0);
-            const remainingDeductible = Math.max(0, deductible - deductibleMet);
-            const remainingOOP = Math.max(0, oopMax - oopMet);
-            
-            // Calculate client responsibility
-            const deductibleApplied = Math.min(totalCharges, remainingDeductible);
-            const amountAfterDeductible = Math.max(0, totalCharges - deductibleApplied);
-            const coinsuranceAmount = amountAfterDeductible * (coinsurance / 100);
-            const totalClientResponsibility = deductibleApplied + coinsuranceAmount;
-            const finalClientCost = Math.min(totalClientResponsibility, remainingOOP);
-            
-            const actualDeductiblePaid = Math.min(deductibleApplied, finalClientCost);
-            const actualCoinsurancePaid = Math.max(0, finalClientCost - actualDeductiblePaid);
-            const insurancePays = totalCharges - finalClientCost;
-            
-            const calculation = {
-                services: services,
-                totalCharges: totalCharges,
-                deductibleApplied: actualDeductiblePaid,
-                coinsuranceAmount: actualCoinsurancePaid,
-                totalClientCost: finalClientCost,
-                insurancePays: insurancePays,
-                remainingDeductible: Math.max(0, remainingDeductible - actualDeductiblePaid),
-                remainingOOP: Math.max(0, remainingOOP - finalClientCost),
-                oopMaxReached: finalClientCost < totalClientResponsibility
-            };
-            
-            showResults(calculation);
-        }
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-        function calculateOOPMaxDay(calc) {
-            const deductible = parseFloat(document.getElementById('deductible').value) || 0;
-            const deductibleMet = parseFloat(document.getElementById('deductibleMet').value) || 0;
-            const oopMax = parseFloat(document.getElementById('oopMax').value) || 0;
-            const oopMet = parseFloat(document.getElementById('oopMet').value) || 0;
-            const coinsurance = parseFloat(document.getElementById('coinsurance').value) || 0;
-            
-            const remainingOOP = Math.max(0, oopMax - oopMet);
-            let remainingDeductible = Math.max(0, deductible - deductibleMet);
-            let cumulativeClientCost = 0;
-            let currentDay = 0;
-            
-            // Go through each service day by day
-            for (let service of calc.services) {
-                for (let day = 1; day <= service.days; day++) {
-                    currentDay++;
-                    let dailyClientCost;
-                    
-                    if (remainingDeductible > 0) {
-                        // During deductible phase - client pays 100%
-                        dailyClientCost = service.rate;
-                        remainingDeductible = Math.max(0, remainingDeductible - service.rate);
-                    } else {
-                        // During coinsurance phase - client pays percentage
-                        dailyClientCost = service.rate * (coinsurance / 100);
-                    }
-                    
-                    cumulativeClientCost += dailyClientCost;
-                    
-                    // Check if we've hit the OOP max
-                    if (cumulativeClientCost >= remainingOOP) {
-                        return currentDay;
-                    }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
-            }
-            
-            return currentDay; // If somehow we get here
-        }
-            const deductible = parseFloat(document.getElementById('deductible').value) || 0;
-            const deductibleMet = parseFloat(document.getElementById('deductibleMet').value) || 0;
-            const oopMax = parseFloat(document.getElementById('oopMax').value) || 0;
-            const oopMet = parseFloat(document.getElementById('oopMet').value) || 0;
-            const coinsurance = parseFloat(document.getElementById('coinsurance').value) || 0;
-            
-            const remainingOOP = Math.max(0, oopMax - oopMet);
-            const remainingDeductible = Math.max(0, deductible - deductibleMet);
-            
-            if (remainingOOP <= 0) {
-                return `
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-green-600 mb-2">0 Days</div>
-                        <p class="text-green-700 text-sm">Out-of-pocket maximum already reached - Insurance pays 100%!</p>
-                    </div>
-                `;
-            }
-            
-            // Calculate weighted average daily rate across all selected services
-            let totalServiceCost = 0;
-            let totalDays = 0;
-            
-            calc.services.forEach(service => {
-                totalServiceCost += service.total;
-                totalDays += service.days;
             });
-            
-            const avgDailyRate = totalServiceCost / totalDays;
-            
-            // Calculate days needed to reach OOP max
-            let daysNeeded = 0;
-            let runningOOPUsed = 0;
-            let currentRemainingDeductible = remainingDeductible;
-            
-            // Phase 1: Days during deductible (client pays 100%)
-            if (currentRemainingDeductible > 0) {
-                const deductibleDays = Math.ceil(currentRemainingDeductible / avgDailyRate);
-                const deductibleCost = deductibleDays * avgDailyRate;
-                
-                if (deductibleCost >= remainingOOP) {
-                    // Will reach OOP max during deductible phase
-                    daysNeeded = Math.ceil(remainingOOP / avgDailyRate);
-                } else {
-                    // Need to continue past deductible into coinsurance
-                    daysNeeded += deductibleDays;
-                    runningOOPUsed += Math.min(deductibleCost, currentRemainingDeductible);
-                    currentRemainingDeductible = 0;
-                    
-                    // Phase 2: Days during coinsurance (client pays %)
-                    const remainingOOPAfterDeductible = remainingOOP - runningOOPUsed;
-                    const clientCoinsuranceRate = coinsurance / 100;
-                    const dailyClientCostInCoinsurance = avgDailyRate * clientCoinsuranceRate;
-                    
-                    if (dailyClientCostInCoinsurance > 0) {
-                        const coinsuranceDays = Math.ceil(remainingOOPAfterDeductible / dailyClientCostInCoinsurance);
-                        daysNeeded += coinsuranceDays;
-                    }
-                }
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
             } else {
-                // Already past deductible, only coinsurance applies
-                const clientCoinsuranceRate = coinsurance / 100;
-                const dailyClientCostInCoinsurance = avgDailyRate * clientCoinsuranceRate;
-                
-                if (dailyClientCostInCoinsurance > 0) {
-                    daysNeeded = Math.ceil(remainingOOP / dailyClientCostInCoinsurance);
-                }
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
             }
-            
-            // Calculate daily rates for different phases
-            const dailyDeductibleCost = avgDailyRate;
-            const dailyCoinsuranceCost = avgDailyRate * (coinsurance / 100);
-            
-            return `
-                <div class="text-center mb-4">
-                    <div class="text-3xl font-bold text-purple-600 mb-2">${daysNeeded} Days</div>
-                    <p class="text-purple-700 text-sm">Until client pays 0% and insurance covers 100% of treatment costs</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                    <div class="bg-white/60 rounded p-3 text-center">
-                        <div class="text-purple-600 font-medium text-sm">Remaining OOP Maximum</div>
-                        <div class="text-lg font-bold text-purple-800">${formatNumber(remainingOOP)}</div>
-                    </div>
-                    <div class="bg-white/60 rounded p-3 text-center">
-                        <div class="text-purple-600 font-medium text-sm">Average Daily Rate</div>
-                        <div class="text-lg font-bold text-purple-800">${formatNumber(avgDailyRate)}</div>
-                    </div>
-                    <div class="bg-white/60 rounded p-3 text-center">
-                        <div class="text-purple-600 font-medium text-sm">Current Phase</div>
-                        <div class="text-lg font-bold text-purple-800">${currentRemainingDeductible > 0 ? 'Deductible' : 'Coinsurance'}</div>
-                    </div>
-                </div>
-                
-                <div class="mt-4 space-y-2 text-sm">
-                    <div class="bg-white/60 rounded p-3">
-                        <div class="font-medium text-purple-700 mb-2">Daily Client Cost by Phase:</div>
-                        <div class="grid grid-cols-2 gap-2 text-xs">
-                            <div>
-                                <span class="text-red-600">• Deductible Phase:</span> ${formatNumber(dailyDeductibleCost)}/day (100%)
-                            </div>
-                            <div>
-                                <span class="text-orange-600">• Coinsurance Phase:</span> ${formatNumber(dailyCoinsuranceCost)}/day (${coinsurance}%)
-                            </div>
-                        </div>
-                        <div class="mt-2 text-green-600 font-medium">
-                            • After ${daysNeeded} days: $0/day (0% - Insurance pays 100%)
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mt-4 text-center p-3 bg-green-50 rounded border border-green-200">
-                    <div class="text-sm text-green-700">
-                        <strong>Goal:</strong> After ${daysNeeded} more days of treatment, all covered services will be FREE for the rest of the year!
-                    </div>
-                </div>
-            `;
-        }
+        });
 
-        function generateServiceBreakdown(calc) {
-            const deductible = parseFloat(document.getElementById('deductible').value) || 0;
-            const deductibleMet = parseFloat(document.getElementById('deductibleMet').value) || 0;
-            const oopMax = parseFloat(document.getElementById('oopMax').value) || 0;
-            const oopMet = parseFloat(document.getElementById('oopMet').value) || 0;
-            const coinsurance = parseFloat(document.getElementById('coinsurance').value) || 0;
-            
-            let remainingDeductible = Math.max(0, deductible - deductibleMet);
-            let remainingOOP = Math.max(0, oopMax - oopMet);
-            let runningClientTotal = 0;
-            let runningInsuranceTotal = 0;
-            
-            const serviceNames = {
-                detox: 'Medical Detoxification',
-                residential: 'Residential Treatment',
-                php: 'Partial Hospitalization',
-                iop: 'Intensive Outpatient'
-            };
-            
-            let breakdown = '<div class="space-y-4">';
-            
-            // Header
-            breakdown += `
-                <div class="text-center mb-4">
-                    <div class="text-lg font-bold text-orange-600 mb-2">Service-by-Service Calculation</div>
-                    <p class="text-orange-700 text-sm">How client responsibility is calculated across multiple treatment levels</p>
-                </div>
-            `;
-            
-            calc.services.forEach((service, index) => {
-                const serviceName = serviceNames[service.name] || service.name;
-                const serviceTotal = service.total;
-                
-                // Calculate this service's client responsibility
-                let deductibleForThisService = Math.min(serviceTotal, remainingDeductible);
-                let amountAfterDeductible = Math.max(0, serviceTotal - deductibleForThisService);
-                let coinsuranceForThisService = amountAfterDeductible * (coinsurance / 100);
-                let totalServiceResponsibility = deductibleForThisService + coinsuranceForThisService;
-                
-                // Apply OOP cap
-                let actualServiceResponsibility = Math.min(totalServiceResponsibility, remainingOOP);
-                let serviceInsurancePays = serviceTotal - actualServiceResponsibility;
-                
-                // Update running totals
-                runningClientTotal += actualServiceResponsibility;
-                runningInsuranceTotal += serviceInsurancePays;
-                
-                // Update remaining amounts
-                remainingDeductible = Math.max(0, remainingDeductible - deductibleForThisService);
-                remainingOOP = Math.max(0, remainingOOP - actualServiceResponsibility);
-                
-                const isDeductiblePhase = deductibleForThisService > 0;
-                const isCoinsurancePhase = coinsuranceForThisService > 0;
-                const isOOPCapped = actualServiceResponsibility < totalServiceResponsibility;
-                
-                breakdown += `
-                    <div class="bg-white/60 rounded-lg p-4 border border-orange-200">
-                        <div class="flex justify-between items-center mb-3">
-                            <div>
-                                <div class="font-semibold text-gray-800">${serviceName}</div>
-                                <div class="text-sm text-gray-600">${service.days} days @ ${formatNumber(service.rate)}/day</div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-lg font-bold text-orange-600">${formatNumber(serviceTotal)}</div>
-                                <div class="text-xs text-gray-600">Total Cost</div>
-                            </div>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-3 text-sm">
-                            <div class="bg-red-50 rounded p-3 border border-red-200">
-                                <div class="font-medium text-red-700 mb-2">Client Pays</div>
-                                ${isDeductiblePhase ? `<div class="text-xs">• Deductible: ${formatNumber(deductibleForThisService)}</div>` : ''}
-                                ${isCoinsurancePhase ? `<div class="text-xs">• Coinsurance (${coinsurance}%): ${formatNumber(coinsuranceForThisService)}</div>` : ''}
-                                ${isOOPCapped ? `<div class="text-xs text-orange-600">• Capped by OOP Max</div>` : ''}
-                                <div class="font-bold text-red-800 mt-1">${formatNumber(actualServiceResponsibility)}</div>
-                            </div>
-                            
-                            <div class="bg-green-50 rounded p-3 border border-green-200">
-                                <div class="font-medium text-green-700 mb-2">Insurance Pays</div>
-                                <div class="text-xs">• Coverage: ${isDeductiblePhase ? '0%' : `${100 - coinsurance}%`} of allowed</div>
-                                ${isOOPCapped ? `<div class="text-xs text-green-600">• Plus OOP excess</div>` : ''}
-                                <div class="font-bold text-green-800 mt-1">${formatNumber(serviceInsurancePays)}</div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-3 pt-3 border-t border-orange-200">
-                            <div class="grid grid-cols-3 gap-2 text-xs">
-                                <div class="text-center">
-                                    <div class="text-gray-600">Remaining Deductible</div>
-                                    <div class="font-semibold">${remainingDeductible > 0 ? '
+        // Enhanced accessibility
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
 
-        function showNoCalculation() {
-            document.getElementById('results-section').innerHTML = `
-                <div class="bg-white rounded-lg shadow-sm p-12 text-center">
-                    <div class="text-gray-400 mb-4">
-                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-800 mb-2">No Calculation Yet</h3>
-                    <p class="text-gray-600">Enter benefits information and select services to see the cost calculation and payment options</p>
-                </div>
-            `;
-        }
-
-        function showResults(calc) {
-            const coinsurance = parseFloat(document.getElementById('coinsurance').value) || 0;
-            const oopMaxDay = calc.oopMaxReached ? calculateOOPMaxDay(calc) : null;
-            
-            document.getElementById('results-section').innerHTML = `
-                <div class="space-y-6">
-                    <!-- Insurance Rules -->
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <div class="text-sm text-gray-700 space-y-1">
-                            <div>• Until Deductible: Client pays 100%</div>
-                            <div>• After Deductible: Client pays coinsurance ${coinsurance || '[enter %]'}%</div>
-                            <div>• After OOP Max: Insurance pays 100%</div>
-                        </div>
-                    </div>
-
-                    <!-- Main Result -->
-                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-sm p-6 text-white">
-                        <h3 class="text-lg font-semibold mb-4">Client Responsibility</h3>
-                        <div class="text-center mb-6">
-                            <div class="text-5xl font-bold mb-2">$${formatNumber(calc.totalClientCost)}</div>
-                            <p class="text-blue-100">Total amount client will pay</p>
-                            ${calc.oopMaxReached ? `<div class="mt-3 bg-white/20 rounded-lg px-4 py-2 text-sm"><span class="font-semibold">✓ OOP Max Reached</span> - Capped at remaining maximum<br><span class="text-blue-200">Reached on day ${oopMaxDay} of treatment</span></div>` : ''}
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div class="bg-white/10 rounded p-3">
-                                <div class="text-blue-100">Insurance Pays</div>
-                                <div class="text-xl font-semibold">$${formatNumber(calc.insurancePays)}</div>
-                            </div>
-                            <div class="bg-white/10 rounded p-3">
-                                <div class="text-blue-100">Total Charges</div>
-                                <div class="text-xl font-semibold">$${formatNumber(calc.totalCharges)}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    ${calc.services.length > 0 && calc.remainingOOP > 0 ? `
-                    <!-- Days Until 100% Insurance Coverage -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Days Until 0% Client Responsibility</h4>
-                        <div class="bg-gradient-to-r from-blue-100 to-purple-100 rounded-lg p-4">
-                            ${generateDaysTo100Coverage(calc)}
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    ${calc.services.length > 0 ? `
-                    <!-- Client Responsibility Breakdown -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Client Responsibility Calculation by Service</h4>
-                        <div class="bg-gradient-to-r from-orange-100 to-red-100 rounded-lg p-4">
-                            ${generateServiceBreakdown(calc)}
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    <!-- Payment Options -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Payment Collection Options</h4>
-                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
-                            <p class="text-sm text-blue-800"><strong>Purpose:</strong> Help clients access treatment when they cannot afford the full amount upfront.</p>
-                        </div>
-                        
-                        <div class="space-y-4">
-                            <!-- Option 1: Deductible Only -->
-                            <div class="border-2 border-gray-200 rounded-lg p-4">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold mb-2">Option 1 - Minimum</span>
-                                        <h5 class="font-semibold text-gray-800">Pay Deductible Portion Only</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-gray-800">$${formatNumber(calc.deductibleApplied)}</div>
-                                </div>
-                                <div class="bg-gray-50 p-3 rounded text-xs space-y-1">
-                                    <div>• Client pays now: $${formatNumber(calc.deductibleApplied)}</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost - calc.deductibleApplied)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.deductibleApplied + calc.insurancePays)}</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 2: 50% -->
-                            <div class="border-2 border-blue-200 rounded-lg p-4 bg-blue-50">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-2">Option 2 - Partial</span>
-                                        <h5 class="font-semibold text-gray-800">Pay 50% of Client Responsibility</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-blue-700">$${formatNumber(calc.totalClientCost * 0.5)}</div>
-                                </div>
-                                <div class="bg-blue-50 p-3 rounded border border-blue-200 text-xs space-y-1">
-                                    <div>• Client pays now: $${formatNumber(calc.totalClientCost * 0.5)}</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost * 0.5)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.totalClientCost * 0.5 + calc.insurancePays)}</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 3: Full -->
-                            <div class="border-2 border-green-200 rounded-lg p-4">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-2">Option 3 - Full Payment</span>
-                                        <h5 class="font-semibold text-gray-800">Pay Full Client Responsibility</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-green-700">$${formatNumber(calc.totalClientCost)}</div>
-                                </div>
-                                <div class="bg-green-50 p-3 rounded border border-green-200 text-xs space-y-1">
-                                    <div>• Client pays now: $${formatNumber(calc.totalClientCost)}</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $0</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.totalCharges)}</div>
-                                </div>
-                                <div class="bg-white p-3 rounded border border-green-300 mt-2 text-center">
-                                    <div class="text-lg font-bold text-green-700">✓ Paid in Full</div>
-                                    <div class="text-xs text-green-600">No future billing required</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 4: $1000 -->
-                            <div class="border-2 border-purple-200 rounded-lg p-4 bg-purple-50">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-2">Option 4 - Hardship</span>
-                                        <h5 class="font-semibold text-gray-800">Minimum Viable Payment</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-purple-700">$1,000</div>
-                                </div>
-                                <div class="bg-purple-50 p-3 rounded border border-purple-200 text-xs space-y-1">
-                                    <div>• Client pays now: $1,000</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost - 1000)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(1000 + calc.insurancePays)}</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 5: $0 -->
-                            <div class="border-2 border-red-200 rounded-lg p-4 bg-red-50">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-semibold mb-2">Option 5 - Emergency</span>
-                                        <h5 class="font-semibold text-gray-800">Collect Nothing Upfront</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-red-700">$0</div>
-                                </div>
-                                <div class="bg-red-50 p-3 rounded border border-red-200 text-xs space-y-1">
-                                    <div>• Client pays now: $0</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.insurancePays)}</div>
-                                </div>
-                                <div class="bg-white p-3 rounded border border-red-300 mt-2 text-center">
-                                    <div class="text-lg font-bold text-red-700">⚠️ High Risk</div>
-                                    <div class="text-xs text-red-600">Requires authorization and collection plan</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Summary -->
-                    <div class="bg-green-50 border border-green-200 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-green-800 mb-4">Collection Summary</h4>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white rounded-lg p-4 border border-green-300">
-                                <div class="text-green-800 font-semibold">Total Client Responsibility</div>
-                                <div class="text-2xl font-bold text-green-700">$${formatNumber(calc.totalClientCost)}</div>
-                            </div>
-                            <div class="bg-white rounded-lg p-4 border border-green-300">
-                                <div class="text-green-800 font-semibold">Insurance Will Pay</div>
-                                <div class="text-xl font-bold text-green-700">$${formatNumber(calc.insurancePays)}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function resetCalculator() {
-            // Reset all benefit inputs
-            document.getElementById('deductible').value = '';
-            document.getElementById('deductibleMet').value = '';
-            document.getElementById('oopMax').value = '';
-            document.getElementById('oopMet').value = '';
-            document.getElementById('coinsurance').value = '';
-            document.getElementById('insurancePortion').value = '';
-            
-            // Reset all services
-            Object.keys(serviceDefaults).forEach(service => {
-                var checkbox = document.getElementById(service + '-checkbox');
-                var inputs = document.getElementById(service + '-inputs');
-                var card = document.getElementById(service + '-card');
-                var rate = document.getElementById(service + '-rate');
-                var days = document.getElementById(service + '-days');
-                
-                checkbox.checked = false;
-                inputs.style.display = 'none';
-                card.classList.remove('selected');
-                rate.value = '';
-                days.value = serviceDefaults[service].days;
-            });
-            
-            showNoCalculation();
-        }
-
-        // Initialize when page loads
-        function initCalculator() {
-            showNoCalculation();
-            updateInsurancePortionDirect();
-        }
-
-        // Initialize immediately
-        initCalculator();
-    </script>
-</body>
-</html> + formatNumber(remainingDeductible) : 'Satisfied'}</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="text-gray-600">Remaining OOP</div>
-                                    <div class="font-semibold">${remainingOOP > 0 ? '
-
-        function showNoCalculation() {
-            document.getElementById('results-section').innerHTML = `
-                <div class="bg-white rounded-lg shadow-sm p-12 text-center">
-                    <div class="text-gray-400 mb-4">
-                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-800 mb-2">No Calculation Yet</h3>
-                    <p class="text-gray-600">Enter benefits information and select services to see the cost calculation and payment options</p>
-                </div>
-            `;
-        }
-
-        function showResults(calc) {
-            const coinsurance = parseFloat(document.getElementById('coinsurance').value) || 0;
-            const daysToOOP = calculateDaysToOOP(calc);
-            const avgDailyClientCost = calc.remainingDeductible > 0 ? 
-                (calc.totalCharges / calc.services.reduce((sum, s) => sum + s.days, 0)) :
-                (calc.totalCharges / calc.services.reduce((sum, s) => sum + s.days, 0)) * (coinsurance / 100);
-            
-            document.getElementById('results-section').innerHTML = `
-                <div class="space-y-6">
-                    <!-- Insurance Rules -->
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <div class="text-sm text-gray-700 space-y-1">
-                            <div>• Until Deductible: Client pays 100%</div>
-                            <div>• After Deductible: Client pays coinsurance ${coinsurance || '[enter %]'}%</div>
-                            <div>• After OOP Max: Insurance pays 100%</div>
-                        </div>
-                    </div>
-
-                    <!-- Main Result -->
-                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-sm p-6 text-white">
-                        <h3 class="text-lg font-semibold mb-4">Client Responsibility</h3>
-                        <div class="text-center mb-6">
-                            <div class="text-5xl font-bold mb-2">$${formatNumber(calc.totalClientCost)}</div>
-                            <p class="text-blue-100">Total amount client will pay</p>
-                            ${calc.oopMaxReached ? '<div class="mt-3 bg-white/20 rounded-lg px-4 py-2 text-sm"><span class="font-semibold">✓ OOP Max Reached</span> - Capped at remaining maximum</div>' : ''}
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div class="bg-white/10 rounded p-3">
-                                <div class="text-blue-100">Insurance Pays</div>
-                                <div class="text-xl font-semibold">$${formatNumber(calc.insurancePays)}</div>
-                            </div>
-                            <div class="bg-white/10 rounded p-3">
-                                <div class="text-blue-100">Total Charges</div>
-                                <div class="text-xl font-semibold">$${formatNumber(calc.totalCharges)}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    ${calc.services.length > 0 ? `
-                    <!-- Client Responsibility Breakdown -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Client Responsibility Calculation by Service</h4>
-                        <div class="bg-gradient-to-r from-orange-100 to-red-100 rounded-lg p-4">
-                            ${generateServiceBreakdown(calc)}
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    <!-- Payment Options -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Payment Collection Options</h4>
-                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
-                            <p class="text-sm text-blue-800"><strong>Purpose:</strong> Help clients access treatment when they cannot afford the full amount upfront.</p>
-                        </div>
-                        
-                        <div class="space-y-4">
-                            <!-- Option 1: Deductible Only -->
-                            <div class="border-2 border-gray-200 rounded-lg p-4">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold mb-2">Option 1 - Minimum</span>
-                                        <h5 class="font-semibold text-gray-800">Pay Deductible Portion Only</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-gray-800">$${formatNumber(calc.deductibleApplied)}</div>
-                                </div>
-                                <div class="bg-gray-50 p-3 rounded text-xs space-y-1">
-                                    <div>• Client pays now: $${formatNumber(calc.deductibleApplied)}</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost - calc.deductibleApplied)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.deductibleApplied + calc.insurancePays)}</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 2: 50% -->
-                            <div class="border-2 border-blue-200 rounded-lg p-4 bg-blue-50">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-2">Option 2 - Partial</span>
-                                        <h5 class="font-semibold text-gray-800">Pay 50% of Client Responsibility</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-blue-700">$${formatNumber(calc.totalClientCost * 0.5)}</div>
-                                </div>
-                                <div class="bg-blue-50 p-3 rounded border border-blue-200 text-xs space-y-1">
-                                    <div>• Client pays now: $${formatNumber(calc.totalClientCost * 0.5)}</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost * 0.5)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.totalClientCost * 0.5 + calc.insurancePays)}</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 3: Full -->
-                            <div class="border-2 border-green-200 rounded-lg p-4">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-2">Option 3 - Full Payment</span>
-                                        <h5 class="font-semibold text-gray-800">Pay Full Client Responsibility</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-green-700">$${formatNumber(calc.totalClientCost)}</div>
-                                </div>
-                                <div class="bg-green-50 p-3 rounded border border-green-200 text-xs space-y-1">
-                                    <div>• Client pays now: $${formatNumber(calc.totalClientCost)}</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $0</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.totalCharges)}</div>
-                                </div>
-                                <div class="bg-white p-3 rounded border border-green-300 mt-2 text-center">
-                                    <div class="text-lg font-bold text-green-700">✓ Paid in Full</div>
-                                    <div class="text-xs text-green-600">No future billing required</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 4: $1000 -->
-                            <div class="border-2 border-purple-200 rounded-lg p-4 bg-purple-50">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-2">Option 4 - Hardship</span>
-                                        <h5 class="font-semibold text-gray-800">Minimum Viable Payment</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-purple-700">$1,000</div>
-                                </div>
-                                <div class="bg-purple-50 p-3 rounded border border-purple-200 text-xs space-y-1">
-                                    <div>• Client pays now: $1,000</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost - 1000)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(1000 + calc.insurancePays)}</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 5: $0 -->
-                            <div class="border-2 border-red-200 rounded-lg p-4 bg-red-50">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-semibold mb-2">Option 5 - Emergency</span>
-                                        <h5 class="font-semibold text-gray-800">Collect Nothing Upfront</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-red-700">$0</div>
-                                </div>
-                                <div class="bg-red-50 p-3 rounded border border-red-200 text-xs space-y-1">
-                                    <div>• Client pays now: $0</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.insurancePays)}</div>
-                                </div>
-                                <div class="bg-white p-3 rounded border border-red-300 mt-2 text-center">
-                                    <div class="text-lg font-bold text-red-700">⚠️ High Risk</div>
-                                    <div class="text-xs text-red-600">Requires authorization and collection plan</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Summary -->
-                    <div class="bg-green-50 border border-green-200 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-green-800 mb-4">Collection Summary</h4>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white rounded-lg p-4 border border-green-300">
-                                <div class="text-green-800 font-semibold">Total Client Responsibility</div>
-                                <div class="text-2xl font-bold text-green-700">$${formatNumber(calc.totalClientCost)}</div>
-                            </div>
-                            <div class="bg-white rounded-lg p-4 border border-green-300">
-                                <div class="text-green-800 font-semibold">Insurance Will Pay</div>
-                                <div class="text-xl font-bold text-green-700">$${formatNumber(calc.insurancePays)}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function resetCalculator() {
-            // Reset all inputs
-            document.getElementById('deductible').value = '';
-            document.getElementById('deductibleMet').value = '';
-            document.getElementById('oopMax').value = '';
-            document.getElementById('oopMet').value = '';
-            document.getElementById('coinsurance').value = '';
-            document.getElementById('insurancePortion').value = '';
-            
-            // Reset all services
-            Object.keys(serviceDefaults).forEach(service => {
-                const checkbox = document.getElementById(service + '-checkbox');
-                const inputs = document.getElementById(service + '-inputs');
-                const card = document.getElementById(service + '-card');
-                const rate = document.getElementById(service + '-rate');
-                const days = document.getElementById(service + '-days');
-                
-                checkbox.checked = false;
-                inputs.style.display = 'none';
-                card.classList.remove('selected');
-                rate.value = '';
-                days.value = serviceDefaults[service].days;
-            });
-            
-            showNoCalculation();
-        }
-
-        // Initialize
-        showNoCalculation();
-    </script>
-</body>
-</html> + formatNumber(remainingOOP) : 'Reached'}</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="text-gray-600">Phase</div>
-                                    <div class="font-semibold">${remainingDeductible > 0 ? 'Deductible' : remainingOOP > 0 ? 'Coinsurance' : '100% Coverage'}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            // Running totals
-            breakdown += `
-                <div class="bg-white rounded-lg p-4 border-2 border-orange-300">
-                    <div class="text-center mb-3">
-                        <div class="text-lg font-bold text-orange-600">Final Totals</div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="text-center p-3 bg-red-50 rounded border border-red-200">
-                            <div class="text-red-600 font-medium">Total Client Responsibility</div>
-                            <div class="text-2xl font-bold text-red-800">${formatNumber(runningClientTotal)}</div>
-                        </div>
-                        <div class="text-center p-3 bg-green-50 rounded border border-green-200">
-                            <div class="text-green-600 font-medium">Total Insurance Coverage</div>
-                            <div class="text-2xl font-bold text-green-800">${formatNumber(runningInsuranceTotal)}</div>
-                        </div>
-                    </div>
-                    <div class="mt-3 text-center text-sm text-gray-600">
-                        Combined treatment cost: ${formatNumber(calc.totalCharges)}
-                    </div>
-                </div>
-            `;
-            
-            breakdown += '</div>';
-            return breakdown;
-        }
-
-        function showNoCalculation() {
-            document.getElementById('results-section').innerHTML = `
-                <div class="bg-white rounded-lg shadow-sm p-12 text-center">
-                    <div class="text-gray-400 mb-4">
-                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-800 mb-2">No Calculation Yet</h3>
-                    <p class="text-gray-600">Enter benefits information and select services to see the cost calculation and payment options</p>
-                </div>
-            `;
-        }
-
-        function showResults(calc) {
-            const coinsurance = parseFloat(document.getElementById('coinsurance').value) || 0;
-            const daysToOOP = calculateDaysToOOP(calc);
-            const avgDailyClientCost = calc.remainingDeductible > 0 ? 
-                (calc.totalCharges / calc.services.reduce((sum, s) => sum + s.days, 0)) :
-                (calc.totalCharges / calc.services.reduce((sum, s) => sum + s.days, 0)) * (coinsurance / 100);
-            
-            document.getElementById('results-section').innerHTML = `
-                <div class="space-y-6">
-                    <!-- Insurance Rules -->
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <div class="text-sm text-gray-700 space-y-1">
-                            <div>• Until Deductible: Client pays 100%</div>
-                            <div>• After Deductible: Client pays coinsurance ${coinsurance || '[enter %]'}%</div>
-                            <div>• After OOP Max: Insurance pays 100%</div>
-                        </div>
-                    </div>
-
-                    <!-- Main Result -->
-                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-sm p-6 text-white">
-                        <h3 class="text-lg font-semibold mb-4">Client Responsibility</h3>
-                        <div class="text-center mb-6">
-                            <div class="text-5xl font-bold mb-2">$${formatNumber(calc.totalClientCost)}</div>
-                            <p class="text-blue-100">Total amount client will pay</p>
-                            ${calc.oopMaxReached ? '<div class="mt-3 bg-white/20 rounded-lg px-4 py-2 text-sm"><span class="font-semibold">✓ OOP Max Reached</span> - Capped at remaining maximum</div>' : ''}
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div class="bg-white/10 rounded p-3">
-                                <div class="text-blue-100">Insurance Pays</div>
-                                <div class="text-xl font-semibold">$${formatNumber(calc.insurancePays)}</div>
-                            </div>
-                            <div class="bg-white/10 rounded p-3">
-                                <div class="text-blue-100">Total Charges</div>
-                                <div class="text-xl font-semibold">$${formatNumber(calc.totalCharges)}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    ${calc.services.length > 0 ? `
-                    <!-- Client Responsibility Breakdown -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Client Responsibility Calculation by Service</h4>
-                        <div class="bg-gradient-to-r from-orange-100 to-red-100 rounded-lg p-4">
-                            ${generateServiceBreakdown(calc)}
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    <!-- Payment Options -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Payment Collection Options</h4>
-                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
-                            <p class="text-sm text-blue-800"><strong>Purpose:</strong> Help clients access treatment when they cannot afford the full amount upfront.</p>
-                        </div>
-                        
-                        <div class="space-y-4">
-                            <!-- Option 1: Deductible Only -->
-                            <div class="border-2 border-gray-200 rounded-lg p-4">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold mb-2">Option 1 - Minimum</span>
-                                        <h5 class="font-semibold text-gray-800">Pay Deductible Portion Only</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-gray-800">$${formatNumber(calc.deductibleApplied)}</div>
-                                </div>
-                                <div class="bg-gray-50 p-3 rounded text-xs space-y-1">
-                                    <div>• Client pays now: $${formatNumber(calc.deductibleApplied)}</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost - calc.deductibleApplied)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.deductibleApplied + calc.insurancePays)}</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 2: 50% -->
-                            <div class="border-2 border-blue-200 rounded-lg p-4 bg-blue-50">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-2">Option 2 - Partial</span>
-                                        <h5 class="font-semibold text-gray-800">Pay 50% of Client Responsibility</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-blue-700">$${formatNumber(calc.totalClientCost * 0.5)}</div>
-                                </div>
-                                <div class="bg-blue-50 p-3 rounded border border-blue-200 text-xs space-y-1">
-                                    <div>• Client pays now: $${formatNumber(calc.totalClientCost * 0.5)}</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost * 0.5)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.totalClientCost * 0.5 + calc.insurancePays)}</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 3: Full -->
-                            <div class="border-2 border-green-200 rounded-lg p-4">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-2">Option 3 - Full Payment</span>
-                                        <h5 class="font-semibold text-gray-800">Pay Full Client Responsibility</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-green-700">$${formatNumber(calc.totalClientCost)}</div>
-                                </div>
-                                <div class="bg-green-50 p-3 rounded border border-green-200 text-xs space-y-1">
-                                    <div>• Client pays now: $${formatNumber(calc.totalClientCost)}</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $0</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.totalCharges)}</div>
-                                </div>
-                                <div class="bg-white p-3 rounded border border-green-300 mt-2 text-center">
-                                    <div class="text-lg font-bold text-green-700">✓ Paid in Full</div>
-                                    <div class="text-xs text-green-600">No future billing required</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 4: $1000 -->
-                            <div class="border-2 border-purple-200 rounded-lg p-4 bg-purple-50">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-2">Option 4 - Hardship</span>
-                                        <h5 class="font-semibold text-gray-800">Minimum Viable Payment</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-purple-700">$1,000</div>
-                                </div>
-                                <div class="bg-purple-50 p-3 rounded border border-purple-200 text-xs space-y-1">
-                                    <div>• Client pays now: $1,000</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost - 1000)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(1000 + calc.insurancePays)}</div>
-                                </div>
-                            </div>
-
-                            <!-- Option 5: $0 -->
-                            <div class="border-2 border-red-200 rounded-lg p-4 bg-red-50">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-semibold mb-2">Option 5 - Emergency</span>
-                                        <h5 class="font-semibold text-gray-800">Collect Nothing Upfront</h5>
-                                    </div>
-                                    <div class="text-2xl font-bold text-red-700">$0</div>
-                                </div>
-                                <div class="bg-red-50 p-3 rounded border border-red-200 text-xs space-y-1">
-                                    <div>• Client pays now: $0</div>
-                                    <div>• Insurance pays: $${formatNumber(calc.insurancePays)}</div>
-                                    <div>• Remaining balance: $${formatNumber(calc.totalClientCost)}</div>
-                                    <div class="font-semibold pt-1 border-t">Total Coverage: $${formatNumber(calc.insurancePays)}</div>
-                                </div>
-                                <div class="bg-white p-3 rounded border border-red-300 mt-2 text-center">
-                                    <div class="text-lg font-bold text-red-700">⚠️ High Risk</div>
-                                    <div class="text-xs text-red-600">Requires authorization and collection plan</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Summary -->
-                    <div class="bg-green-50 border border-green-200 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-green-800 mb-4">Collection Summary</h4>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white rounded-lg p-4 border border-green-300">
-                                <div class="text-green-800 font-semibold">Total Client Responsibility</div>
-                                <div class="text-2xl font-bold text-green-700">$${formatNumber(calc.totalClientCost)}</div>
-                            </div>
-                            <div class="bg-white rounded-lg p-4 border border-green-300">
-                                <div class="text-green-800 font-semibold">Insurance Will Pay</div>
-                                <div class="text-xl font-bold text-green-700">$${formatNumber(calc.insurancePays)}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function resetCalculator() {
-            // Reset all inputs
-            document.getElementById('deductible').value = '';
-            document.getElementById('deductibleMet').value = '';
-            document.getElementById('oopMax').value = '';
-            document.getElementById('oopMet').value = '';
-            document.getElementById('coinsurance').value = '';
-            document.getElementById('insurancePortion').value = '';
-            
-            // Reset all services
-            Object.keys(serviceDefaults).forEach(service => {
-                const checkbox = document.getElementById(service + '-checkbox');
-                const inputs = document.getElementById(service + '-inputs');
-                const card = document.getElementById(service + '-card');
-                const rate = document.getElementById(service + '-rate');
-                const days = document.getElementById(service + '-days');
-                
-                checkbox.checked = false;
-                inputs.style.display = 'none';
-                card.classList.remove('selected');
-                rate.value = '';
-                days.value = serviceDefaults[service].days;
-            });
-            
-            showNoCalculation();
-        }
-
-        // Initialize
-        showNoCalculation();
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
     </script>
 </body>
 </html>
