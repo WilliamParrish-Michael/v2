@@ -3,74 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ernesto Paz LMFT - Marriage & Family Therapy | California</title>
-    <meta name="description" content="Licensed Marriage & Family Therapist specializing in anxiety, depression, relationships, and holistic mental health. Serving California with telehealth and in-person sessions.">
+    <meta name="description" content="Ernesto Paz, LMFT - Licensed Marriage & Family Therapist in California specializing in anxiety, depression, couples therapy, and holistic mental health. Telehealth and in-person sessions available.">
+    <meta name="keywords" content="therapist, LMFT, marriage counseling, family therapy, anxiety, depression, California, telehealth, Ernesto Paz">
+    <meta name="author" content="Ernesto Paz, LMFT">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ernesto Paz, LMFT - Marriage & Family Therapist">
+    <meta property="og:description" content="Holistic psychotherapy focused on happiness and fulfillment. Licensed therapist serving California with 6+ years experience.">
+    <meta property="og:image" content="/assets/ernesto-paz-og-image.jpg">
+    
+    <title>Ernesto Paz, LMFT | Marriage & Family Therapist | California</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --text-dark: #1f2937;
+            --text-medium: #4b5563;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-light: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 1rem;
         }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 0;
+        .container-lg {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header & Navigation */
+        .header {
             position: fixed;
-            width: 100%;
             top: 0;
-            z-index: 1000;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 100;
             transition: all 0.3s ease;
         }
 
-        nav {
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1rem 0;
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
+            align-items: center;
         }
 
         .nav-links a {
-            color: white;
+            color: var(--text-dark);
             text-decoration: none;
+            font-weight: 500;
             transition: color 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: #f0f8ff;
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
-            padding: 120px 0 80px;
+            padding: 8rem 0 6rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -83,83 +185,118 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hero-pattern" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23hero-pattern)"/></svg>');
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .hero h1 {
             font-size: 3.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
         }
 
         .hero .subtitle {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             margin-bottom: 1rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
+            opacity: 0.95;
+            font-weight: 500;
         }
 
         .hero .credentials {
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 2rem;
-            opacity: 0.8;
-            animation: fadeInUp 1s ease 0.4s both;
+            opacity: 0.85;
         }
 
-        .cta-button {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid white;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease 0.6s both;
+        .hero .description {
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .cta-button:hover {
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
             background: white;
-            color: #667eea;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: white;
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-2px);
         }
 
         /* Sections */
-        section {
-            padding: 80px 0;
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
         }
 
         .section-title {
-            text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #2c3e50;
-            position: relative;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 2px;
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
         }
 
         /* About Section */
         .about {
-            background: #f8f9fa;
+            background: var(--bg-light);
         }
 
         .about-content {
@@ -170,24 +307,37 @@
         }
 
         .about-image {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             width: 100%;
             max-width: 400px;
             height: 400px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius-xl);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 4rem;
+            font-weight: 700;
             margin: 0 auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="about-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23about-pattern)"/></svg>');
         }
 
         .about-text {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.8;
+            font-size: 1.125rem;
+            color: var(--text-medium);
+            line-height: 1.7;
         }
 
         .about-text p {
@@ -195,75 +345,123 @@
         }
 
         .highlight {
-            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-            padding: 2px 8px;
-            border-radius: 4px;
+            background: linear-gradient(120deg, #a7f3d0 0%, #fde68a 100%);
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
             font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-medium);
+            margin-top: 0.5rem;
         }
 
         /* Philosophy Section */
-        .philosophy {
-            background: white;
-        }
-
         .philosophy-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
 
         .philosophy-card {
             background: white;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #f0f0f0;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philosophy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
 
         .philosophy-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .philosophy-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
         }
 
         .philosophy-card h3 {
-            color: #667eea;
+            color: var(--text-dark);
             margin-bottom: 1rem;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .philosophy-card p {
+            color: var(--text-medium);
+            line-height: 1.6;
         }
 
         /* Services Section */
         .services {
-            background: #f8f9fa;
+            background: var(--bg-light);
         }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
 
         .service-card {
             background: white;
             padding: 2rem;
-            border-radius: 15px;
+            border-radius: var(--radius-xl);
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
         }
 
         .service-icon {
             width: 80px;
             height: 80px;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -272,84 +470,182 @@
             font-size: 2rem;
         }
 
-        /* Specializations */
-        .specializations {
-            background: white;
+        .service-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
         }
 
-        .spec-grid {
+        .service-card p {
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        .modalities {
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .modalities h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+        }
+
+        .modalities-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .modality-item {
+            background: white;
+            padding: 1rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .modality-item:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Specializations Section */
+        .specializations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin-top: 3rem;
         }
 
         .spec-item {
-            background: #f8f9fa;
+            background: white;
             padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--primary-color);
+            box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
         }
 
         .spec-item:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
+            background: var(--bg-light);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .spec-item h4 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .spec-item p {
+            color: var(--text-medium);
+            font-size: 0.925rem;
+            line-height: 1.5;
         }
 
         /* Insurance Section */
         .insurance {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .insurance .section-title {
             color: white;
         }
 
         .insurance-highlight {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            font-weight: bold;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .insurance-subtitle {
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
         }
 
         .insurance-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
-            margin-top: 2rem;
+            margin-bottom: 3rem;
         }
 
         .insurance-item {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
+            border-radius: var(--radius-lg);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .insurance-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .payment-options {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .payment-options h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .payment-options p {
+            opacity: 0.9;
+            line-height: 1.6;
         }
 
         /* Contact Section */
         .contact {
-            background: white;
-            text-align: center;
+            background: var(--bg-light);
         }
 
-        .contact-info {
+        .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-bottom: 3rem;
         }
 
         .contact-card {
-            background: #f8f9fa;
+            background: white;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
         }
 
         .contact-icon {
             width: 60px;
             height: 60px;
             margin: 0 auto 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -358,29 +654,125 @@
             font-size: 1.5rem;
         }
 
-        /* Footer */
-        footer {
-            background: #2c3e50;
-            color: white;
-            padding: 2rem 0;
+        .contact-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .contact-card p {
+            color: var(--text-medium);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-card .detail {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .session-info {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .session-info h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
             text-align: center;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .session-info ul {
+            list-style: none;
         }
 
+        .session-info li {
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .session-info li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Testimonial Section */
+        .testimonial {
+            background: white;
+            text-align: center;
+        }
+
+        .testimonial-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            padding: 3rem;
+            border-radius: var(--radius-xl);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary-color);
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 2rem;
+        }
+
+        .footer h3 {
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-bottom p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
             transition: all 0.6s ease;
         }
 
@@ -389,18 +781,66 @@
             transform: translateY(0);
         }
 
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow-lg);
+                border-top: 1px solid var(--border-light);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 0 4rem;
             }
 
             .hero h1 {
                 font-size: 2.5rem;
             }
 
-            .hero .subtitle {
-                font-size: 1.1rem;
+            .hero .description {
+                font-size: 1rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
             }
 
             .about-content {
@@ -410,6 +850,24 @@
 
             .section-title {
                 font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -427,258 +885,401 @@
         }
 
         /* Focus states */
-        a:focus, button:focus {
-            outline: 3px solid #667eea;
+        a:focus,
+        button:focus {
+            outline: 3px solid var(--primary-light);
             outline-offset: 2px;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">Ernesto Paz, LMFT</div>
-            <ul class="nav-links">
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="logo">Ernesto Paz, LMFT</a>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#specializations">Specializations</a></li>
-                <li><a href="#insurance">Insurance</a></li>
+                <li><a href="#specializations">Expertise</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="cta-button">Get Started</a></li>
             </ul>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                ☰
+            </button>
         </nav>
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <h1>Ernesto Paz</h1>
+                    <h1 class="font-display">Ernesto Paz</h1>
                     <p class="subtitle">Licensed Marriage & Family Therapist</p>
-                    <p class="credentials">LMFT #115411 | California Licensed</p>
-                    <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">Creating balanced, joyful, and fulfilling lives through holistic psychotherapy focused on happiness and your unique recipe for well-being.</p>
-                    <a href="#contact" class="cta-button">Start Your Journey</a>
+                    <p class="credentials">LMFT #115411 • California Licensed • 6+ Years Experience</p>
+                    <p class="description">
+                        Creating balanced, joyful, and fulfilling lives through holistic psychotherapy. 
+                        I focus on happiness and your unique recipe for well-being, not just managing symptoms.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#contact" class="btn-primary">Start Your Journey</a>
+                        <a href="#about" class="btn-secondary">Learn More</a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="about">
+        <!-- About Section -->
+        <section id="about" class="section about">
             <div class="container">
-                <h2 class="section-title">About Ernesto</h2>
+                <div class="section-header">
+                    <h2 class="section-title font-display">About Ernesto</h2>
+                    <p class="section-subtitle">
+                        A collaborative approach to mental health focused on fulfillment, not just fixing problems
+                    </p>
+                </div>
+                
                 <div class="about-content">
-                    <div class="about-image">
+                    <div class="about-image slide-in-left">
                         <span>EP</span>
                     </div>
-                    <div class="about-text">
-                        <p>Welcome! I'm Ernesto Paz, a Licensed Marriage and Family Therapist with over six years of clinical experience serving individuals, couples, and families throughout California. My approach to therapy is centered on <span class="highlight">holistic well-being and happiness</span> rather than simply managing symptoms.</p>
+                    <div class="about-text slide-in-right">
+                        <p>Welcome! I'm Ernesto Paz, a Licensed Marriage and Family Therapist with over six years of clinical experience serving individuals, couples, and families throughout California. My approach to therapy is fundamentally different from traditional models.</p>
                         
-                        <p>I believe that therapy should focus on <strong>happiness and each person's unique recipe for that</strong>. My goal is to partner with you in creating a life filled with fulfillment, joy, and peace of mind. Together, we'll work collaboratively to develop solutions and build your confidence in achieving your personal goals.</p>
+                        <p>I believe that therapy should focus on <span class="highlight">happiness and each person's unique recipe for that</span>. Rather than simply managing symptoms, my goal is to partner with you in creating a life filled with fulfillment, joy, and peace of mind.</p>
                         
-                        <p>As a <span class="highlight">Certified Mindfulness-Informed Clinician</span> and <span class="highlight">DBT Skills Training Certified</span> therapist, I integrate evidence-based practices with a warm, authentic approach. I create a safe, non-judgmental space that respects all backgrounds and encourages authentic exploration and growth.</p>
+                        <p>As a <span class="highlight">Certified Mindfulness-Informed Clinician</span> and <span class="highlight">DBT Skills Training Certified</span> therapist, I integrate evidence-based practices with a warm, collaborative approach. My extensive background in addiction treatment has equipped me to work with incredibly diverse populations across all backgrounds.</p>
                         
-                        <p>When I'm not in session, I enjoy an active lifestyle with my wife and three sons - mountain biking, snowboarding, surfing, and exploring the outdoors. This balance in my own life reflects the holistic approach I bring to therapy.</p>
+                        <p>Beyond my professional identity, I'm a dedicated family man, married with three sons. I maintain an active lifestyle—mountain biking, snowboarding, surfing, and exploring the outdoors—which reflects the holistic approach I bring to therapy.</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid fade-in">
+                    <div class="stat-item">
+                        <span class="stat-number">6+</span>
+                        <div class="stat-label">Years Licensed Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">9+</span>
+                        <div class="stat-label">Treatment Modalities</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">12+</span>
+                        <div class="stat-label">Areas of Expertise</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <div class="stat-label">Happiness-Focused</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="philosophy" class="philosophy">
+        <!-- Philosophy Section -->
+        <section class="section">
             <div class="container">
-                <h2 class="section-title">My Therapeutic Approach</h2>
+                <div class="section-header">
+                    <h2 class="section-title font-display">My Therapeutic Philosophy</h2>
+                    <p class="section-subtitle">
+                        A holistic, collaborative approach that treats you as the expert on your own life
+                    </p>
+                </div>
+                
                 <div class="philosophy-grid">
                     <div class="philosophy-card fade-in">
-                        <h3>🌟 Happiness-Focused</h3>
-                        <p>Unlike traditional symptom-reduction models, I focus on helping you experience higher states of fulfillment, joy, and peace of mind.</p>
+                        <span class="philosophy-icon">🌟</span>
+                        <h3>Happiness-Focused Approach</h3>
+                        <p>Unlike traditional symptom-reduction models, I focus on helping you experience higher states of fulfillment, joy, and peace of mind. Therapy should be about creating the life you want, not just fixing what's wrong.</p>
                     </div>
+                    
                     <div class="philosophy-card fade-in">
-                        <h3>🤝 Collaborative Partnership</h3>
-                        <p>You're the expert on your own life. I work with you as a partner to develop solutions and build confidence in achieving your goals.</p>
+                        <span class="philosophy-icon">🤝</span>
+                        <h3>Collaborative Partnership</h3>
+                        <p>You're the expert on your own life. I work with you as a partner to develop solutions and build confidence in achieving your personal goals. Together, we create your unique recipe for happiness.</p>
                     </div>
+                    
                     <div class="philosophy-card fade-in">
-                        <h3>🎯 Solution-Focused</h3>
-                        <p>My action-oriented, mindful approach emphasizes practical solutions and real-world applications of therapeutic insights.</p>
+                        <span class="philosophy-icon">🎯</span>
+                        <h3>Action-Oriented Solutions</h3>
+                        <p>My approach is practical and solution-focused. We don't just talk about problems—we develop real-world strategies and skills you can use immediately to create positive change in your life.</p>
                     </div>
+                    
                     <div class="philosophy-card fade-in">
-                        <h3>🌍 Culturally Responsive</h3>
-                        <p>I respect all backgrounds and create an inclusive space where everyone feels understood and valued for who they are.</p>
+                        <span class="philosophy-icon">🌍</span>
+                        <h3>Culturally Responsive Care</h3>
+                        <p>I respect all backgrounds and create an inclusive space where everyone feels understood and valued. My extensive experience with diverse populations ensures culturally competent care.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="services" class="services">
+        <!-- Services Section -->
+        <section id="services" class="section services">
             <div class="container">
-                <h2 class="section-title">Services Offered</h2>
+                <div class="section-header">
+                    <h2 class="section-title font-display">Services & Approach</h2>
+                    <p class="section-subtitle">
+                        Comprehensive mental health services tailored to your unique needs and goals
+                    </p>
+                </div>
+                
                 <div class="services-grid">
                     <div class="service-card fade-in">
                         <div class="service-icon">👤</div>
                         <h3>Individual Therapy</h3>
-                        <p>Personalized one-on-one sessions focusing on your unique needs, goals, and path to fulfillment.</p>
+                        <p>Personalized one-on-one sessions focusing on your unique needs, goals, and path to fulfillment. We'll work together to develop your personal recipe for happiness and well-being.</p>
                     </div>
+                    
                     <div class="service-card fade-in">
                         <div class="service-icon">💑</div>
                         <h3>Couples Therapy</h3>
-                        <p>Strengthen your relationship using evidence-based approaches including the Gottman Method.</p>
+                        <p>Strengthen your relationship using evidence-based approaches including the Gottman Method. Build deeper connection, improve communication, and create lasting positive change together.</p>
                     </div>
+                    
                     <div class="service-card fade-in">
                         <div class="service-icon">👨‍👩‍👧‍👦</div>
                         <h3>Family Therapy</h3>
-                        <p>Navigate family dynamics, blended family challenges, and parent-child relationships.</p>
+                        <p>Navigate family dynamics, blended family challenges, and parent-child relationships. Create harmony and understanding within your family system.</p>
                     </div>
+                    
                     <div class="service-card fade-in">
                         <div class="service-icon">💻</div>
                         <h3>Telehealth Sessions</h3>
-                        <p>Convenient, secure video therapy sessions available throughout California.</p>
+                        <p>Convenient, secure video therapy sessions available throughout California. Access quality mental health care from the comfort and privacy of your home.</p>
                     </div>
                 </div>
 
-                <div style="margin-top: 3rem; text-align: center;">
-                    <h3 style="margin-bottom: 2rem; color: #2c3e50;">Treatment Modalities</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 800px; margin: 0 auto;">
-                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Cognitive Behavioral Therapy (CBT)</div>
-                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Dialectical Behavior Therapy (DBT)</div>
-                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Mindfulness-Based Interventions</div>
-                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Acceptance & Commitment Therapy</div>
-                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Solution-Focused Therapy</div>
-                        <div style="background: white; padding: 1rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">Motivational Interviewing</div>
+                <div class="modalities">
+                    <h3>Evidence-Based Treatment Modalities</h3>
+                    <div class="modalities-grid">
+                        <div class="modality-item">Cognitive Behavioral Therapy (CBT)</div>
+                        <div class="modality-item">Dialectical Behavior Therapy (DBT)</div>
+                        <div class="modality-item">Mindfulness-Based Interventions</div>
+                        <div class="modality-item">Acceptance & Commitment Therapy (ACT)</div>
+                        <div class="modality-item">Solution-Focused Therapy</div>
+                        <div class="modality-item">Motivational Interviewing</div>
+                        <div class="modality-item">Gottman Method (Couples)</div>
+                        <div class="modality-item">Narrative Therapy</div>
+                        <div class="modality-item">Interpersonal Therapy (IPT)</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="specializations" class="specializations">
+        <!-- Specializations Section -->
+        <section id="specializations" class="section">
             <div class="container">
-                <h2 class="section-title">Areas of Expertise</h2>
-                <div class="spec-grid">
+                <div class="section-header">
+                    <h2 class="section-title font-display">Areas of Expertise</h2>
+                    <p class="section-subtitle">
+                        Specialized experience in treating a wide range of mental health conditions and life challenges
+                    </p>
+                </div>
+                
+                <div class="specializations-grid">
                     <div class="spec-item fade-in">
-                        <h4>Anxiety & Depression</h4>
-                        <p>Comprehensive treatment for anxiety disorders, panic attacks, depression, and mood disorders.</p>
+                        <h4>Anxiety & Panic Disorders</h4>
+                        <p>Comprehensive treatment for generalized anxiety, panic attacks, social anxiety, and specific phobias using evidence-based approaches.</p>
                     </div>
+                    
+                    <div class="spec-item fade-in">
+                        <h4>Depression & Mood Disorders</h4>
+                        <p>Support for depression, bipolar disorder, and mood regulation challenges with a focus on building resilience and joy.</p>
+                    </div>
+                    
                     <div class="spec-item fade-in">
                         <h4>Substance Use & Addiction</h4>
-                        <p>Evidence-based addiction treatment with extensive experience in recovery support.</p>
+                        <p>Extensive experience in addiction treatment with harm reduction approaches and co-occurring mental health disorders.</p>
                     </div>
+                    
                     <div class="spec-item fade-in">
-                        <h4>Relationship Issues</h4>
-                        <p>Marriage counseling, family conflict resolution, and relationship strengthening.</p>
+                        <h4>Relationship & Marriage Issues</h4>
+                        <p>Couples counseling, family conflict resolution, and communication skills development for stronger relationships.</p>
                     </div>
+                    
                     <div class="spec-item fade-in">
-                        <h4>Life Transitions</h4>
-                        <p>Support through major life changes, grief, loss, and adjustment challenges.</p>
+                        <h4>ADHD & Executive Functioning</h4>
+                        <p>Specialized support for attention-deficit disorders and executive functioning challenges in adults and families.</p>
                     </div>
+                    
                     <div class="spec-item fade-in">
-                        <h4>ADHD & OCD</h4>
-                        <p>Specialized treatment for attention-deficit disorders and obsessive-compulsive disorder.</p>
+                        <h4>OCD & Compulsive Behaviors</h4>
+                        <p>Treatment for obsessive-compulsive disorder and repetitive behavior patterns using CBT and exposure therapy techniques.</p>
                     </div>
+                    
                     <div class="spec-item fade-in">
-                        <h4>Cultural Issues</h4>
-                        <p>Culturally responsive therapy addressing racial stress and identity concerns.</p>
+                        <h4>Life Transitions & Grief</h4>
+                        <p>Support through major life changes, loss, grief, and adjustment difficulties with compassionate guidance.</p>
                     </div>
+                    
                     <div class="spec-item fade-in">
-                        <h4>Workplace Stress</h4>
-                        <p>Managing burnout, workplace challenges, and career-related anxiety.</p>
+                        <h4>Cultural & Identity Issues</h4>
+                        <p>Culturally responsive therapy addressing racial stress, identity concerns, and multicultural family dynamics.</p>
                     </div>
+                    
                     <div class="spec-item fade-in">
-                        <h4>Sleep & Phobias</h4>
-                        <p>Treatment for sleep disorders, insomnia, and specific fears or phobias.</p>
+                        <h4>Workplace Stress & Burnout</h4>
+                        <p>Managing career challenges, workplace anxiety, professional burnout, and work-life balance issues.</p>
+                    </div>
+                    
+                    <div class="spec-item fade-in">
+                        <h4>Parenting & Family Dynamics</h4>
+                        <p>Support for parenting challenges, blended families, parent-child relationships, and family communication.</p>
+                    </div>
+                    
+                    <div class="spec-item fade-in">
+                        <h4>Self-Esteem & Personal Growth</h4>
+                        <p>Building confidence, self-worth, and personal empowerment through strengths-based therapeutic approaches.</p>
+                    </div>
+                    
+                    <div class="spec-item fade-in">
+                        <h4>Sleep Disorders & Wellness</h4>
+                        <p>Treatment for insomnia, sleep difficulties, and integrating holistic wellness practices into daily life.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="insurance" class="insurance">
-            <div class="container" style="text-align: center;">
-                <h2 class="section-title" style="color: white;">Insurance & Accessibility</h2>
-                <div class="insurance-highlight">
-                    Average Client Co-pay: $28
-                </div>
-                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Accepting 40+ major insurance providers to make quality therapy accessible and affordable</p>
-                
-                <div class="insurance-grid">
-                    <div class="insurance-item">Aetna</div>
-                    <div class="insurance-item">Anthem Blue Cross</div>
-                    <div class="insurance-item">Blue Shield of California</div>
-                    <div class="insurance-item">Cigna/Evernorth</div>
-                    <div class="insurance-item">Health Net/MHN</div>
-                    <div class="insurance-item">UnitedHealthcare</div>
-                    <div class="insurance-item">Kaiser Permanente</div>
-                    <div class="insurance-item">TRICARE West</div>
-                    <div class="insurance-item">Optum & Oscar</div>
-                    <div class="insurance-item">+ Many Others</div>
-                </div>
-
-                <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px; backdrop-filter: blur(10px);">
-                    <h3 style="margin-bottom: 1rem;">Payment Options</h3>
-                    <p>In-network insurance • Out-of-network benefits • HSA/FSA • Credit cards • Cash payments</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
+        <!-- Testimonial Section -->
+        <section class="section testimonial">
             <div class="container">
-                <h2 class="section-title">Get Started Today</h2>
-                <p style="font-size: 1.2rem; color: #666; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">Ready to begin your journey toward greater happiness and fulfillment? I'm here to support you every step of the way.</p>
+                <div class="section-header">
+                    <h2 class="section-title font-display">Client Experience</h2>
+                </div>
                 
-                <div class="contact-info">
+                <div class="testimonial-content fade-in">
+                    <p class="testimonial-quote">
+                        Highly recommend Ernesto's kind yet direct approach. Exceptional communication skills, respectful of all backgrounds. Effortlessly builds rapport and creates a safe space for growth. A standout therapist in every way!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title font-display">Get Started Today</h2>
+                    <p class="section-subtitle">
+                        Ready to begin your journey toward greater happiness and fulfillment? I'm here to support you every step of the way.
+                    </p>
+                </div>
+                
+                <div class="contact-grid">
                     <div class="contact-card fade-in">
                         <div class="contact-icon">📞</div>
                         <h3>Phone</h3>
-                        <p>(760) 799-9767</p>
-                        <p style="font-size: 0.9rem; color: #666;">Primary contact number</p>
+                        <p><strong>(760) 799-9767</strong></p>
+                        <p class="detail">Primary contact number</p>
                     </div>
+                    
                     <div class="contact-card fade-in">
                         <div class="contact-icon">✉️</div>
                         <h3>Email</h3>
-                        <p>Ernestopazlmft@gmail.com</p>
-                        <p style="font-size: 0.9rem; color: #666;">For appointment requests</p>
+                        <p><strong>Ernestopazlmft@gmail.com</strong></p>
+                        <p class="detail">For appointment requests and inquiries</p>
                     </div>
+                    
                     <div class="contact-card fade-in">
                         <div class="contact-icon">🌍</div>
                         <h3>Service Area</h3>
-                        <p>California Statewide</p>
-                        <p style="font-size: 0.9rem; color: #666;">Telehealth & in-person sessions</p>
+                        <p><strong>California Statewide</strong></p>
+                        <p class="detail">Telehealth and in-person sessions</p>
                     </div>
+                    
                     <div class="contact-card fade-in">
                         <div class="contact-icon">🏥</div>
-                        <h3>Networks</h3>
-                        <p>Octave • Evernorth</p>
-                        <p style="font-size: 0.9rem; color: #666;">Behavioral Care Group</p>
+                        <h3>Professional Networks</h3>
+                        <p><strong>Octave • Evernorth</strong></p>
+                        <p class="detail">Behavioral Care Group affiliations</p>
                     </div>
                 </div>
 
-                <div style="margin-top: 3rem; padding: 2rem; background: #f8f9fa; border-radius: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    <h3 style="color: #2c3e50; margin-bottom: 1rem;">Session Information</h3>
-                    <p style="color: #666; margin-bottom: 0.5rem;">• 60-minute individual therapy sessions</p>
-                    <p style="color: #666; margin-bottom: 0.5rem;">• Couples and family therapy available</p>
-                    <p style="color: #666; margin-bottom: 0.5rem;">• Video and phone sessions offered</p>
-                    <p style="color: #666;">• English language services</p>
+                <div class="session-info fade-in">
+                    <h3>Session Information</h3>
+                    <ul>
+                        <li>60-minute individual therapy sessions</li>
+                        <li>Couples and family therapy available</li>
+                        <li>Video therapy and phone sessions offered</li>
+                        <li>English language services</li>
+                        <li>Adults (18-64), seniors (65+), couples, and families</li>
+                        <li>Convenient scheduling with flexible hours</li>
+                    </ul>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Ernesto Paz, LMFT. Licensed Marriage & Family Therapist #115411. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">This website provides general information and is not intended as a substitute for professional medical advice, diagnosis, or treatment.</p>
+            <div class="footer-content">
+                <h3 class="font-display">Ernesto Paz, LMFT</h3>
+                <p>Licensed Marriage & Family Therapist #115411</p>
+                <p>Creating balanced, joyful, and fulfilling lives through holistic psychotherapy</p>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ernesto Paz, LMFT. All rights reserved.</p>
+                <p>This website provides general information and is not intended as a substitute for professional medical advice, diagnosis, or treatment.</p>
+            </div>
         </div>
     </footer>
 
     <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
+                
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
             });
         });
 
-        // Fade in animation on scroll
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -692,21 +1293,12 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in').forEach(el => {
+        // Observe all elements with animation classes
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
             observer.observe(el);
         });
 
-        // Header background on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(102, 126, 234, 0.95)';
-            } else {
-                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-            }
-        });
-
-        // Enhanced accessibility
+        // Enhanced accessibility - keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Tab') {
                 document.body.classList.add('keyboard-navigation');
@@ -716,6 +1308,63 @@
         document.addEventListener('mousedown', () => {
             document.body.classList.remove('keyboard-navigation');
         });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav') && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Preload critical resources
+        const preloadResources = () => {
+            const links = [
+                { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+                { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true }
+            ];
+            
+            links.forEach(({ rel, href, crossorigin }) => {
+                const link = document.createElement('link');
+                link.rel = rel;
+                link.href = href;
+                if (crossorigin) link.crossOrigin = crossorigin;
+                document.head.appendChild(link);
+            });
+        };
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            preloadResources();
+            
+            // Add loading states
+            document.body.classList.add('loaded');
+        });
+
+        // Performance optimization - lazy load images when added later
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+
+        // Error handling for form submissions (when forms are added)
+        const handleFormSubmission = (formElement) => {
+            formElement.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                try {
+                    // Form submission logic would go here
+                    console.log('Form submission handled');
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                }
+            });
+        };
     </script>
 </body>
 </html>
