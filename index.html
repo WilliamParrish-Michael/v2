@@ -3,1368 +3,919 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ernesto Paz, LMFT - Licensed Marriage & Family Therapist in California specializing in anxiety, depression, couples therapy, and holistic mental health. Telehealth and in-person sessions available.">
-    <meta name="keywords" content="therapist, LMFT, marriage counseling, family therapy, anxiety, depression, California, telehealth, Ernesto Paz">
-    <meta name="author" content="Ernesto Paz, LMFT">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Ernesto Paz, LMFT - Marriage & Family Therapist">
-    <meta property="og:description" content="Holistic psychotherapy focused on happiness and fulfillment. Licensed therapist serving California with 6+ years experience.">
-    <meta property="og:image" content="/assets/ernesto-paz-og-image.jpg">
-    
-    <title>Ernesto Paz, LMFT | Marriage & Family Therapist | California</title>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <title>Insurance Benefits Calculator - Free Tool</title>
+    <meta name="description" content="Free insurance benefits calculator to determine client responsibility for treatment services. Calculate deductibles, coinsurance, and out-of-pocket costs.">
+
+    <!-- React and Dependencies -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --primary-light: #3b82f6;
-            --primary-dark: #1d4ed8;
-            --secondary-color: #8b5cf6;
-            --accent-color: #06b6d4;
-            --text-dark: #1f2937;
-            --text-medium: #4b5563;
-            --text-light: #6b7280;
-            --bg-light: #f8fafc;
-            --bg-white: #ffffff;
-            --border-light: #e5e7eb;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--bg-white);
-        }
-
-        .font-display {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .container-lg {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        /* Header & Navigation */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-light);
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
-
-        .header.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: var(--shadow-md);
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .cta-button {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-lg);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-dark);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            padding: 8rem 0 6rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hero-pattern" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23hero-pattern)"/></svg>');
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            font-family: 'Playfair Display', serif;
-            line-height: 1.2;
-        }
-
-        .hero .subtitle {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            opacity: 0.95;
-            font-weight: 500;
-        }
-
-        .hero .credentials {
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            opacity: 0.85;
-        }
-
-        .hero .description {
-            font-size: 1.125rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-            line-height: 1.7;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: white;
-            color: var(--primary-color);
-            padding: 1rem 2rem;
-            border-radius: var(--radius-lg);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid white;
-        }
-
-        .btn-primary:hover {
-            background: transparent;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: var(--radius-lg);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Sections */
-        .section {
-            padding: 5rem 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .section-subtitle {
-            font-size: 1.125rem;
-            color: var(--text-medium);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        /* About Section */
-        .about {
-            background: var(--bg-light);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-image {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            width: 100%;
-            max-width: 400px;
-            height: 400px;
-            border-radius: var(--radius-xl);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-            font-weight: 700;
-            margin: 0 auto;
-            box-shadow: var(--shadow-xl);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="about-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23about-pattern)"/></svg>');
-        }
-
-        .about-text {
-            font-size: 1.125rem;
-            color: var(--text-medium);
-            line-height: 1.7;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #a7f3d0 0%, #fde68a 100%);
-            padding: 2px 6px;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 1.5rem;
-            background: white;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--text-medium);
-            margin-top: 0.5rem;
-        }
-
-        /* Philosophy Section */
-        .philosophy-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .philosophy-card {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-light);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .philosophy-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-        }
-
-        .philosophy-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .philosophy-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .philosophy-card h3 {
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .philosophy-card p {
-            color: var(--text-medium);
-            line-height: 1.6;
-        }
-
-        /* Services Section */
-        .services {
-            background: var(--bg-light);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--radius-xl);
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-light);
-        }
-
-        .service-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-        }
-
-        .service-card h3 {
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .service-card p {
-            color: var(--text-medium);
-            line-height: 1.6;
-        }
-
-        .modalities {
-            margin-top: 4rem;
-            text-align: center;
-        }
-
-        .modalities h3 {
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            margin-bottom: 2rem;
-        }
-
-        .modalities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .modality-item {
-            background: white;
-            padding: 1rem;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
-            font-weight: 500;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-        }
-
-        .modality-item:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Specializations Section */
-        .specializations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .spec-item {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--radius-lg);
-            border-left: 4px solid var(--primary-color);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-        }
-
-        .spec-item:hover {
-            background: var(--bg-light);
-            transform: translateX(4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .spec-item h4 {
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .spec-item p {
-            color: var(--text-medium);
-            font-size: 0.925rem;
-            line-height: 1.5;
-        }
-
-        /* Insurance Section */
-        .insurance {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            text-align: center;
-        }
-
-        .insurance .section-title {
-            color: white;
-        }
-
-        .insurance-highlight {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .insurance-subtitle {
-            font-size: 1.125rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-        }
-
-        .insurance-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-bottom: 3rem;
-        }
-
-        .insurance-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: var(--radius-lg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .insurance-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .payment-options {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: var(--radius-xl);
-            backdrop-filter: blur(10px);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .payment-options h3 {
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-        }
-
-        .payment-options p {
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: var(--bg-light);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .contact-card {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-md);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        .contact-card h3 {
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .contact-card p {
-            color: var(--text-medium);
-            margin-bottom: 0.25rem;
-        }
-
-        .contact-card .detail {
-            font-size: 0.875rem;
-            color: var(--text-light);
-        }
-
-        .session-info {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-md);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .session-info h3 {
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .session-info ul {
-            list-style: none;
-        }
-
-        .session-info li {
-            color: var(--text-medium);
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .session-info li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        /* Testimonial Section */
-        .testimonial {
-            background: white;
-            text-align: center;
-        }
-
-        .testimonial-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--bg-light);
-            padding: 3rem;
-            border-radius: var(--radius-xl);
-            position: relative;
-        }
-
-        .testimonial-quote {
-            font-size: 1.25rem;
-            color: var(--text-dark);
-            line-height: 1.7;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-        }
-
-        .testimonial-quote::before {
-            content: '"';
-            font-size: 3rem;
-            color: var(--primary-color);
-            position: absolute;
-            top: 1rem;
-            left: 2rem;
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--text-dark);
-            color: white;
-            padding: 3rem 0 2rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            margin-bottom: 2rem;
-        }
-
-        .footer h3 {
-            margin-bottom: 1rem;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .footer p {
-            opacity: 0.8;
-            line-height: 1.6;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .footer-bottom p {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-30px);
-            transition: all 0.6s ease;
-        }
-
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(30px);
-            transition: all 0.6s ease;
-        }
-
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 1rem;
-                box-shadow: var(--shadow-lg);
-                border-top: 1px solid var(--border-light);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .hero {
-                padding: 6rem 0 4rem;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .description {
-                font-size: 1rem;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .container {
-                padding: 0 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Accessibility */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        /* Focus states */
-        a:focus,
-        button:focus {
-            outline: 3px solid var(--primary-light);
-            outline-offset: 2px;
-        }
-
-        /* Reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .calculator-container { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#" class="logo">Ernesto Paz, LMFT</a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#specializations">Expertise</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#contact" class="cta-button">Get Started</a></li>
-            </ul>
-            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
-                ☰
-            </button>
-        </nav>
-    </header>
+    <div id="root"></div>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="font-display">Ernesto Paz</h1>
-                    <p class="subtitle">Licensed Marriage & Family Therapist</p>
-                    <p class="credentials">LMFT #115411 • California Licensed • 6+ Years Experience</p>
-                    <p class="description">
-                        Creating balanced, joyful, and fulfilling lives through holistic psychotherapy. 
-                        I focus on happiness and your unique recipe for well-being, not just managing symptoms.
-                    </p>
-                    <div class="hero-cta">
-                        <a href="#contact" class="btn-primary">Start Your Journey</a>
-                        <a href="#about" class="btn-secondary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-        <!-- About Section -->
-        <section id="about" class="section about">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title font-display">About Ernesto</h2>
-                    <p class="section-subtitle">
-                        A collaborative approach to mental health focused on fulfillment, not just fixing problems
-                    </p>
-                </div>
+        function InsuranceBenefitsCalculator() {
+            const [benefits, setBenefits] = useState({
+                deductible: '',
+                deductibleMet: '',
+                oopMax: '',
+                oopMet: '',
+                coinsurance: '',
+                deductibleCountsTowardOOP: true
+            });
+
+            const [services, setServices] = useState({
+                detox: { selected: false, dailyRate: '', days: 7 },
+                residential: { selected: false, dailyRate: '', days: 21 },
+                php: { selected: false, dailyRate: '', days: 30 },
+                iop: { selected: false, dailyRate: '', days: 30 }
+            });
+
+            const [calculation, setCalculation] = useState(null);
+
+            const serviceInfo = {
+                detox: {
+                    name: 'Detox',
+                    fullName: 'Medical Detoxification',
+                    description: 'Medically supervised withdrawal management',
+                    defaultRate: 800
+                },
+                residential: {
+                    name: 'Residential',
+                    fullName: 'Residential Treatment Center',
+                    description: 'Inpatient residential treatment program',
+                    defaultRate: 600
+                },
+                php: {
+                    name: 'PHP',
+                    fullName: 'Partial Hospitalization Program',
+                    description: 'Intensive day treatment program',
+                    defaultRate: 400
+                },
+                iop: {
+                    name: 'IOP',
+                    fullName: 'Intensive Outpatient Program',
+                    description: 'Structured outpatient treatment',
+                    defaultRate: 200
+                }
+            };
+
+            const updateBenefit = (field, value) => {
+                // Add validation
+                let validatedValue = value;
                 
-                <div class="about-content">
-                    <div class="about-image slide-in-left">
-                        <span>EP</span>
-                    </div>
-                    <div class="about-text slide-in-right">
-                        <p>Welcome! I'm Ernesto Paz, a Licensed Marriage and Family Therapist with over six years of clinical experience serving individuals, couples, and families throughout California. My approach to therapy is fundamentally different from traditional models.</p>
+                // Prevent negative numbers
+                if (value && parseFloat(value) < 0) {
+                    validatedValue = '0';
+                }
+                
+                if (field === 'deductibleMet' || field === 'oopMet') {
+                    const max = field === 'deductibleMet' ? parseFloat(benefits.deductible) || 0 : parseFloat(benefits.oopMax) || 0;
+                    const numValue = parseFloat(value) || 0;
+                    if (numValue > max) {
+                        validatedValue = max.toString();
+                    }
+                }
+                
+                if (field === 'coinsurance') {
+                    const numValue = parseFloat(value) || 0;
+                    if (numValue > 100) validatedValue = '100';
+                    if (numValue < 0) validatedValue = '0';
+                }
+                
+                setBenefits(prev => ({ ...prev, [field]: validatedValue }));
+            };
+
+            const toggleService = (service) => {
+                setServices(prev => ({
+                    ...prev,
+                    [service]: { ...prev[service], selected: !prev[service].selected }
+                }));
+            };
+
+            const updateService = (service, field, value) => {
+                // Add validation for positive numbers
+                let validatedValue = value;
+                if (field === 'dailyRate' || field === 'days') {
+                    const numValue = parseFloat(value) || 0;
+                    if (numValue < 0) validatedValue = '0';
+                }
+                
+                setServices(prev => ({
+                    ...prev,
+                    [service]: { ...prev[service], [field]: validatedValue }
+                }));
+            };
+
+            const setDefaultRates = () => {
+                const newServices = { ...services };
+                Object.keys(services).forEach(service => {
+                    newServices[service].dailyRate = serviceInfo[service].defaultRate.toString();
+                });
+                setServices(newServices);
+            };
+
+            const resetCalculator = () => {
+                setBenefits({
+                    deductible: '',
+                    deductibleMet: '',
+                    oopMax: '',
+                    oopMet: '',
+                    coinsurance: '',
+                    deductibleCountsTowardOOP: true
+                });
+                setServices({
+                    detox: { selected: false, dailyRate: '', days: 7 },
+                    residential: { selected: false, dailyRate: '', days: 21 },
+                    php: { selected: false, dailyRate: '', days: 30 },
+                    iop: { selected: false, dailyRate: '', days: 30 }
+                });
+                setCalculation(null);
+            };
+
+            const calculateResponsibility = () => {
+                const selectedServices = Object.entries(services)
+                    .filter(([_, service]) => service.selected && service.dailyRate && service.days)
+                    .map(([key, service]) => ({
+                        name: key,
+                        ...service,
+                        totalCost: parseFloat(service.dailyRate) * parseInt(service.days)
+                    }));
+
+                if (selectedServices.length === 0) {
+                    setCalculation(null);
+                    return;
+                }
+
+                // Basic calculations
+                const deductible = parseFloat(benefits.deductible) || 0;
+                const deductibleMet = parseFloat(benefits.deductibleMet) || 0;
+                const oopMax = parseFloat(benefits.oopMax) || 0;
+                const oopMet = parseFloat(benefits.oopMet) || 0;
+                const coinsurance = parseFloat(benefits.coinsurance) || 0;
+                const coinsuranceDecimal = coinsurance / 100;
+
+                const totalProviderCharges = selectedServices.reduce((sum, service) => sum + service.totalCost, 0);
+                const allowedAmount = totalProviderCharges;
+                
+                const remainingDeductible = Math.max(0, deductible - deductibleMet);
+                const remainingOOP = Math.max(0, oopMax - oopMet);
+                
+                // Calculate theoretical responsibility before OOP max
+                const deductibleResponsibility = Math.min(allowedAmount, remainingDeductible);
+                const amountAfterDeductible = Math.max(0, allowedAmount - deductibleResponsibility);
+                const coinsuranceResponsibility = amountAfterDeductible * coinsuranceDecimal;
+                
+                // Calculate what counts toward OOP max
+                let amountTowardOOP;
+                if (benefits.deductibleCountsTowardOOP) {
+                    // Both deductible and coinsurance count
+                    amountTowardOOP = deductibleResponsibility + coinsuranceResponsibility;
+                } else {
+                    // Only coinsurance counts
+                    amountTowardOOP = coinsuranceResponsibility;
+                }
+                
+                // Apply OOP max cap only to amounts that count
+                const cappedOOPAmount = Math.min(amountTowardOOP, remainingOOP);
+                
+                // Calculate actual amounts paid
+                let actualDeductiblePaid = deductibleResponsibility;
+                let actualCoinsurancePaid;
+                
+                if (benefits.deductibleCountsTowardOOP) {
+                    // If deductible counts, both are subject to OOP cap
+                    if (cappedOOPAmount < deductibleResponsibility) {
+                        actualDeductiblePaid = cappedOOPAmount;
+                        actualCoinsurancePaid = 0;
+                    } else {
+                        actualDeductiblePaid = deductibleResponsibility;
+                        actualCoinsurancePaid = cappedOOPAmount - deductibleResponsibility;
+                    }
+                } else {
+                    // If deductible doesn't count, client pays full deductible plus capped coinsurance
+                    actualDeductiblePaid = deductibleResponsibility;
+                    actualCoinsurancePaid = cappedOOPAmount;
+                }
+                
+                const totalClientCost = actualDeductiblePaid + actualCoinsurancePaid;
+                const insurancePays = allowedAmount - totalClientCost;
+
+                // SIMPLIFIED: Calculate when insurance pays 100% using user's formula
+                let daysUntil100Percent = null;
+                let runningDays = 0;
+                let runningDeductible = remainingDeductible;
+                let runningOOP = remainingOOP;
+                
+                // Track through services to find when OOP max is reached
+                for (let i = 0; i < selectedServices.length; i++) {
+                    const service = selectedServices[i];
+                    const dailyRate = parseFloat(service.dailyRate);
+                    const serviceDays = parseInt(service.days);
+                    
+                    // Check each day in this service
+                    for (let day = 1; day <= serviceDays; day++) {
+                        runningDays++;
                         
-                        <p>I believe that therapy should focus on <span class="highlight">happiness and each person's unique recipe for that</span>. Rather than simply managing symptoms, my goal is to partner with you in creating a life filled with fulfillment, joy, and peace of mind.</p>
+                        // Calculate client cost for this day
+                        let dayClientCost = 0;
+                        let dayOOPContribution = 0;
                         
-                        <p>As a <span class="highlight">Certified Mindfulness-Informed Clinician</span> and <span class="highlight">DBT Skills Training Certified</span> therapist, I integrate evidence-based practices with a warm, collaborative approach. My extensive background in addiction treatment has equipped me to work with incredibly diverse populations across all backgrounds.</p>
+                        if (runningDeductible > 0) {
+                            // In deductible phase
+                            const deductiblePortion = Math.min(dailyRate, runningDeductible);
+                            dayClientCost = deductiblePortion;
+                            runningDeductible -= deductiblePortion;
+                            
+                            // Check if deductible counts toward OOP
+                            if (benefits.deductibleCountsTowardOOP) {
+                                dayOOPContribution = deductiblePortion;
+                            }
+                            
+                            // If daily rate exceeds deductible portion, apply coinsurance to remainder
+                            if (deductiblePortion < dailyRate) {
+                                const remainderAfterDeductible = dailyRate - deductiblePortion;
+                                const coinsurancePortion = remainderAfterDeductible * coinsuranceDecimal;
+                                dayClientCost += coinsurancePortion;
+                                dayOOPContribution += coinsurancePortion; // Coinsurance always counts
+                            }
+                        } else {
+                            // In coinsurance phase
+                            const coinsurancePortion = dailyRate * coinsuranceDecimal;
+                            dayClientCost = coinsurancePortion;
+                            dayOOPContribution = coinsurancePortion; // Coinsurance always counts
+                        }
                         
-                        <p>Beyond my professional identity, I'm a dedicated family man, married with three sons. I maintain an active lifestyle—mountain biking, snowboarding, surfing, and exploring the outdoors—which reflects the holistic approach I bring to therapy.</p>
-                    </div>
-                </div>
-
-                <div class="stats-grid fade-in">
-                    <div class="stat-item">
-                        <span class="stat-number">6+</span>
-                        <div class="stat-label">Years Licensed Experience</div>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">9+</span>
-                        <div class="stat-label">Treatment Modalities</div>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">12+</span>
-                        <div class="stat-label">Areas of Expertise</div>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <div class="stat-label">Happiness-Focused</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Philosophy Section -->
-        <section class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title font-display">My Therapeutic Philosophy</h2>
-                    <p class="section-subtitle">
-                        A holistic, collaborative approach that treats you as the expert on your own life
-                    </p>
-                </div>
-                
-                <div class="philosophy-grid">
-                    <div class="philosophy-card fade-in">
-                        <span class="philosophy-icon">🌟</span>
-                        <h3>Happiness-Focused Approach</h3>
-                        <p>Unlike traditional symptom-reduction models, I focus on helping you experience higher states of fulfillment, joy, and peace of mind. Therapy should be about creating the life you want, not just fixing what's wrong.</p>
-                    </div>
+                        // Apply OOP contribution
+                        if (runningOOP > 0) {
+                            const cappedOOPContribution = Math.min(dayOOPContribution, runningOOP);
+                            runningOOP -= cappedOOPContribution;
+                            
+                            // If OOP is capped, adjust client cost for coinsurance portion
+                            if (!benefits.deductibleCountsTowardOOP && runningDeductible === 0 && cappedOOPContribution < dayOOPContribution) {
+                                dayClientCost = cappedOOPContribution;
+                            } else if (benefits.deductibleCountsTowardOOP && cappedOOPContribution < dayOOPContribution) {
+                                dayClientCost = cappedOOPContribution;
+                            }
+                        } else {
+                            // OOP max reached - insurance pays 100%
+                            if (daysUntil100Percent === null) {
+                                daysUntil100Percent = runningDays;
+                            }
+                            break;
+                        }
+                    }
                     
-                    <div class="philosophy-card fade-in">
-                        <span class="philosophy-icon">🤝</span>
-                        <h3>Collaborative Partnership</h3>
-                        <p>You're the expert on your own life. I work with you as a partner to develop solutions and build confidence in achieving your personal goals. Together, we create your unique recipe for happiness.</p>
-                    </div>
-                    
-                    <div class="philosophy-card fade-in">
-                        <span class="philosophy-icon">🎯</span>
-                        <h3>Action-Oriented Solutions</h3>
-                        <p>My approach is practical and solution-focused. We don't just talk about problems—we develop real-world strategies and skills you can use immediately to create positive change in your life.</p>
-                    </div>
-                    
-                    <div class="philosophy-card fade-in">
-                        <span class="philosophy-icon">🌍</span>
-                        <h3>Culturally Responsive Care</h3>
-                        <p>I respect all backgrounds and create an inclusive space where everyone feels understood and valued. My extensive experience with diverse populations ensures culturally competent care.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="section services">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title font-display">Services & Approach</h2>
-                    <p class="section-subtitle">
-                        Comprehensive mental health services tailored to your unique needs and goals
-                    </p>
-                </div>
-                
-                <div class="services-grid">
-                    <div class="service-card fade-in">
-                        <div class="service-icon">👤</div>
-                        <h3>Individual Therapy</h3>
-                        <p>Personalized one-on-one sessions focusing on your unique needs, goals, and path to fulfillment. We'll work together to develop your personal recipe for happiness and well-being.</p>
-                    </div>
-                    
-                    <div class="service-card fade-in">
-                        <div class="service-icon">💑</div>
-                        <h3>Couples Therapy</h3>
-                        <p>Strengthen your relationship using evidence-based approaches including the Gottman Method. Build deeper connection, improve communication, and create lasting positive change together.</p>
-                    </div>
-                    
-                    <div class="service-card fade-in">
-                        <div class="service-icon">👨‍👩‍👧‍👦</div>
-                        <h3>Family Therapy</h3>
-                        <p>Navigate family dynamics, blended family challenges, and parent-child relationships. Create harmony and understanding within your family system.</p>
-                    </div>
-                    
-                    <div class="service-card fade-in">
-                        <div class="service-icon">💻</div>
-                        <h3>Telehealth Sessions</h3>
-                        <p>Convenient, secure video therapy sessions available throughout California. Access quality mental health care from the comfort and privacy of your home.</p>
-                    </div>
-                </div>
-
-                <div class="modalities">
-                    <h3>Evidence-Based Treatment Modalities</h3>
-                    <div class="modalities-grid">
-                        <div class="modality-item">Cognitive Behavioral Therapy (CBT)</div>
-                        <div class="modality-item">Dialectical Behavior Therapy (DBT)</div>
-                        <div class="modality-item">Mindfulness-Based Interventions</div>
-                        <div class="modality-item">Acceptance & Commitment Therapy (ACT)</div>
-                        <div class="modality-item">Solution-Focused Therapy</div>
-                        <div class="modality-item">Motivational Interviewing</div>
-                        <div class="modality-item">Gottman Method (Couples)</div>
-                        <div class="modality-item">Narrative Therapy</div>
-                        <div class="modality-item">Interpersonal Therapy (IPT)</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Specializations Section -->
-        <section id="specializations" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title font-display">Areas of Expertise</h2>
-                    <p class="section-subtitle">
-                        Specialized experience in treating a wide range of mental health conditions and life challenges
-                    </p>
-                </div>
-                
-                <div class="specializations-grid">
-                    <div class="spec-item fade-in">
-                        <h4>Anxiety & Panic Disorders</h4>
-                        <p>Comprehensive treatment for generalized anxiety, panic attacks, social anxiety, and specific phobias using evidence-based approaches.</p>
-                    </div>
-                    
-                    <div class="spec-item fade-in">
-                        <h4>Depression & Mood Disorders</h4>
-                        <p>Support for depression, bipolar disorder, and mood regulation challenges with a focus on building resilience and joy.</p>
-                    </div>
-                    
-                    <div class="spec-item fade-in">
-                        <h4>Substance Use & Addiction</h4>
-                        <p>Extensive experience in addiction treatment with harm reduction approaches and co-occurring mental health disorders.</p>
-                    </div>
-                    
-                    <div class="spec-item fade-in">
-                        <h4>Relationship & Marriage Issues</h4>
-                        <p>Couples counseling, family conflict resolution, and communication skills development for stronger relationships.</p>
-                    </div>
-                    
-                    <div class="spec-item fade-in">
-                        <h4>ADHD & Executive Functioning</h4>
-                        <p>Specialized support for attention-deficit disorders and executive functioning challenges in adults and families.</p>
-                    </div>
-                    
-                    <div class="spec-item fade-in">
-                        <h4>OCD & Compulsive Behaviors</h4>
-                        <p>Treatment for obsessive-compulsive disorder and repetitive behavior patterns using CBT and exposure therapy techniques.</p>
-                    </div>
-                    
-                    <div class="spec-item fade-in">
-                        <h4>Life Transitions & Grief</h4>
-                        <p>Support through major life changes, loss, grief, and adjustment difficulties with compassionate guidance.</p>
-                    </div>
-                    
-                    <div class="spec-item fade-in">
-                        <h4>Cultural & Identity Issues</h4>
-                        <p>Culturally responsive therapy addressing racial stress, identity concerns, and multicultural family dynamics.</p>
-                    </div>
-                    
-                    <div class="spec-item fade-in">
-                        <h4>Workplace Stress & Burnout</h4>
-                        <p>Managing career challenges, workplace anxiety, professional burnout, and work-life balance issues.</p>
-                    </div>
-                    
-                    <div class="spec-item fade-in">
-                        <h4>Parenting & Family Dynamics</h4>
-                        <p>Support for parenting challenges, blended families, parent-child relationships, and family communication.</p>
-                    </div>
-                    
-                    <div class="spec-item fade-in">
-                        <h4>Self-Esteem & Personal Growth</h4>
-                        <p>Building confidence, self-worth, and personal empowerment through strengths-based therapeutic approaches.</p>
-                    </div>
-                    
-                    <div class="spec-item fade-in">
-                        <h4>Sleep Disorders & Wellness</h4>
-                        <p>Treatment for insomnia, sleep difficulties, and integrating holistic wellness practices into daily life.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonial Section -->
-        <section class="section testimonial">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title font-display">Client Experience</h2>
-                </div>
-                
-                <div class="testimonial-content fade-in">
-                    <p class="testimonial-quote">
-                        Highly recommend Ernesto's kind yet direct approach. Exceptional communication skills, respectful of all backgrounds. Effortlessly builds rapport and creates a safe space for growth. A standout therapist in every way!
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section contact">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title font-display">Get Started Today</h2>
-                    <p class="section-subtitle">
-                        Ready to begin your journey toward greater happiness and fulfillment? I'm here to support you every step of the way.
-                    </p>
-                </div>
-                
-                <div class="contact-grid">
-                    <div class="contact-card fade-in">
-                        <div class="contact-icon">📞</div>
-                        <h3>Phone</h3>
-                        <p><strong>(760) 799-9767</strong></p>
-                        <p class="detail">Primary contact number</p>
-                    </div>
-                    
-                    <div class="contact-card fade-in">
-                        <div class="contact-icon">✉️</div>
-                        <h3>Email</h3>
-                        <p><strong>Ernestopazlmft@gmail.com</strong></p>
-                        <p class="detail">For appointment requests and inquiries</p>
-                    </div>
-                    
-                    <div class="contact-card fade-in">
-                        <div class="contact-icon">🌍</div>
-                        <h3>Service Area</h3>
-                        <p><strong>California Statewide</strong></p>
-                        <p class="detail">Telehealth and in-person sessions</p>
-                    </div>
-                    
-                    <div class="contact-card fade-in">
-                        <div class="contact-icon">🏥</div>
-                        <h3>Professional Networks</h3>
-                        <p><strong>Octave • Evernorth</strong></p>
-                        <p class="detail">Behavioral Care Group affiliations</p>
-                    </div>
-                </div>
-
-                <div class="session-info fade-in">
-                    <h3>Session Information</h3>
-                    <ul>
-                        <li>60-minute individual therapy sessions</li>
-                        <li>Couples and family therapy available</li>
-                        <li>Video therapy and phone sessions offered</li>
-                        <li>English language services</li>
-                        <li>Adults (18-64), seniors (65+), couples, and families</li>
-                        <li>Convenient scheduling with flexible hours</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <h3 class="font-display">Ernesto Paz, LMFT</h3>
-                <p>Licensed Marriage & Family Therapist #115411</p>
-                <p>Creating balanced, joyful, and fulfilling lives through holistic psychotherapy</p>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 Ernesto Paz, LMFT. All rights reserved.</p>
-                <p>This website provides general information and is not intended as a substitute for professional medical advice, diagnosis, or treatment.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-
-        mobileMenuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Header scroll effect
-        const header = document.getElementById('header');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerHeight = header.offsetHeight;
-                    const targetPosition = target.offsetTop - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
+                    if (daysUntil100Percent !== null) break;
                 }
+
+                // Benefit status after service
+                const newDeductibleMet = Math.min(deductible, deductibleMet + actualDeductiblePaid);
+                const newRemainingDeductible = Math.max(0, deductible - newDeductibleMet);
                 
-                // Close mobile menu if open
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                let newOOPMet;
+                if (benefits.deductibleCountsTowardOOP) {
+                    // Both deductible and coinsurance count toward OOP
+                    newOOPMet = Math.min(oopMax, oopMet + actualDeductiblePaid + actualCoinsurancePaid);
+                } else {
+                    // Only coinsurance counts toward OOP
+                    newOOPMet = Math.min(oopMax, oopMet + actualCoinsurancePaid);
                 }
-            });
-        }, observerOptions);
+                const newRemainingOOP = Math.max(0, oopMax - newOOPMet);
 
-        // Observe all elements with animation classes
-        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
-            observer.observe(el);
-        });
+                setCalculation({
+                    services: selectedServices,
+                    daysUntil100Percent: daysUntil100Percent,
+                    totals: {
+                        providerCharges: totalProviderCharges,
+                        allowedAmount: allowedAmount,
+                        deductibleApplied: actualDeductiblePaid,
+                        coinsuranceAmount: actualCoinsurancePaid,
+                        totalClientCost: totalClientCost,
+                        insurancePays: insurancePays,
+                        remainingDeductible: newRemainingDeductible,
+                        remainingOOP: newRemainingOOP,
+                        oopMaxReached: newRemainingOOP === 0
+                    },
+                    currentStatus: {
+                        remainingDeductible: remainingDeductible,
+                        remainingOOP: remainingOOP
+                    }
+                });
+            };
 
-        // Enhanced accessibility - keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Tab') {
-                document.body.classList.add('keyboard-navigation');
-            }
-        });
+            useEffect(() => {
+                calculateResponsibility();
+            }, [benefits, services]);
 
-        document.addEventListener('mousedown', () => {
-            document.body.classList.remove('keyboard-navigation');
-        });
+            return (
+                <div className="min-h-screen bg-gray-50 calculator-container">
+                    <div className="max-w-6xl mx-auto p-4">
+                        {/* Header */}
+                        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+                            <div className="flex items-center justify-between flex-wrap gap-4">
+                                <div>
+                                    <h1 className="text-2xl font-bold text-gray-800 mb-2">Insurance Benefits Calculator</h1>
+                                    <p className="text-gray-600">Calculate client responsibility for treatment services</p>
+                                </div>
+                                <button
+                                    onClick={resetCalculator}
+                                    className="px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+                                >
+                                    Reset Calculator
+                                </button>
+                            </div>
+                        </div>
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.nav') && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-            }
-        });
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {/* Input Section */}
+                            <div className="space-y-6">
+                                {/* Benefits Information */}
+                                <div className="bg-white rounded-lg shadow-sm p-6">
+                                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Insurance Benefits</h2>
+                                    
+                                    <div className="space-y-4">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-700 mb-1">Annual Deductible ($)</label>
+                                                <input
+                                                    type="number"
+                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                    value={benefits.deductible}
+                                                    onChange={(e) => updateBenefit('deductible', e.target.value)}
+                                                    placeholder="5000"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-700 mb-1">Deductible Met ($)</label>
+                                                <input
+                                                    type="number"
+                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                    value={benefits.deductibleMet}
+                                                    onChange={(e) => updateBenefit('deductibleMet', e.target.value)}
+                                                    placeholder="1500"
+                                                />
+                                                {parseFloat(benefits.deductibleMet) > parseFloat(benefits.deductible) && benefits.deductible && (
+                                                    <p className="text-xs text-red-600 mt-1">Cannot exceed deductible</p>
+                                                )}
+                                            </div>
+                                        </div>
 
-        // Preload critical resources
-        const preloadResources = () => {
-            const links = [
-                { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-                { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true }
-            ];
-            
-            links.forEach(({ rel, href, crossorigin }) => {
-                const link = document.createElement('link');
-                link.rel = rel;
-                link.href = href;
-                if (crossorigin) link.crossOrigin = crossorigin;
-                document.head.appendChild(link);
-            });
-        };
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-700 mb-1">Out-of-Pocket Max ($)</label>
+                                                <input
+                                                    type="number"
+                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                    value={benefits.oopMax}
+                                                    onChange={(e) => updateBenefit('oopMax', e.target.value)}
+                                                    placeholder="8000"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-700 mb-1">OOP Met ($)</label>
+                                                <input
+                                                    type="number"
+                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                    value={benefits.oopMet}
+                                                    onChange={(e) => updateBenefit('oopMet', e.target.value)}
+                                                    placeholder="2000"
+                                                />
+                                                {parseFloat(benefits.oopMet) > parseFloat(benefits.oopMax) && benefits.oopMax && (
+                                                    <p className="text-xs text-red-600 mt-1">Cannot exceed OOP max</p>
+                                                )}
+                                            </div>
+                                        </div>
 
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            preloadResources();
-            
-            // Add loading states
-            document.body.classList.add('loaded');
-        });
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1">Coinsurance (%)</label>
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                max="100"
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                value={benefits.coinsurance}
+                                                onChange={(e) => updateBenefit('coinsurance', e.target.value)}
+                                                placeholder="20"
+                                            />
+                                        </div>
 
-        // Performance optimization - lazy load images when added later
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
+                                        <div className="pt-2">
+                                            <label className="flex items-center cursor-pointer">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={benefits.deductibleCountsTowardOOP}
+                                                    onChange={(e) => updateBenefit('deductibleCountsTowardOOP', e.target.checked)}
+                                                    className="h-4 w-4 text-blue-600 rounded"
+                                                />
+                                                <span className="ml-2 text-sm font-medium text-gray-700">Deductible counts toward Out-of-Pocket Maximum</span>
+                                            </label>
+                                            <p className="text-xs text-gray-500 mt-1 ml-6">
+                                                Some plans have deductibles that don't count toward the OOP max
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
 
-        // Error handling for form submissions (when forms are added)
-        const handleFormSubmission = (formElement) => {
-            formElement.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                try {
-                    // Form submission logic would go here
-                    console.log('Form submission handled');
-                } catch (error) {
-                    console.error('Form submission error:', error);
-                }
-            });
-        };
+                                {/* Treatment Services */}
+                                <div className="bg-white rounded-lg shadow-sm p-6">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h2 className="text-lg font-semibold text-gray-800">Treatment Services</h2>
+                                        <button
+                                            onClick={setDefaultRates}
+                                            className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                                        >
+                                            Set Default Rates
+                                        </button>
+                                    </div>
+
+                                    <div className="space-y-3">
+                                        {Object.entries(serviceInfo).map(([key, info]) => (
+                                            <div 
+                                                key={key} 
+                                                className={`border rounded-lg p-4 transition-all ${
+                                                    services[key].selected 
+                                                        ? 'border-blue-300 bg-blue-50' 
+                                                        : 'border-gray-200 hover:border-gray-300'
+                                                }`}
+                                            >
+                                                <label className="flex items-start cursor-pointer">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={services[key].selected}
+                                                        onChange={() => toggleService(key)}
+                                                        className="h-4 w-4 text-blue-600 rounded mt-1"
+                                                    />
+                                                    <div className="ml-3 flex-1">
+                                                        <div className="font-medium text-gray-800">{info.fullName}</div>
+                                                        <div className="text-sm text-gray-600">{info.description}</div>
+                                                    </div>
+                                                </label>
+
+                                                {services[key].selected && (
+                                                    <div className="ml-7 mt-3 grid grid-cols-2 gap-3">
+                                                        <div>
+                                                            <label className="block text-xs font-medium text-gray-700 mb-1">Daily Rate ($)</label>
+                                                            <input
+                                                                type="number"
+                                                                className="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                                                value={services[key].dailyRate}
+                                                                onChange={(e) => updateService(key, 'dailyRate', e.target.value)}
+                                                                placeholder={info.defaultRate.toString()}
+                                                            />
+                                                        </div>
+                                                        <div>
+                                                            <label className="block text-xs font-medium text-gray-700 mb-1">Number of Days</label>
+                                                            <input
+                                                                type="number"
+                                                                min="1"
+                                                                className="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                                                value={services[key].days}
+                                                                onChange={(e) => updateService(key, 'days', e.target.value)}
+                                                            />
+                                                        </div>
+                                                        {services[key].dailyRate && services[key].days && (
+                                                            <div className="col-span-2 text-center p-2 bg-white rounded border border-blue-200">
+                                                                <span className="text-sm text-gray-600">Service Total: </span>
+                                                                <span className="font-semibold text-blue-600">
+                                                                    ${(parseFloat(services[key].dailyRate) * parseInt(services[key].days)).toLocaleString()}
+                                                                </span>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Results Section */}
+                            <div>
+                                {calculation && calculation.services.length > 0 ? (
+                                    <div className="space-y-6">
+                                        {/* Insurance Rules - Simple */}
+                                        <div className="bg-gray-50 rounded-lg p-4">
+                                            <div className="text-sm text-gray-700 space-y-1">
+                                                <div>• Until Deductible: Client pays 100%</div>
+                                                <div>• After Deductible: Client pays coinsurance {benefits.coinsurance || '[enter %]'}%</div>
+                                                <div>• After OOP Max: Insurance pays 100%</div>
+                                                {!benefits.deductibleCountsTowardOOP && (
+                                                    <div className="text-amber-600 font-semibold">⚠️ Deductible does NOT count toward OOP max</div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        
+                                        {!benefits.deductibleCountsTowardOOP && parseFloat(benefits.deductible) > 0 && (
+                                            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                                                <div className="flex items-start">
+                                                    <svg className="w-5 h-5 text-amber-600 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                    </svg>
+                                                    <div>
+                                                        <p className="font-semibold text-amber-800 text-sm">Important: Deductible Doesn't Count Toward OOP Maximum</p>
+                                                        <p className="text-sm text-amber-700 mt-1">
+                                                            The client must pay the full ${(parseFloat(benefits.deductible) || 0).toLocaleString()} deductible PLUS up to ${(parseFloat(benefits.oopMax) || 0).toLocaleString()} in coinsurance before insurance pays 100%.
+                                                            Total possible cost: ${((parseFloat(benefits.deductible) || 0) + (parseFloat(benefits.oopMax) || 0)).toLocaleString()}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/* Main Result */}
+                                        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-sm p-6 text-white">
+                                            <h3 className="text-lg font-semibold mb-4">Client Responsibility</h3>
+                                            <div className="text-center mb-6">
+                                                <div className="text-5xl font-bold mb-2">
+                                                    ${calculation.totals.totalClientCost.toLocaleString()}
+                                                </div>
+                                                <p className="text-blue-100">Total amount client will pay</p>
+                                                {calculation.totals.oopMaxReached && (
+                                                    <div className="mt-3 bg-white/20 rounded-lg px-4 py-2 text-sm">
+                                                        <span className="font-semibold">✓ OOP Max Reached</span> - No more client costs this year
+                                                    </div>
+                                                )}
+                                            </div>
+                                            
+                                            <div className="grid grid-cols-2 gap-4 text-sm">
+                                                <div className="bg-white/10 rounded p-3">
+                                                    <div className="text-blue-100">Insurance Pays</div>
+                                                    <div className="text-xl font-semibold">${calculation.totals.insurancePays.toLocaleString()}</div>
+                                                </div>
+                                                <div className="bg-white/10 rounded p-3">
+                                                    <div className="text-blue-100">Total Charges</div>
+                                                    <div className="text-xl font-semibold">${calculation.totals.providerCharges.toLocaleString()}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* When Does Insurance Pay 100%? */}
+                                        <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg shadow-sm p-6 text-white">
+                                            <h3 className="text-lg font-semibold mb-4">📅 When Does Insurance Pay 100%?</h3>
+                                            {calculation.currentStatus.remainingOOP === 0 ? (
+                                                <div className="text-center">
+                                                    <div className="text-4xl font-bold mb-2">
+                                                        Already at 100%!
+                                                    </div>
+                                                    <p className="text-purple-100">OOP Maximum already reached</p>
+                                                    <div className="mt-3 bg-white/20 rounded-lg px-4 py-2 text-sm">
+                                                        <span className="font-semibold">✓ All covered services are FREE</span>
+                                                    </div>
+                                                </div>
+                                            ) : calculation.daysUntil100Percent ? (
+                                                <div className="text-center">
+                                                    <div className="text-5xl font-bold mb-2">
+                                                        Day {calculation.daysUntil100Percent}
+                                                    </div>
+                                                    <p className="text-purple-100">Insurance starts paying 100% of covered services</p>
+                                                    <div className="mt-3 bg-white/20 rounded-lg px-4 py-2 text-sm">
+                                                        <span className="font-semibold">🎉 Out-of-Pocket Maximum will be reached!</span>
+                                                    </div>
+                                                    <div className="mt-4 p-4 bg-white/20 rounded-lg">
+                                                        <p className="text-center text-sm">
+                                                            After day {calculation.daysUntil100Percent}, all covered services are FREE for the rest of the year!
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div className="text-center">
+                                                    <div className="text-3xl font-bold mb-2">
+                                                        Not reached with current services
+                                                    </div>
+                                                    <p className="text-purple-100">Need more services to reach OOP maximum</p>
+                                                    <div className="mt-3 bg-white/20 rounded-lg px-4 py-2 text-sm">
+                                                        <span className="font-semibold">${calculation.currentStatus.remainingOOP.toLocaleString()} remaining to OOP max</span>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {/* Payment Collection Scenarios */}
+                                        <div className="bg-white rounded-lg shadow-sm p-6">
+                                            <h4 className="text-lg font-semibold text-gray-800 mb-4">Payment Collection Scenarios</h4>
+                                            
+                                            <div className="space-y-4">
+                                                {/* Scenario 1 - Pay Remaining Deductible */}
+                                                <div className="border-2 border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors">
+                                                    <div className="flex justify-between items-start mb-2">
+                                                        <div>
+                                                            <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold mb-2">
+                                                                Scenario 1 - Conservative
+                                                            </span>
+                                                            <h5 className="font-semibold text-gray-800">Pay Remaining Deductible</h5>
+                                                        </div>
+                                                        <div className="text-right">
+                                                            <div className="text-2xl font-bold text-gray-800">
+                                                                ${Math.min(calculation.currentStatus.remainingDeductible, calculation.totals.totalClientCost).toLocaleString()}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="text-sm text-gray-600 space-y-2">
+                                                        <div className="bg-gray-50 p-3 rounded">
+                                                            <div className="font-medium mb-1">What This Covers:</div>
+                                                            <div className="space-y-1 text-xs">
+                                                                <div>• Satisfies remaining deductible requirement</div>
+                                                                <div>• After this payment: Client pays only {benefits.coinsurance}% coinsurance</div>
+                                                                <div>• Future services much more affordable</div>
+                                                                {!benefits.deductibleCountsTowardOOP && calculation.currentStatus.remainingDeductible > 0 && (
+                                                                    <div className="text-amber-600">• Note: This payment does NOT reduce OOP remaining</div>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                        <div className="bg-purple-50 p-3 rounded mt-2">
+                                                            <div className="font-medium mb-1 text-purple-800">When Insurance Pays 100%:</div>
+                                                            <div className="text-xs">
+                                                                {(() => {
+                                                                    const paymentAmount = Math.min(calculation.currentStatus.remainingDeductible, calculation.totals.totalClientCost);
+                                                                    
+                                                                    // Calculate remaining client responsibility after this payment
+                                                                    const remainingClientResponsibility = Math.max(0, calculation.totals.totalClientCost - paymentAmount);
+                                                                    
+                                                                    if (remainingClientResponsibility === 0) {
+                                                                        return "Immediately after this payment!";
+                                                                    }
+                                                                    
+                                                                    // Calculate average daily client cost
+                                                                    const totalDays = calculation.services.reduce((sum, s) => sum + s.days, 0);
+                                                                    const avgClientDailyRate = calculation.totals.totalClientCost / totalDays;
+                                                                    
+                                                                    // Days needed = remaining responsibility / daily client rate
+                                                                    const daysNeeded = Math.ceil(remainingClientResponsibility / avgClientDailyRate);
+                                                                    
+                                                                    return `After ${daysNeeded} more days of treatment (${remainingClientResponsibility.toLocaleString()} remaining)`;
+                                                                })()}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Scenario 2 - Pay Half OOP Remaining */}
+                                                <div className="border-2 border-blue-200 rounded-lg p-4 hover:border-blue-400 transition-colors bg-blue-50">
+                                                    <div className="flex justify-between items-start mb-2">
+                                                        <div>
+                                                            <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-2">
+                                                                Scenario 2 - Balanced
+                                                            </span>
+                                                            <h5 className="font-semibold text-gray-800">Pay Half of Remaining OOP Maximum</h5>
+                                                        </div>
+                                                        <div className="text-right">
+                                                            <div className="text-2xl font-bold text-blue-700">
+                                                                ${(() => {
+                                                                    const halfOOP = calculation.currentStatus.remainingOOP * 0.5;
+                                                                    if (!benefits.deductibleCountsTowardOOP) {
+                                                                        // Pay deductible + half of OOP
+                                                                        return Math.min(calculation.currentStatus.remainingDeductible + halfOOP, calculation.totals.totalClientCost).toLocaleString();
+                                                                    } else {
+                                                                        // Just half of OOP (which includes deductible)
+                                                                        return Math.min(halfOOP, calculation.totals.totalClientCost).toLocaleString();
+                                                                    }
+                                                                })()}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="text-sm text-gray-600 space-y-2">
+                                                        <div className="bg-blue-50 p-3 rounded border border-blue-200">
+                                                            <div className="font-medium mb-1">What This Covers:</div>
+                                                            <div className="space-y-1 text-xs">
+                                                                {!benefits.deductibleCountsTowardOOP && calculation.currentStatus.remainingDeductible > 0 && (
+                                                                    <div>• Pays remaining deductible: ${calculation.currentStatus.remainingDeductible.toLocaleString()}</div>
+                                                                )}
+                                                                <div>• Moves halfway to 100% insurance coverage</div>
+                                                                <div>• Good for clients likely needing more treatment</div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="bg-purple-50 p-3 rounded mt-2 border border-purple-200">
+                                                            <div className="font-medium mb-1 text-purple-800">When Insurance Pays 100%:</div>
+                                                            <div className="text-xs">
+                                                                {(() => {
+                                                                    const halfOOP = calculation.currentStatus.remainingOOP * 0.5;
+                                                                    let paymentAmount;
+                                                                    
+                                                                    if (!benefits.deductibleCountsTowardOOP) {
+                                                                        paymentAmount = Math.min(calculation.currentStatus.remainingDeductible + halfOOP, calculation.totals.totalClientCost);
+                                                                    } else {
+                                                                        paymentAmount = Math.min(halfOOP, calculation.totals.totalClientCost);
+                                                                    }
+                                                                    
+                                                                    // Calculate remaining client responsibility after this payment
+                                                                    const remainingClientResponsibility = Math.max(0, calculation.totals.totalClientCost - paymentAmount);
+                                                                    
+                                                                    if (remainingClientResponsibility === 0) {
+                                                                        return "Immediately after this payment!";
+                                                                    }
+                                                                    
+                                                                    // Calculate average daily client cost
+                                                                    const totalDays = calculation.services.reduce((sum, s) => sum + s.days, 0);
+                                                                    const avgClientDailyRate = calculation.totals.totalClientCost / totalDays;
+                                                                    
+                                                                    // Days needed = remaining responsibility / daily client rate
+                                                                    const daysNeeded = Math.ceil(remainingClientResponsibility / avgClientDailyRate);
+                                                                    
+                                                                    return `After ${daysNeeded} more days of treatment (${remainingClientResponsibility.toLocaleString()} remaining)`;
+                                                                })()}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Scenario 3 - Pay Full OOP Maximum */}
+                                                <div className="border-2 border-green-200 rounded-lg p-4 hover:border-green-400 transition-colors">
+                                                    <div className="flex justify-between items-start mb-2">
+                                                        <div>
+                                                            <span className="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-2">
+                                                                Scenario 3 - Maximum Value
+                                                            </span>
+                                                            <h5 className="font-semibold text-gray-800">Pay Full Remaining OOP Maximum</h5>
+                                                        </div>
+                                                        <div className="text-right">
+                                                            <div className="text-2xl font-bold text-green-700">
+                                                                ${(() => {
+                                                                    if (!benefits.deductibleCountsTowardOOP) {
+                                                                        // Pay deductible + full OOP
+                                                                        return (calculation.currentStatus.remainingDeductible + calculation.currentStatus.remainingOOP).toLocaleString();
+                                                                    } else {
+                                                                        // Just OOP (which includes deductible)
+                                                                        return calculation.currentStatus.remainingOOP.toLocaleString();
+                                                                    }
+                                                                })()}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="text-sm text-gray-600 space-y-2">
+                                                        <div className="bg-green-50 p-3 rounded border border-green-200">
+                                                            <div className="font-medium mb-1">What This Covers:</div>
+                                                            <div className="space-y-1 text-xs">
+                                                                {!benefits.deductibleCountsTowardOOP && calculation.currentStatus.remainingDeductible > 0 && (
+                                                                    <div>• Pays remaining deductible: ${calculation.currentStatus.remainingDeductible.toLocaleString()}</div>
+                                                                )}
+                                                                <div>• Satisfies entire OOP maximum for the year</div>
+                                                                <div>• Insurance pays 100% immediately</div>
+                                                                <div>• ALL covered services FREE rest of year</div>
+                                                                <div>• Best value for ongoing treatment needs</div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="bg-white p-3 rounded border border-green-300">
+                                                            <div className="text-center">
+                                                                <div className="text-lg font-bold text-green-700">$0 Future Costs</div>
+                                                                <div className="text-xs text-green-600">Complete financial protection</div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="bg-purple-50 p-3 rounded mt-2 border border-purple-200">
+                                                            <div className="font-medium mb-1 text-purple-800">When Insurance Pays 100%:</div>
+                                                            <div className="text-xs text-purple-700 font-semibold">
+                                                                Immediately after this payment! ✨
+                                                            </div>
+                                                            <div className="text-xs text-purple-600 mt-1">
+                                                                No more out-of-pocket costs for covered services this year
+                                                            </div>
+                                                        </div>
+                                                        {!benefits.deductibleCountsTowardOOP && calculation.currentStatus.remainingDeductible > 0 && (
+                                                            <div className="mt-2 p-2 bg-amber-50 rounded border border-amber-200">
+                                                                <div className="text-xs text-amber-700">
+                                                                    <strong>Total Payment Breakdown:</strong>
+                                                                    <br/>Deductible: ${calculation.currentStatus.remainingDeductible.toLocaleString()}
+                                                                    <br/>+ OOP Max: ${calculation.currentStatus.remainingOOP.toLocaleString()}
+                                                                    <br/>= Total: ${(calculation.currentStatus.remainingDeductible + calculation.currentStatus.remainingOOP).toLocaleString()}
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Detailed Breakdown */}
+                                        <div className="bg-white rounded-lg shadow-sm p-6">
+                                            <h3 className="text-lg font-semibold text-gray-800 mb-4">Cost Breakdown</h3>
+                                            
+                                            <div className="mb-6">
+                                                <h4 className="text-sm font-medium text-gray-700 mb-3">Selected Services</h4>
+                                                <div className="space-y-2">
+                                                    {calculation.services.map((service, idx) => (
+                                                        <div key={idx} className="flex justify-between items-center py-2 border-b border-gray-100">
+                                                            <span className="text-sm text-gray-600">
+                                                                {serviceInfo[service.name].fullName} ({service.days} days @ ${service.dailyRate}/day)
+                                                            </span>
+                                                            <span className="font-medium">${service.totalCost.toLocaleString()}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            <div className="space-y-3">
+                                                <div className="flex justify-between items-center py-2">
+                                                    <span className="text-sm text-gray-600">Total Provider Charges</span>
+                                                    <span className="font-medium">${calculation.totals.providerCharges.toLocaleString()}</span>
+                                                </div>
+                                                
+                                                <div className="border-t pt-3">
+                                                    <div className="flex justify-between items-center py-1">
+                                                        <span className="text-sm text-gray-600">
+                                                            Deductible Applied
+                                                            {!benefits.deductibleCountsTowardOOP && (
+                                                                <span className="text-xs text-amber-600 ml-1">(not toward OOP)</span>
+                                                            )}
+                                                        </span>
+                                                        <span className="font-medium text-red-600">-${calculation.totals.deductibleApplied.toLocaleString()}</span>
+                                                    </div>
+                                                    
+                                                    <div className="flex justify-between items-center py-1">
+                                                        <span className="text-sm text-gray-600">Coinsurance ({benefits.coinsurance}%)</span>
+                                                        <span className="font-medium text-red-600">-${calculation.totals.coinsuranceAmount.toLocaleString()}</span>
+                                                    </div>
+                                                </div>
+                                                
+                                                {calculation.totals.oopMaxReached && (
+                                                    <div className="py-2 px-3 bg-green-50 rounded border border-green-200">
+                                                        <div className="text-sm text-green-700 font-medium">
+                                                            Out-of-Pocket Maximum Reached
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                
+                                                <div className="flex justify-between items-center py-3 border-t font-semibold">
+                                                    <span>Total Client Responsibility</span>
+                                                    <span className="text-lg text-indigo-600">${calculation.totals.totalClientCost.toLocaleString()}</span>
+                                                </div>
+                                            </div>
+
+                                            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                                                <h4 className="text-sm font-medium text-gray-700 mb-3">Benefit Status After This Service</h4>
+                                                <div className="space-y-3">
+                                                    <div>
+                                                        <div className="flex justify-between text-xs mb-1">
+                                                            <span className="text-gray-600">Deductible Remaining</span>
+                                                            <span className="font-medium">
+                                                                ${calculation.totals.remainingDeductible.toLocaleString()} of ${(parseFloat(benefits.deductible) || 0).toLocaleString()}
+                                                            </span>
+                                                        </div>
+                                                        <div className="w-full bg-gray-200 rounded-full h-2">
+                                                            <div 
+                                                                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                                                                style={{width: `${Math.min(100, (((parseFloat(benefits.deductible) || 0) - calculation.totals.remainingDeductible) / (parseFloat(benefits.deductible) || 1)) * 100)}%`}}
+                                                            ></div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="flex justify-between text-xs mb-1">
+                                                            <span className="text-gray-600">Out-of-Pocket Remaining</span>
+                                                            <span className="font-medium">
+                                                                ${calculation.totals.remainingOOP.toLocaleString()} of ${(parseFloat(benefits.oopMax) || 0).toLocaleString()}
+                                                            </span>
+                                                        </div>
+                                                        <div className="w-full bg-gray-200 rounded-full h-2">
+                                                            <div 
+                                                                className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                                                                style={{width: `${Math.min(100, (((parseFloat(benefits.oopMax) || 0) - calculation.totals.remainingOOP) / (parseFloat(benefits.oopMax) || 1)) * 100)}%`}}
+                                                            ></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                                            <p className="text-sm text-amber-800">
+                                                <strong>Disclaimer:</strong> This is an estimate based on the benefits information provided. 
+                                                Actual costs may vary depending on final coding, medical necessity determinations, and other factors.
+                                            </p>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="bg-white rounded-lg shadow-sm p-12 text-center">
+                                        <div className="text-gray-400 mb-4">
+                                            <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-lg font-medium text-gray-800 mb-2">No Calculation Yet</h3>
+                                        <p className="text-gray-600">Enter benefits information and select services to see the cost calculation</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Footer */}
+                        <div className="mt-8 text-center text-sm text-gray-500">
+                            <p>Free Insurance Benefits Calculator - No registration required</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<InsuranceBenefitsCalculator />, document.getElementById('root'));
     </script>
 </body>
 </html>
