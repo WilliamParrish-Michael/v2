@@ -1,921 +1,575 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insurance Benefits Calculator - Free Tool</title>
-    <meta name="description" content="Free insurance benefits calculator to determine client responsibility for treatment services. Calculate deductibles, coinsurance, and out-of-pocket costs.">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kathors Peptides — Certified Reference Standards for Research</title>
+<meta name="description" content="Kathors Peptides supplies certified peptide reference standards to qualified research institutions. HPLC purity data, mass-spec identity confirmation, and a Certificate of Analysis per lot. For laboratory research use only — not for human or veterinary use." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0A1524;
+    --navy:#0B2A4A;
+    --navy-deep:#081F38;
+    --steel:#2E6FA7;
+    --steel-soft:#5B8FC0;
+    --paper:#F7F9FB;
+    --panel:#FFFFFF;
+    --hair:#D9E2EC;
+    --hair-strong:#C3D0DE;
+    --slate:#4A5C6E;
+    --slate-light:#6B7C8E;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --sans:"IBM Plex Sans",system-ui,sans-serif;
+    --display:"Archivo",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
 
-    <!-- React and Dependencies -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+  /* ---- utility eyebrow / mono labels ---- */
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--steel);
+    font-weight:500;
+  }
 
-    <style>
-        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-        .calculator-container { animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
+  /* ---- compliance top bar ---- */
+  .compliance-bar{
+    background:var(--navy-deep);
+    color:#B9CBDD;
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.04em;
+  }
+  .compliance-bar .wrap{
+    display:flex;justify-content:center;align-items:center;gap:10px;
+    min-height:34px;text-align:center;flex-wrap:wrap;
+  }
+  .compliance-bar strong{color:#EAF1F8;font-weight:600}
+
+  /* ---- header ---- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,249,251,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--hair);
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;min-height:70px;gap:24px}
+  .brand{display:flex;align-items:baseline;gap:11px;flex-shrink:0}
+  .brand .mark{
+    font-family:var(--display);font-weight:800;font-size:26px;color:var(--navy);
+    letter-spacing:-.01em;line-height:1;
+  }
+  .brand .mark span{color:var(--steel)}
+  .brand .sub{
+    font-family:var(--mono);font-size:10px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--slate-light);
+  }
+  nav.main{display:flex;gap:30px;align-items:center}
+  nav.main a{
+    font-size:14px;color:var(--slate);font-weight:500;
+    transition:color .15s;
+  }
+  nav.main a:hover{color:var(--navy)}
+  .btn{
+    font-family:var(--sans);font-size:14px;font-weight:600;
+    padding:10px 18px;border-radius:2px;cursor:pointer;border:1px solid transparent;
+    transition:background .15s,border-color .15s,color .15s;display:inline-block;
+  }
+  .btn-primary{background:var(--navy);color:#fff}
+  .btn-primary:hover{background:var(--steel)}
+  .btn-ghost{background:transparent;border-color:var(--hair-strong);color:var(--navy)}
+  .btn-ghost:hover{border-color:var(--steel);color:var(--steel)}
+  .nav-toggle{display:none;background:none;border:1px solid var(--hair-strong);border-radius:2px;padding:8px 10px;cursor:pointer}
+  .nav-toggle span{display:block;width:20px;height:2px;background:var(--navy);margin:4px 0}
+
+  /* ---- hero ---- */
+  .hero{
+    background:
+      radial-gradient(circle at 88% 12%, rgba(46,111,167,.10), transparent 42%),
+      linear-gradient(180deg,#fff 0%, var(--paper) 100%);
+    border-bottom:1px solid var(--hair);
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;grid-template-columns:1.12fr .88fr;gap:56px;
+    padding-top:76px;padding-bottom:76px;align-items:center;
+  }
+  .hero h1{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(34px,4.4vw,54px);line-height:1.04;letter-spacing:-.02em;
+    color:var(--ink);margin:18px 0 20px;
+  }
+  .hero h1 em{font-style:normal;color:var(--steel)}
+  .hero p.lead{
+    font-size:17px;color:var(--slate);max-width:42ch;margin-bottom:30px;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:28px}
+  .hero-note{
+    font-family:var(--mono);font-size:11.5px;color:var(--slate-light);
+    letter-spacing:.03em;line-height:1.7;border-left:2px solid var(--hair-strong);
+    padding-left:14px;max-width:44ch;
+  }
+
+  /* credential panel (hero right) */
+  .cred{
+    background:var(--navy);color:#EAF1F8;border-radius:4px;
+    padding:30px 30px 26px;position:relative;overflow:hidden;
+    box-shadow:0 24px 48px -28px rgba(8,31,56,.6);
+  }
+  .cred::before{
+    content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(91,143,192,.45),transparent 70%);
+  }
+  .cred .eyebrow{color:var(--steel-soft);position:relative}
+  .cred h2{
+    font-family:var(--display);font-weight:600;font-size:19px;
+    margin:8px 0 20px;position:relative;letter-spacing:-.01em;
+  }
+  .cred ul{list-style:none;position:relative}
+  .cred li{
+    display:flex;gap:12px;align-items:flex-start;
+    padding:13px 0;border-top:1px solid rgba(255,255,255,.10);
+    font-size:13.5px;color:#CFDEEC;
+  }
+  .cred li:first-of-type{border-top:none}
+  .cred li .k{
+    font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+    color:var(--steel-soft);text-transform:uppercase;flex-shrink:0;width:66px;padding-top:2px;
+  }
+  .cred li b{color:#fff;font-weight:600;display:block;font-size:13.5px}
+
+  /* ---- QC strip ---- */
+  .qc{background:var(--panel);border-bottom:1px solid var(--hair)}
+  .qc .wrap{
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .qc .cell{
+    padding:26px 22px;border-left:1px solid var(--hair);
+  }
+  .qc .cell:first-child{border-left:none;padding-left:0}
+  .qc .n{font-family:var(--mono);font-size:12px;color:var(--steel);letter-spacing:.08em;margin-bottom:8px}
+  .qc .t{font-family:var(--display);font-weight:600;font-size:15px;color:var(--navy);margin-bottom:4px}
+  .qc .d{font-size:12.5px;color:var(--slate-light);line-height:1.5}
+
+  /* ---- section scaffold ---- */
+  section{padding:78px 0}
+  .sec-head{max-width:60ch;margin-bottom:40px}
+  .sec-head h2{
+    font-family:var(--display);font-weight:700;font-size:clamp(26px,3vw,34px);
+    letter-spacing:-.02em;color:var(--ink);margin:12px 0 12px;line-height:1.1;
+  }
+  .sec-head p{color:var(--slate);font-size:16px;max-width:52ch}
+
+  /* ---- catalog ---- */
+  #catalog{background:var(--paper)}
+  .catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{
+    background:var(--panel);border:1px solid var(--hair);border-radius:5px;
+    display:flex;flex-direction:column;overflow:hidden;
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 22px 40px -30px rgba(8,31,56,.5);border-color:var(--hair-strong)}
+  .card-top{
+    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);
+    color:#fff;padding:20px 22px 18px;
+  }
+  .card-cat{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--steel-soft)}
+  .card-top h3{font-family:var(--display);font-weight:700;font-size:23px;letter-spacing:.01em;margin:6px 0 3px}
+  .card-top .inn{font-size:12.5px;color:#B9CBDD}
+  .spec{padding:6px 22px 8px}
+  .spec dl{display:grid;grid-template-columns:auto 1fr;gap:0}
+  .spec .row{display:contents}
+  .spec dt,.spec dd{
+    font-family:var(--mono);font-size:12px;padding:9px 0;border-top:1px solid var(--hair);
+  }
+  .spec dt{color:var(--slate-light);letter-spacing:.03em}
+  .spec dd{color:var(--ink);text-align:right;font-weight:500;word-break:break-word}
+  .spec .row:first-child dt,.spec .row:first-child dd{border-top:none}
+  .card-foot{margin-top:auto;padding:16px 22px 20px;border-top:1px solid var(--hair)}
+  .doc-tags{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+  .doc-tags span{
+    font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+    background:#EDF3F9;color:var(--steel);padding:4px 8px;border-radius:2px;
+  }
+  .card-actions{display:flex;gap:8px}
+  .card-actions .btn{flex:1;text-align:center;font-size:13px;padding:9px 10px}
+  .card .price-note{font-family:var(--mono);font-size:11px;color:var(--slate-light);margin-bottom:12px;letter-spacing:.02em}
+  .catalog-foot{
+    font-family:var(--mono);font-size:11.5px;color:var(--slate-light);
+    margin-top:22px;letter-spacing:.02em;line-height:1.7;text-align:center;
+  }
+
+  /* ---- eligibility ---- */
+  #eligibility{background:var(--panel);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+  .elig-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .steps{counter-reset:step;list-style:none}
+  .steps li{
+    display:flex;gap:18px;padding:20px 0;border-top:1px solid var(--hair);
+  }
+  .steps li:first-child{border-top:none;padding-top:0}
+  .steps li::before{
+    counter-increment:step;content:counter(step,decimal-leading-zero);
+    font-family:var(--mono);font-size:13px;color:var(--steel);font-weight:600;
+    flex-shrink:0;padding-top:2px;
+  }
+  .steps h4{font-family:var(--display);font-weight:600;font-size:16px;margin-bottom:4px;color:var(--navy)}
+  .steps p{font-size:14px;color:var(--slate)}
+  .elig-panel{
+    background:var(--paper);border:1px solid var(--hair);border-radius:5px;padding:30px;
+  }
+  .elig-panel h3{font-family:var(--display);font-weight:700;font-size:18px;color:var(--ink);margin-bottom:6px}
+  .elig-panel > p{font-size:14px;color:var(--slate);margin-bottom:22px}
+  .field{margin-bottom:15px}
+  .field label{display:block;font-size:12px;font-weight:600;color:var(--slate);margin-bottom:6px;letter-spacing:.02em}
+  .field input,.field select{
+    width:100%;font-family:var(--sans);font-size:14px;color:var(--ink);
+    padding:11px 13px;border:1px solid var(--hair-strong);border-radius:3px;background:#fff;
+  }
+  .field input:focus,.field select:focus{outline:2px solid var(--steel);outline-offset:0;border-color:var(--steel)}
+  .attest{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--slate);margin:6px 0 18px}
+  .attest input{margin-top:3px;flex-shrink:0}
+  .elig-panel .btn-primary{width:100%;text-align:center}
+  .form-note{font-family:var(--mono);font-size:11px;color:var(--slate-light);margin-top:14px;text-align:center;letter-spacing:.02em}
+
+  /* ---- documentation ---- */
+  #docs{background:var(--paper)}
+  .doc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .doc-card{background:var(--panel);border:1px solid var(--hair);border-radius:5px;padding:24px 22px}
+  .doc-card .code{font-family:var(--mono);font-size:11px;color:var(--steel);letter-spacing:.1em;margin-bottom:12px}
+  .doc-card h4{font-family:var(--display);font-weight:600;font-size:16px;color:var(--navy);margin-bottom:7px}
+  .doc-card p{font-size:13.5px;color:var(--slate)}
+
+  /* ---- footer ---- */
+  footer{background:var(--navy-deep);color:#AFC2D6;padding:56px 0 30px;font-size:13.5px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
+  .foot-brand .mark{font-family:var(--display);font-weight:800;font-size:24px;color:#fff}
+  .foot-brand .mark span{color:var(--steel-soft)}
+  .foot-brand p{margin-top:12px;max-width:34ch;color:#94A9BF;font-size:13px}
+  footer h5{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7791AB;margin-bottom:14px}
+  footer ul{list-style:none}
+  footer ul li{margin-bottom:9px}
+  footer ul a{color:#AFC2D6;transition:color .15s}
+  footer ul a:hover{color:#fff}
+  .foot-legal{
+    margin-top:26px;font-family:var(--mono);font-size:11px;line-height:1.8;color:#8AA0B6;letter-spacing:.02em;
+  }
+  .foot-legal strong{color:#CFDEEC;font-weight:600}
+  .foot-copy{margin-top:20px;font-size:12px;color:#6C84 9C;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  /* ---- reveal ---- */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---- responsive ---- */
+  @media(max-width:900px){
+    nav.main{
+      display:none;position:absolute;top:70px;left:0;right:0;
+      background:var(--paper);border-bottom:1px solid var(--hair);
+      flex-direction:column;gap:0;padding:8px 24px 18px;
+    }
+    nav.main.open{display:flex}
+    nav.main a{padding:12px 0;border-bottom:1px solid var(--hair);width:100%}
+    nav.main .btn{margin-top:10px;text-align:center}
+    .nav-toggle{display:block}
+    .hero .wrap{grid-template-columns:1fr;gap:40px;padding-top:52px;padding-bottom:52px}
+    .qc .wrap{grid-template-columns:1fr 1fr}
+    .qc .cell{border-left:none;border-top:1px solid var(--hair);padding-left:0}
+    .qc .cell:first-child,.qc .cell:nth-child(2){border-top:none}
+    .catalog-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+    .elig-grid{grid-template-columns:1fr;gap:40px}
+    .doc-grid{grid-template-columns:1fr 1fr}
+    .foot-top{grid-template-columns:1fr 1fr;gap:30px}
+  }
+  @media(max-width:520px){
+    .doc-grid{grid-template-columns:1fr}
+    .foot-top{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .card:hover{transform:none}
+  }
+</style>
 </head>
 <body>
-    <div id="root"></div>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
+<!-- compliance bar -->
+<div class="compliance-bar">
+  <div class="wrap">
+    <span><strong>For laboratory research use only.</strong> Not for human or veterinary use. Sold exclusively to qualified institutions.</span>
+  </div>
+</div>
 
-        function InsuranceBenefitsCalculator() {
-            const [benefits, setBenefits] = useState({
-                deductible: '',
-                deductibleMet: '',
-                oopMax: '',
-                oopMet: '',
-                coinsurance: '',
-                deductibleCountsTowardOOP: true
-            });
+<!-- header -->
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Kathors Peptides home">
+      <span class="mark">K<span>·</span>athors</span>
+      <span class="sub">Reference Standards</span>
+    </a>
+    <nav class="main" id="menu">
+      <a href="#catalog">Catalog</a>
+      <a href="#eligibility">Ordering &amp; Eligibility</a>
+      <a href="#docs">Documentation</a>
+      <a href="#eligibility" class="btn btn-primary">Request account access</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
 
-            const [services, setServices] = useState({
-                detox: { selected: false, dailyRate: '', days: 7 },
-                residential: { selected: false, dailyRate: '', days: 21 },
-                php: { selected: false, dailyRate: '', days: 30 },
-                iop: { selected: false, dailyRate: '', days: 30 }
-            });
+<main id="top">
 
-            const [calculation, setCalculation] = useState(null);
+<!-- hero -->
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Analytical &amp; research reference standards</span>
+      <h1>Certified peptide reference standards for <em>research and analytical labs.</em></h1>
+      <p class="lead">Kathors supplies characterized peptide standards to qualified research institutions — each lot backed by HPLC purity data, mass-spec identity confirmation, and a Certificate of Analysis.</p>
+      <div class="hero-cta">
+        <a href="#eligibility" class="btn btn-primary">Request institutional access</a>
+        <a href="#catalog" class="btn btn-ghost">View catalog</a>
+      </div>
+      <p class="hero-note">Products are supplied as laboratory reference materials for in-vitro research use only. Kathors does not sell to individuals and makes no therapeutic, performance, or human-use claims. Ordering requires a verified institutional account.</p>
+    </div>
 
-            const serviceInfo = {
-                detox: {
-                    name: 'Detox',
-                    fullName: 'Medical Detoxification',
-                    description: 'Medically supervised withdrawal management',
-                    defaultRate: 800
-                },
-                residential: {
-                    name: 'Residential',
-                    fullName: 'Residential Treatment Center',
-                    description: 'Inpatient residential treatment program',
-                    defaultRate: 600
-                },
-                php: {
-                    name: 'PHP',
-                    fullName: 'Partial Hospitalization Program',
-                    description: 'Intensive day treatment program',
-                    defaultRate: 400
-                },
-                iop: {
-                    name: 'IOP',
-                    fullName: 'Intensive Outpatient Program',
-                    description: 'Structured outpatient treatment',
-                    defaultRate: 200
-                }
-            };
+    <aside class="cred reveal" aria-label="Supply standards">
+      <span class="eyebrow">What ships with every lot</span>
+      <h2>Documentation, not marketing.</h2>
+      <ul>
+        <li><span class="k">COA</span><div><b>Certificate of Analysis</b>Lot-specific, released before dispatch.</div></li>
+        <li><span class="k">HPLC</span><div><b>Purity by RP-HPLC</b>Chromatogram included with each report.</div></li>
+        <li><span class="k">MS</span><div><b>Identity by mass spectrometry</b>Observed vs. theoretical mass.</div></li>
+        <li><span class="k">SDS</span><div><b>Safety data sheet</b>Handling, storage, and disposal guidance.</div></li>
+      </ul>
+    </aside>
+  </div>
+</section>
 
-            const updateBenefit = (field, value) => {
-                // Add validation
-                let validatedValue = value;
-                
-                // Prevent negative numbers
-                if (value && parseFloat(value) < 0) {
-                    validatedValue = '0';
-                }
-                
-                if (field === 'deductibleMet' || field === 'oopMet') {
-                    const max = field === 'deductibleMet' ? parseFloat(benefits.deductible) || 0 : parseFloat(benefits.oopMax) || 0;
-                    const numValue = parseFloat(value) || 0;
-                    if (numValue > max) {
-                        validatedValue = max.toString();
-                    }
-                }
-                
-                if (field === 'coinsurance') {
-                    const numValue = parseFloat(value) || 0;
-                    if (numValue > 100) validatedValue = '100';
-                    if (numValue < 0) validatedValue = '0';
-                }
-                
-                setBenefits(prev => ({ ...prev, [field]: validatedValue }));
-            };
+<!-- QC strip -->
+<div class="qc">
+  <div class="wrap">
+    <div class="cell"><div class="n">01</div><div class="t">Purity verified</div><div class="d">RP-HPLC purity reported per lot, typically ≥98%.</div></div>
+    <div class="cell"><div class="n">02</div><div class="t">Identity confirmed</div><div class="d">Mass-spec confirmation of molecular weight.</div></div>
+    <div class="cell"><div class="n">03</div><div class="t">Batch traceability</div><div class="d">Every unit tied to a documented production lot.</div></div>
+    <div class="cell"><div class="n">04</div><div class="t">Cold-chain dispatch</div><div class="d">Lyophilized and shipped to preserve stability.</div></div>
+  </div>
+</div>
 
-            const toggleService = (service) => {
-                setServices(prev => ({
-                    ...prev,
-                    [service]: { ...prev[service], selected: !prev[service].selected }
-                }));
-            };
+<!-- catalog -->
+<section id="catalog">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Catalog</span>
+      <h2>Reference standards</h2>
+      <p>Representative catalog entries. Pricing and ordering are available to verified institutional accounts. Final specifications are defined by the lot-specific Certificate of Analysis.</p>
+    </div>
 
-            const updateService = (service, field, value) => {
-                // Add validation for positive numbers
-                let validatedValue = value;
-                if (field === 'dailyRate' || field === 'days') {
-                    const numValue = parseFloat(value) || 0;
-                    if (numValue < 0) validatedValue = '0';
-                }
-                
-                setServices(prev => ({
-                    ...prev,
-                    [service]: { ...prev[service], [field]: validatedValue }
-                }));
-            };
+    <div class="catalog-grid">
 
-            const setDefaultRates = () => {
-                const newServices = { ...services };
-                Object.keys(services).forEach(service => {
-                    newServices[service].dailyRate = serviceInfo[service].defaultRate.toString();
-                });
-                setServices(newServices);
-            };
+      <!-- BPC-157 -->
+      <article class="card reveal">
+        <div class="card-top">
+          <div class="card-cat">CAT · KP-0157</div>
+          <h3>BPC-157</h3>
+          <div class="inn">Pentadecapeptide · lyophilized</div>
+        </div>
+        <div class="spec">
+          <dl>
+            <div class="row"><dt>CAS</dt><dd>137525-51-0</dd></div>
+            <div class="row"><dt>Formula</dt><dd>C62H98N16O22</dd></div>
+            <div class="row"><dt>Mol. weight</dt><dd>1419.5 g/mol</dd></div>
+            <div class="row"><dt>Sequence</dt><dd>GEPPPGKPADDAGLV</dd></div>
+            <div class="row"><dt>Purity</dt><dd>≥98% (HPLC)</dd></div>
+            <div class="row"><dt>Format</dt><dd>10&nbsp;mg / vial</dd></div>
+          </dl>
+        </div>
+        <div class="card-foot">
+          <div class="doc-tags"><span>COA</span><span>HPLC</span><span>MS</span><span>SDS</span></div>
+          <div class="price-note">Pricing visible to verified accounts</div>
+          <div class="card-actions">
+            <a href="#eligibility" class="btn btn-primary">Request quote</a>
+            <a href="#docs" class="btn btn-ghost">Spec sheet</a>
+          </div>
+        </div>
+      </article>
 
-            const resetCalculator = () => {
-                setBenefits({
-                    deductible: '',
-                    deductibleMet: '',
-                    oopMax: '',
-                    oopMet: '',
-                    coinsurance: '',
-                    deductibleCountsTowardOOP: true
-                });
-                setServices({
-                    detox: { selected: false, dailyRate: '', days: 7 },
-                    residential: { selected: false, dailyRate: '', days: 21 },
-                    php: { selected: false, dailyRate: '', days: 30 },
-                    iop: { selected: false, dailyRate: '', days: 30 }
-                });
-                setCalculation(null);
-            };
+      <!-- TB-500 -->
+      <article class="card reveal">
+        <div class="card-top">
+          <div class="card-cat">CAT · KP-0500</div>
+          <h3>TB-500</h3>
+          <div class="inn">Thymosin β4 fragment · lyophilized</div>
+        </div>
+        <div class="spec">
+          <dl>
+            <div class="row"><dt>CAS</dt><dd>77591-33-4</dd></div>
+            <div class="row"><dt>Formula</dt><dd>per COA</dd></div>
+            <div class="row"><dt>Mol. weight</dt><dd>per COA</dd></div>
+            <div class="row"><dt>Sequence</dt><dd>Ac-LKKTETQ (fragment)</dd></div>
+            <div class="row"><dt>Purity</dt><dd>≥98% (HPLC)</dd></div>
+            <div class="row"><dt>Format</dt><dd>10&nbsp;mg / vial</dd></div>
+          </dl>
+        </div>
+        <div class="card-foot">
+          <div class="doc-tags"><span>COA</span><span>HPLC</span><span>MS</span><span>SDS</span></div>
+          <div class="price-note">Pricing visible to verified accounts</div>
+          <div class="card-actions">
+            <a href="#eligibility" class="btn btn-primary">Request quote</a>
+            <a href="#docs" class="btn btn-ghost">Spec sheet</a>
+          </div>
+        </div>
+      </article>
 
-            const calculateResponsibility = () => {
-                const selectedServices = Object.entries(services)
-                    .filter(([_, service]) => service.selected && service.dailyRate && service.days)
-                    .map(([key, service]) => ({
-                        name: key,
-                        ...service,
-                        totalCost: parseFloat(service.dailyRate) * parseInt(service.days)
-                    }));
+      <!-- CJC-1295 -->
+      <article class="card reveal">
+        <div class="card-top">
+          <div class="card-cat">CAT · KP-1295</div>
+          <h3>CJC-1295</h3>
+          <div class="inn">Modified GRF (1–29) · lyophilized</div>
+        </div>
+        <div class="spec">
+          <dl>
+            <div class="row"><dt>CAS</dt><dd>863288-34-0</dd></div>
+            <div class="row"><dt>Formula</dt><dd>C152H252N44O42</dd></div>
+            <div class="row"><dt>Mol. weight</dt><dd>3367.9 g/mol</dd></div>
+            <div class="row"><dt>Sequence</dt><dd>29-aa (see COA)</dd></div>
+            <div class="row"><dt>Purity</dt><dd>≥98% (HPLC)</dd></div>
+            <div class="row"><dt>Format</dt><dd>10&nbsp;mg / vial</dd></div>
+          </dl>
+        </div>
+        <div class="card-foot">
+          <div class="doc-tags"><span>COA</span><span>HPLC</span><span>MS</span><span>SDS</span></div>
+          <div class="price-note">Pricing visible to verified accounts</div>
+          <div class="card-actions">
+            <a href="#eligibility" class="btn btn-primary">Request quote</a>
+            <a href="#docs" class="btn btn-ghost">Spec sheet</a>
+          </div>
+        </div>
+      </article>
 
-                if (selectedServices.length === 0) {
-                    setCalculation(null);
-                    return;
-                }
+    </div>
+    <p class="catalog-foot">Values shown are representative reference data for display and must be confirmed against the lot-specific Certificate of Analysis. Supplied for in-vitro laboratory research only.</p>
+  </div>
+</section>
 
-                // Basic calculations
-                const deductible = parseFloat(benefits.deductible) || 0;
-                const deductibleMet = parseFloat(benefits.deductibleMet) || 0;
-                const oopMax = parseFloat(benefits.oopMax) || 0;
-                const oopMet = parseFloat(benefits.oopMet) || 0;
-                const coinsurance = parseFloat(benefits.coinsurance) || 0;
-                const coinsuranceDecimal = coinsurance / 100;
+<!-- eligibility -->
+<section id="eligibility">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Ordering &amp; eligibility</span>
+      <h2>Who we sell to</h2>
+      <p>Kathors supplies verified research organizations only. Accounts are reviewed before any pricing, quoting, or dispatch. We do not sell to individual consumers.</p>
+    </div>
 
-                const totalProviderCharges = selectedServices.reduce((sum, service) => sum + service.totalCost, 0);
-                const allowedAmount = totalProviderCharges;
-                
-                const remainingDeductible = Math.max(0, deductible - deductibleMet);
-                const remainingOOP = Math.max(0, oopMax - oopMet);
-                
-                // Calculate theoretical responsibility before OOP max
-                const deductibleResponsibility = Math.min(allowedAmount, remainingDeductible);
-                const amountAfterDeductible = Math.max(0, allowedAmount - deductibleResponsibility);
-                const coinsuranceResponsibility = amountAfterDeductible * coinsuranceDecimal;
-                
-                // Calculate what counts toward OOP max
-                let amountTowardOOP;
-                if (benefits.deductibleCountsTowardOOP) {
-                    // Both deductible and coinsurance count
-                    amountTowardOOP = deductibleResponsibility + coinsuranceResponsibility;
-                } else {
-                    // Only coinsurance counts
-                    amountTowardOOP = coinsuranceResponsibility;
-                }
-                
-                // Apply OOP max cap only to amounts that count
-                const cappedOOPAmount = Math.min(amountTowardOOP, remainingOOP);
-                
-                // Calculate actual amounts paid
-                let actualDeductiblePaid = deductibleResponsibility;
-                let actualCoinsurancePaid;
-                
-                if (benefits.deductibleCountsTowardOOP) {
-                    // If deductible counts, both are subject to OOP cap
-                    if (cappedOOPAmount < deductibleResponsibility) {
-                        actualDeductiblePaid = cappedOOPAmount;
-                        actualCoinsurancePaid = 0;
-                    } else {
-                        actualDeductiblePaid = deductibleResponsibility;
-                        actualCoinsurancePaid = cappedOOPAmount - deductibleResponsibility;
-                    }
-                } else {
-                    // If deductible doesn't count, client pays full deductible plus capped coinsurance
-                    actualDeductiblePaid = deductibleResponsibility;
-                    actualCoinsurancePaid = cappedOOPAmount;
-                }
-                
-                const totalClientCost = actualDeductiblePaid + actualCoinsurancePaid;
-                const insurancePays = allowedAmount - totalClientCost;
+    <div class="elig-grid">
+      <ol class="steps reveal">
+        <li><div><h4>Submit institutional details</h4><p>Provide your organization, role, and a work email on an institutional domain.</p></div></li>
+        <li><div><h4>Verification review</h4><p>Our team confirms the account represents a qualified research institution or laboratory.</p></div></li>
+        <li><div><h4>Purpose attestation</h4><p>You confirm materials are for in-vitro research use only — not for human or veterinary administration.</p></div></li>
+        <li><div><h4>Account activation</h4><p>Once approved, pricing and quoting unlock, and orders ship with full lot documentation.</p></div></li>
+      </ol>
 
-                // SIMPLIFIED: Calculate when insurance pays 100% using user's formula
-                let daysUntil100Percent = null;
-                let runningDays = 0;
-                let runningDeductible = remainingDeductible;
-                let runningOOP = remainingOOP;
-                
-                // Track through services to find when OOP max is reached
-                for (let i = 0; i < selectedServices.length; i++) {
-                    const service = selectedServices[i];
-                    const dailyRate = parseFloat(service.dailyRate);
-                    const serviceDays = parseInt(service.days);
-                    
-                    // Check each day in this service
-                    for (let day = 1; day <= serviceDays; day++) {
-                        runningDays++;
-                        
-                        // Calculate client cost for this day
-                        let dayClientCost = 0;
-                        let dayOOPContribution = 0;
-                        
-                        if (runningDeductible > 0) {
-                            // In deductible phase
-                            const deductiblePortion = Math.min(dailyRate, runningDeductible);
-                            dayClientCost = deductiblePortion;
-                            runningDeductible -= deductiblePortion;
-                            
-                            // Check if deductible counts toward OOP
-                            if (benefits.deductibleCountsTowardOOP) {
-                                dayOOPContribution = deductiblePortion;
-                            }
-                            
-                            // If daily rate exceeds deductible portion, apply coinsurance to remainder
-                            if (deductiblePortion < dailyRate) {
-                                const remainderAfterDeductible = dailyRate - deductiblePortion;
-                                const coinsurancePortion = remainderAfterDeductible * coinsuranceDecimal;
-                                dayClientCost += coinsurancePortion;
-                                dayOOPContribution += coinsurancePortion; // Coinsurance always counts
-                            }
-                        } else {
-                            // In coinsurance phase
-                            const coinsurancePortion = dailyRate * coinsuranceDecimal;
-                            dayClientCost = coinsurancePortion;
-                            dayOOPContribution = coinsurancePortion; // Coinsurance always counts
-                        }
-                        
-                        // Apply OOP contribution
-                        if (runningOOP > 0) {
-                            const cappedOOPContribution = Math.min(dayOOPContribution, runningOOP);
-                            runningOOP -= cappedOOPContribution;
-                            
-                            // If OOP is capped, adjust client cost for coinsurance portion
-                            if (!benefits.deductibleCountsTowardOOP && runningDeductible === 0 && cappedOOPContribution < dayOOPContribution) {
-                                dayClientCost = cappedOOPContribution;
-                            } else if (benefits.deductibleCountsTowardOOP && cappedOOPContribution < dayOOPContribution) {
-                                dayClientCost = cappedOOPContribution;
-                            }
-                        } else {
-                            // OOP max reached - insurance pays 100%
-                            if (daysUntil100Percent === null) {
-                                daysUntil100Percent = runningDays;
-                            }
-                            break;
-                        }
-                    }
-                    
-                    if (daysUntil100Percent !== null) break;
-                }
+      <div class="elig-panel reveal">
+        <h3>Request account access</h3>
+        <p>For qualified institutions. This is a display mockup — the form does not submit.</p>
+        <div class="field"><label for="org">Institution / organization</label><input id="org" type="text" placeholder="e.g. University research lab" /></div>
+        <div class="field"><label for="email">Institutional email</label><input id="email" type="email" placeholder="name@institution.edu" /></div>
+        <div class="field"><label for="role">Role</label>
+          <select id="role">
+            <option>Principal investigator</option>
+            <option>Lab manager</option>
+            <option>Procurement</option>
+            <option>Research staff</option>
+          </select>
+        </div>
+        <label class="attest"><input type="checkbox" /> I confirm materials will be used for in-vitro laboratory research only, and not for human or veterinary use.</label>
+        <button class="btn btn-primary" type="button" onclick="return false;">Submit for review</button>
+        <p class="form-note">Accounts are manually verified before activation.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-                // Benefit status after service
-                const newDeductibleMet = Math.min(deductible, deductibleMet + actualDeductiblePaid);
-                const newRemainingDeductible = Math.max(0, deductible - newDeductibleMet);
-                
-                let newOOPMet;
-                if (benefits.deductibleCountsTowardOOP) {
-                    // Both deductible and coinsurance count toward OOP
-                    newOOPMet = Math.min(oopMax, oopMet + actualDeductiblePaid + actualCoinsurancePaid);
-                } else {
-                    // Only coinsurance counts toward OOP
-                    newOOPMet = Math.min(oopMax, oopMet + actualCoinsurancePaid);
-                }
-                const newRemainingOOP = Math.max(0, oopMax - newOOPMet);
+<!-- documentation -->
+<section id="docs">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Documentation</span>
+      <h2>Every lot, fully documented</h2>
+      <p>Analytical records accompany each shipment and are available to account holders on request.</p>
+    </div>
+    <div class="doc-grid">
+      <div class="doc-card reveal"><div class="code">DOC-01</div><h4>Certificate of Analysis</h4><p>Lot-specific results for identity, purity, and content, released prior to dispatch.</p></div>
+      <div class="doc-card reveal"><div class="code">DOC-02</div><h4>HPLC report</h4><p>Reverse-phase chromatogram with reported purity for the supplied lot.</p></div>
+      <div class="doc-card reveal"><div class="code">DOC-03</div><h4>Mass spectrometry</h4><p>Observed molecular mass compared against the theoretical value.</p></div>
+      <div class="doc-card reveal"><div class="code">DOC-04</div><h4>Safety data sheet</h4><p>Handling, storage, transport, and disposal guidance for laboratory settings.</p></div>
+    </div>
+  </div>
+</section>
 
-                setCalculation({
-                    services: selectedServices,
-                    daysUntil100Percent: daysUntil100Percent,
-                    totals: {
-                        providerCharges: totalProviderCharges,
-                        allowedAmount: allowedAmount,
-                        deductibleApplied: actualDeductiblePaid,
-                        coinsuranceAmount: actualCoinsurancePaid,
-                        totalClientCost: totalClientCost,
-                        insurancePays: insurancePays,
-                        remainingDeductible: newRemainingDeductible,
-                        remainingOOP: newRemainingOOP,
-                        oopMaxReached: newRemainingOOP === 0
-                    },
-                    currentStatus: {
-                        remainingDeductible: remainingDeductible,
-                        remainingOOP: remainingOOP
-                    }
-                });
-            };
+</main>
 
-            useEffect(() => {
-                calculateResponsibility();
-            }, [benefits, services]);
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="mark">K<span>·</span>athors</div>
+        <p>Certified peptide reference standards supplied to qualified research institutions worldwide.</p>
+      </div>
+      <div>
+        <h5>Catalog</h5>
+        <ul><li><a href="#catalog">Reference standards</a></li><li><a href="#docs">Documentation</a></li><li><a href="#eligibility">Request access</a></li></ul>
+      </div>
+      <div>
+        <h5>Ordering</h5>
+        <ul><li><a href="#eligibility">Eligibility</a></li><li><a href="#eligibility">Institutional accounts</a></li><li><a href="#docs">Spec sheets</a></li></ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul><li><a href="#top">About</a></li><li><a href="#top">Contact</a></li><li><a href="#top">Terms</a></li></ul>
+      </div>
+    </div>
+    <p class="foot-legal">
+      <strong>For laboratory research use only. Not for human or veterinary use.</strong><br />
+      Products are sold exclusively as reference materials for in-vitro research to qualified institutions. Kathors makes no claim, express or implied, that any product is a drug, supplement, or therapeutic agent, and provides no dosing, medical, or human-use guidance. Purchasers are responsible for lawful use and for compliance with all applicable local, state, and federal regulations.
+    </p>
+    <p class="foot-copy"><span>© 2026 Kathors Peptides. Display mockup — not a live storefront.</span><span>Science · Purity · Traceability</span></p>
+  </div>
+</footer>
 
-            return (
-                <div className="min-h-screen bg-gray-50 calculator-container">
-                    <div className="max-w-6xl mx-auto p-4">
-                        {/* Header */}
-                        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-                            <div className="flex items-center justify-between flex-wrap gap-4">
-                                <div>
-                                    <h1 className="text-2xl font-bold text-gray-800 mb-2">Insurance Benefits Calculator</h1>
-                                    <p className="text-gray-600">Calculate client responsibility for treatment services</p>
-                                </div>
-                                <button
-                                    onClick={resetCalculator}
-                                    className="px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
-                                >
-                                    Reset Calculator
-                                </button>
-                            </div>
-                        </div>
+<script>
+  // mobile nav
+  var t=document.getElementById('navToggle'),m=document.getElementById('menu');
+  t.addEventListener('click',function(){
+    var open=m.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+  });
+  m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');t.setAttribute('aria-expanded','false');});});
 
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            {/* Input Section */}
-                            <div className="space-y-6">
-                                {/* Benefits Information */}
-                                <div className="bg-white rounded-lg shadow-sm p-6">
-                                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Insurance Benefits</h2>
-                                    
-                                    <div className="space-y-4">
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-1">Annual Deductible ($)</label>
-                                                <input
-                                                    type="number"
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                                    value={benefits.deductible}
-                                                    onChange={(e) => updateBenefit('deductible', e.target.value)}
-                                                    placeholder="5000"
-                                                />
-                                            </div>
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-1">Deductible Met ($)</label>
-                                                <input
-                                                    type="number"
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                                    value={benefits.deductibleMet}
-                                                    onChange={(e) => updateBenefit('deductibleMet', e.target.value)}
-                                                    placeholder="1500"
-                                                />
-                                                {parseFloat(benefits.deductibleMet) > parseFloat(benefits.deductible) && benefits.deductible && (
-                                                    <p className="text-xs text-red-600 mt-1">Cannot exceed deductible</p>
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-1">Out-of-Pocket Max ($)</label>
-                                                <input
-                                                    type="number"
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                                    value={benefits.oopMax}
-                                                    onChange={(e) => updateBenefit('oopMax', e.target.value)}
-                                                    placeholder="8000"
-                                                />
-                                            </div>
-                                            <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-1">OOP Met ($)</label>
-                                                <input
-                                                    type="number"
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                                    value={benefits.oopMet}
-                                                    onChange={(e) => updateBenefit('oopMet', e.target.value)}
-                                                    placeholder="2000"
-                                                />
-                                                {parseFloat(benefits.oopMet) > parseFloat(benefits.oopMax) && benefits.oopMax && (
-                                                    <p className="text-xs text-red-600 mt-1">Cannot exceed OOP max</p>
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">Coinsurance (%)</label>
-                                            <input
-                                                type="number"
-                                                min="0"
-                                                max="100"
-                                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                                value={benefits.coinsurance}
-                                                onChange={(e) => updateBenefit('coinsurance', e.target.value)}
-                                                placeholder="20"
-                                            />
-                                        </div>
-
-                                        <div className="pt-2">
-                                            <label className="flex items-center cursor-pointer">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={benefits.deductibleCountsTowardOOP}
-                                                    onChange={(e) => updateBenefit('deductibleCountsTowardOOP', e.target.checked)}
-                                                    className="h-4 w-4 text-blue-600 rounded"
-                                                />
-                                                <span className="ml-2 text-sm font-medium text-gray-700">Deductible counts toward Out-of-Pocket Maximum</span>
-                                            </label>
-                                            <p className="text-xs text-gray-500 mt-1 ml-6">
-                                                Some plans have deductibles that don't count toward the OOP max
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Treatment Services */}
-                                <div className="bg-white rounded-lg shadow-sm p-6">
-                                    <div className="flex items-center justify-between mb-4">
-                                        <h2 className="text-lg font-semibold text-gray-800">Treatment Services</h2>
-                                        <button
-                                            onClick={setDefaultRates}
-                                            className="text-sm text-blue-600 hover:text-blue-700 font-medium"
-                                        >
-                                            Set Default Rates
-                                        </button>
-                                    </div>
-
-                                    <div className="space-y-3">
-                                        {Object.entries(serviceInfo).map(([key, info]) => (
-                                            <div 
-                                                key={key} 
-                                                className={`border rounded-lg p-4 transition-all ${
-                                                    services[key].selected 
-                                                        ? 'border-blue-300 bg-blue-50' 
-                                                        : 'border-gray-200 hover:border-gray-300'
-                                                }`}
-                                            >
-                                                <label className="flex items-start cursor-pointer">
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={services[key].selected}
-                                                        onChange={() => toggleService(key)}
-                                                        className="h-4 w-4 text-blue-600 rounded mt-1"
-                                                    />
-                                                    <div className="ml-3 flex-1">
-                                                        <div className="font-medium text-gray-800">{info.fullName}</div>
-                                                        <div className="text-sm text-gray-600">{info.description}</div>
-                                                    </div>
-                                                </label>
-
-                                                {services[key].selected && (
-                                                    <div className="ml-7 mt-3 grid grid-cols-2 gap-3">
-                                                        <div>
-                                                            <label className="block text-xs font-medium text-gray-700 mb-1">Daily Rate ($)</label>
-                                                            <input
-                                                                type="number"
-                                                                className="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                                                                value={services[key].dailyRate}
-                                                                onChange={(e) => updateService(key, 'dailyRate', e.target.value)}
-                                                                placeholder={info.defaultRate.toString()}
-                                                            />
-                                                        </div>
-                                                        <div>
-                                                            <label className="block text-xs font-medium text-gray-700 mb-1">Number of Days</label>
-                                                            <input
-                                                                type="number"
-                                                                min="1"
-                                                                className="w-full px-2 py-1.5 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                                                                value={services[key].days}
-                                                                onChange={(e) => updateService(key, 'days', e.target.value)}
-                                                            />
-                                                        </div>
-                                                        {services[key].dailyRate && services[key].days && (
-                                                            <div className="col-span-2 text-center p-2 bg-white rounded border border-blue-200">
-                                                                <span className="text-sm text-gray-600">Service Total: </span>
-                                                                <span className="font-semibold text-blue-600">
-                                                                    ${(parseFloat(services[key].dailyRate) * parseInt(services[key].days)).toLocaleString()}
-                                                                </span>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Results Section */}
-                            <div>
-                                {calculation && calculation.services.length > 0 ? (
-                                    <div className="space-y-6">
-                                        {/* Insurance Rules - Simple */}
-                                        <div className="bg-gray-50 rounded-lg p-4">
-                                            <div className="text-sm text-gray-700 space-y-1">
-                                                <div>• Until Deductible: Client pays 100%</div>
-                                                <div>• After Deductible: Client pays coinsurance {benefits.coinsurance || '[enter %]'}%</div>
-                                                <div>• After OOP Max: Insurance pays 100%</div>
-                                                {!benefits.deductibleCountsTowardOOP && (
-                                                    <div className="text-amber-600 font-semibold">⚠️ Deductible does NOT count toward OOP max</div>
-                                                )}
-                                            </div>
-                                        </div>
-                                        
-                                        {!benefits.deductibleCountsTowardOOP && parseFloat(benefits.deductible) > 0 && (
-                                            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                                                <div className="flex items-start">
-                                                    <svg className="w-5 h-5 text-amber-600 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                                    </svg>
-                                                    <div>
-                                                        <p className="font-semibold text-amber-800 text-sm">Important: Deductible Doesn't Count Toward OOP Maximum</p>
-                                                        <p className="text-sm text-amber-700 mt-1">
-                                                            The client must pay the full ${(parseFloat(benefits.deductible) || 0).toLocaleString()} deductible PLUS up to ${(parseFloat(benefits.oopMax) || 0).toLocaleString()} in coinsurance before insurance pays 100%.
-                                                            Total possible cost: ${((parseFloat(benefits.deductible) || 0) + (parseFloat(benefits.oopMax) || 0)).toLocaleString()}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        {/* Main Result */}
-                                        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-sm p-6 text-white">
-                                            <h3 className="text-lg font-semibold mb-4">Client Responsibility</h3>
-                                            <div className="text-center mb-6">
-                                                <div className="text-5xl font-bold mb-2">
-                                                    ${calculation.totals.totalClientCost.toLocaleString()}
-                                                </div>
-                                                <p className="text-blue-100">Total amount client will pay</p>
-                                                {calculation.totals.oopMaxReached && (
-                                                    <div className="mt-3 bg-white/20 rounded-lg px-4 py-2 text-sm">
-                                                        <span className="font-semibold">✓ OOP Max Reached</span> - No more client costs this year
-                                                    </div>
-                                                )}
-                                            </div>
-                                            
-                                            <div className="grid grid-cols-2 gap-4 text-sm">
-                                                <div className="bg-white/10 rounded p-3">
-                                                    <div className="text-blue-100">Insurance Pays</div>
-                                                    <div className="text-xl font-semibold">${calculation.totals.insurancePays.toLocaleString()}</div>
-                                                </div>
-                                                <div className="bg-white/10 rounded p-3">
-                                                    <div className="text-blue-100">Total Charges</div>
-                                                    <div className="text-xl font-semibold">${calculation.totals.providerCharges.toLocaleString()}</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* When Does Insurance Pay 100%? */}
-                                        <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg shadow-sm p-6 text-white">
-                                            <h3 className="text-lg font-semibold mb-4">📅 When Does Insurance Pay 100%?</h3>
-                                            {calculation.currentStatus.remainingOOP === 0 ? (
-                                                <div className="text-center">
-                                                    <div className="text-4xl font-bold mb-2">
-                                                        Already at 100%!
-                                                    </div>
-                                                    <p className="text-purple-100">OOP Maximum already reached</p>
-                                                    <div className="mt-3 bg-white/20 rounded-lg px-4 py-2 text-sm">
-                                                        <span className="font-semibold">✓ All covered services are FREE</span>
-                                                    </div>
-                                                </div>
-                                            ) : calculation.daysUntil100Percent ? (
-                                                <div className="text-center">
-                                                    <div className="text-5xl font-bold mb-2">
-                                                        Day {calculation.daysUntil100Percent}
-                                                    </div>
-                                                    <p className="text-purple-100">Insurance starts paying 100% of covered services</p>
-                                                    <div className="mt-3 bg-white/20 rounded-lg px-4 py-2 text-sm">
-                                                        <span className="font-semibold">🎉 Out-of-Pocket Maximum will be reached!</span>
-                                                    </div>
-                                                    <div className="mt-4 p-4 bg-white/20 rounded-lg">
-                                                        <p className="text-center text-sm">
-                                                            After day {calculation.daysUntil100Percent}, all covered services are FREE for the rest of the year!
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <div className="text-center">
-                                                    <div className="text-3xl font-bold mb-2">
-                                                        Not reached with current services
-                                                    </div>
-                                                    <p className="text-purple-100">Need more services to reach OOP maximum</p>
-                                                    <div className="mt-3 bg-white/20 rounded-lg px-4 py-2 text-sm">
-                                                        <span className="font-semibold">${calculation.currentStatus.remainingOOP.toLocaleString()} remaining to OOP max</span>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        {/* Payment Collection Scenarios */}
-                                        <div className="bg-white rounded-lg shadow-sm p-6">
-                                            <h4 className="text-lg font-semibold text-gray-800 mb-4">Payment Collection Scenarios</h4>
-                                            
-                                            <div className="space-y-4">
-                                                {/* Scenario 1 - Pay Remaining Deductible */}
-                                                <div className="border-2 border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors">
-                                                    <div className="flex justify-between items-start mb-2">
-                                                        <div>
-                                                            <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold mb-2">
-                                                                Scenario 1 - Conservative
-                                                            </span>
-                                                            <h5 className="font-semibold text-gray-800">Pay Remaining Deductible</h5>
-                                                        </div>
-                                                        <div className="text-right">
-                                                            <div className="text-2xl font-bold text-gray-800">
-                                                                ${Math.min(calculation.currentStatus.remainingDeductible, calculation.totals.totalClientCost).toLocaleString()}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="text-sm text-gray-600 space-y-2">
-                                                        <div className="bg-gray-50 p-3 rounded">
-                                                            <div className="font-medium mb-1">What This Covers:</div>
-                                                            <div className="space-y-1 text-xs">
-                                                                <div>• Satisfies remaining deductible requirement</div>
-                                                                <div>• After this payment: Client pays only {benefits.coinsurance}% coinsurance</div>
-                                                                <div>• Future services much more affordable</div>
-                                                                {!benefits.deductibleCountsTowardOOP && calculation.currentStatus.remainingDeductible > 0 && (
-                                                                    <div className="text-amber-600">• Note: This payment does NOT reduce OOP remaining</div>
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                        <div className="bg-purple-50 p-3 rounded mt-2">
-                                                            <div className="font-medium mb-1 text-purple-800">When Insurance Pays 100%:</div>
-                                                            <div className="text-xs">
-                                                                {(() => {
-                                                                    const paymentAmount = Math.min(calculation.currentStatus.remainingDeductible, calculation.totals.totalClientCost);
-                                                                    
-                                                                    // Calculate remaining client responsibility after this payment
-                                                                    const remainingClientResponsibility = Math.max(0, calculation.totals.totalClientCost - paymentAmount);
-                                                                    
-                                                                    if (remainingClientResponsibility === 0) {
-                                                                        return "Immediately after this payment!";
-                                                                    }
-                                                                    
-                                                                    // Calculate average daily client cost
-                                                                    const totalDays = calculation.services.reduce((sum, s) => sum + s.days, 0);
-                                                                    const avgClientDailyRate = calculation.totals.totalClientCost / totalDays;
-                                                                    
-                                                                    // Days needed = remaining responsibility / daily client rate
-                                                                    const daysNeeded = Math.ceil(remainingClientResponsibility / avgClientDailyRate);
-                                                                    
-                                                                    return `After ${daysNeeded} more days of treatment (${remainingClientResponsibility.toLocaleString()} remaining)`;
-                                                                })()}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                {/* Scenario 2 - Pay Half OOP Remaining */}
-                                                <div className="border-2 border-blue-200 rounded-lg p-4 hover:border-blue-400 transition-colors bg-blue-50">
-                                                    <div className="flex justify-between items-start mb-2">
-                                                        <div>
-                                                            <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-2">
-                                                                Scenario 2 - Balanced
-                                                            </span>
-                                                            <h5 className="font-semibold text-gray-800">Pay Half of Remaining OOP Maximum</h5>
-                                                        </div>
-                                                        <div className="text-right">
-                                                            <div className="text-2xl font-bold text-blue-700">
-                                                                ${(() => {
-                                                                    const halfOOP = calculation.currentStatus.remainingOOP * 0.5;
-                                                                    if (!benefits.deductibleCountsTowardOOP) {
-                                                                        // Pay deductible + half of OOP
-                                                                        return Math.min(calculation.currentStatus.remainingDeductible + halfOOP, calculation.totals.totalClientCost).toLocaleString();
-                                                                    } else {
-                                                                        // Just half of OOP (which includes deductible)
-                                                                        return Math.min(halfOOP, calculation.totals.totalClientCost).toLocaleString();
-                                                                    }
-                                                                })()}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="text-sm text-gray-600 space-y-2">
-                                                        <div className="bg-blue-50 p-3 rounded border border-blue-200">
-                                                            <div className="font-medium mb-1">What This Covers:</div>
-                                                            <div className="space-y-1 text-xs">
-                                                                {!benefits.deductibleCountsTowardOOP && calculation.currentStatus.remainingDeductible > 0 && (
-                                                                    <div>• Pays remaining deductible: ${calculation.currentStatus.remainingDeductible.toLocaleString()}</div>
-                                                                )}
-                                                                <div>• Moves halfway to 100% insurance coverage</div>
-                                                                <div>• Good for clients likely needing more treatment</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="bg-purple-50 p-3 rounded mt-2 border border-purple-200">
-                                                            <div className="font-medium mb-1 text-purple-800">When Insurance Pays 100%:</div>
-                                                            <div className="text-xs">
-                                                                {(() => {
-                                                                    const halfOOP = calculation.currentStatus.remainingOOP * 0.5;
-                                                                    let paymentAmount;
-                                                                    
-                                                                    if (!benefits.deductibleCountsTowardOOP) {
-                                                                        paymentAmount = Math.min(calculation.currentStatus.remainingDeductible + halfOOP, calculation.totals.totalClientCost);
-                                                                    } else {
-                                                                        paymentAmount = Math.min(halfOOP, calculation.totals.totalClientCost);
-                                                                    }
-                                                                    
-                                                                    // Calculate remaining client responsibility after this payment
-                                                                    const remainingClientResponsibility = Math.max(0, calculation.totals.totalClientCost - paymentAmount);
-                                                                    
-                                                                    if (remainingClientResponsibility === 0) {
-                                                                        return "Immediately after this payment!";
-                                                                    }
-                                                                    
-                                                                    // Calculate average daily client cost
-                                                                    const totalDays = calculation.services.reduce((sum, s) => sum + s.days, 0);
-                                                                    const avgClientDailyRate = calculation.totals.totalClientCost / totalDays;
-                                                                    
-                                                                    // Days needed = remaining responsibility / daily client rate
-                                                                    const daysNeeded = Math.ceil(remainingClientResponsibility / avgClientDailyRate);
-                                                                    
-                                                                    return `After ${daysNeeded} more days of treatment (${remainingClientResponsibility.toLocaleString()} remaining)`;
-                                                                })()}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                {/* Scenario 3 - Pay Full OOP Maximum */}
-                                                <div className="border-2 border-green-200 rounded-lg p-4 hover:border-green-400 transition-colors">
-                                                    <div className="flex justify-between items-start mb-2">
-                                                        <div>
-                                                            <span className="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-2">
-                                                                Scenario 3 - Maximum Value
-                                                            </span>
-                                                            <h5 className="font-semibold text-gray-800">Pay Full Remaining OOP Maximum</h5>
-                                                        </div>
-                                                        <div className="text-right">
-                                                            <div className="text-2xl font-bold text-green-700">
-                                                                ${(() => {
-                                                                    if (!benefits.deductibleCountsTowardOOP) {
-                                                                        // Pay deductible + full OOP
-                                                                        return (calculation.currentStatus.remainingDeductible + calculation.currentStatus.remainingOOP).toLocaleString();
-                                                                    } else {
-                                                                        // Just OOP (which includes deductible)
-                                                                        return calculation.currentStatus.remainingOOP.toLocaleString();
-                                                                    }
-                                                                })()}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="text-sm text-gray-600 space-y-2">
-                                                        <div className="bg-green-50 p-3 rounded border border-green-200">
-                                                            <div className="font-medium mb-1">What This Covers:</div>
-                                                            <div className="space-y-1 text-xs">
-                                                                {!benefits.deductibleCountsTowardOOP && calculation.currentStatus.remainingDeductible > 0 && (
-                                                                    <div>• Pays remaining deductible: ${calculation.currentStatus.remainingDeductible.toLocaleString()}</div>
-                                                                )}
-                                                                <div>• Satisfies entire OOP maximum for the year</div>
-                                                                <div>• Insurance pays 100% immediately</div>
-                                                                <div>• ALL covered services FREE rest of year</div>
-                                                                <div>• Best value for ongoing treatment needs</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="bg-white p-3 rounded border border-green-300">
-                                                            <div className="text-center">
-                                                                <div className="text-lg font-bold text-green-700">$0 Future Costs</div>
-                                                                <div className="text-xs text-green-600">Complete financial protection</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="bg-purple-50 p-3 rounded mt-2 border border-purple-200">
-                                                            <div className="font-medium mb-1 text-purple-800">When Insurance Pays 100%:</div>
-                                                            <div className="text-xs text-purple-700 font-semibold">
-                                                                Immediately after this payment! ✨
-                                                            </div>
-                                                            <div className="text-xs text-purple-600 mt-1">
-                                                                No more out-of-pocket costs for covered services this year
-                                                            </div>
-                                                        </div>
-                                                        {!benefits.deductibleCountsTowardOOP && calculation.currentStatus.remainingDeductible > 0 && (
-                                                            <div className="mt-2 p-2 bg-amber-50 rounded border border-amber-200">
-                                                                <div className="text-xs text-amber-700">
-                                                                    <strong>Total Payment Breakdown:</strong>
-                                                                    <br/>Deductible: ${calculation.currentStatus.remainingDeductible.toLocaleString()}
-                                                                    <br/>+ OOP Max: ${calculation.currentStatus.remainingOOP.toLocaleString()}
-                                                                    <br/>= Total: ${(calculation.currentStatus.remainingDeductible + calculation.currentStatus.remainingOOP).toLocaleString()}
-                                                                </div>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Detailed Breakdown */}
-                                        <div className="bg-white rounded-lg shadow-sm p-6">
-                                            <h3 className="text-lg font-semibold text-gray-800 mb-4">Cost Breakdown</h3>
-                                            
-                                            <div className="mb-6">
-                                                <h4 className="text-sm font-medium text-gray-700 mb-3">Selected Services</h4>
-                                                <div className="space-y-2">
-                                                    {calculation.services.map((service, idx) => (
-                                                        <div key={idx} className="flex justify-between items-center py-2 border-b border-gray-100">
-                                                            <span className="text-sm text-gray-600">
-                                                                {serviceInfo[service.name].fullName} ({service.days} days @ ${service.dailyRate}/day)
-                                                            </span>
-                                                            <span className="font-medium">${service.totalCost.toLocaleString()}</span>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-
-                                            <div className="space-y-3">
-                                                <div className="flex justify-between items-center py-2">
-                                                    <span className="text-sm text-gray-600">Total Provider Charges</span>
-                                                    <span className="font-medium">${calculation.totals.providerCharges.toLocaleString()}</span>
-                                                </div>
-                                                
-                                                <div className="border-t pt-3">
-                                                    <div className="flex justify-between items-center py-1">
-                                                        <span className="text-sm text-gray-600">
-                                                            Deductible Applied
-                                                            {!benefits.deductibleCountsTowardOOP && (
-                                                                <span className="text-xs text-amber-600 ml-1">(not toward OOP)</span>
-                                                            )}
-                                                        </span>
-                                                        <span className="font-medium text-red-600">-${calculation.totals.deductibleApplied.toLocaleString()}</span>
-                                                    </div>
-                                                    
-                                                    <div className="flex justify-between items-center py-1">
-                                                        <span className="text-sm text-gray-600">Coinsurance ({benefits.coinsurance}%)</span>
-                                                        <span className="font-medium text-red-600">-${calculation.totals.coinsuranceAmount.toLocaleString()}</span>
-                                                    </div>
-                                                </div>
-                                                
-                                                {calculation.totals.oopMaxReached && (
-                                                    <div className="py-2 px-3 bg-green-50 rounded border border-green-200">
-                                                        <div className="text-sm text-green-700 font-medium">
-                                                            Out-of-Pocket Maximum Reached
-                                                        </div>
-                                                    </div>
-                                                )}
-                                                
-                                                <div className="flex justify-between items-center py-3 border-t font-semibold">
-                                                    <span>Total Client Responsibility</span>
-                                                    <span className="text-lg text-indigo-600">${calculation.totals.totalClientCost.toLocaleString()}</span>
-                                                </div>
-                                            </div>
-
-                                            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                                                <h4 className="text-sm font-medium text-gray-700 mb-3">Benefit Status After This Service</h4>
-                                                <div className="space-y-3">
-                                                    <div>
-                                                        <div className="flex justify-between text-xs mb-1">
-                                                            <span className="text-gray-600">Deductible Remaining</span>
-                                                            <span className="font-medium">
-                                                                ${calculation.totals.remainingDeductible.toLocaleString()} of ${(parseFloat(benefits.deductible) || 0).toLocaleString()}
-                                                            </span>
-                                                        </div>
-                                                        <div className="w-full bg-gray-200 rounded-full h-2">
-                                                            <div 
-                                                                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                                                                style={{width: `${Math.min(100, (((parseFloat(benefits.deductible) || 0) - calculation.totals.remainingDeductible) / (parseFloat(benefits.deductible) || 1)) * 100)}%`}}
-                                                            ></div>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div className="flex justify-between text-xs mb-1">
-                                                            <span className="text-gray-600">Out-of-Pocket Remaining</span>
-                                                            <span className="font-medium">
-                                                                ${calculation.totals.remainingOOP.toLocaleString()} of ${(parseFloat(benefits.oopMax) || 0).toLocaleString()}
-                                                            </span>
-                                                        </div>
-                                                        <div className="w-full bg-gray-200 rounded-full h-2">
-                                                            <div 
-                                                                className="bg-green-600 h-2 rounded-full transition-all duration-300"
-                                                                style={{width: `${Math.min(100, (((parseFloat(benefits.oopMax) || 0) - calculation.totals.remainingOOP) / (parseFloat(benefits.oopMax) || 1)) * 100)}%`}}
-                                                            ></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                                            <p className="text-sm text-amber-800">
-                                                <strong>Disclaimer:</strong> This is an estimate based on the benefits information provided. 
-                                                Actual costs may vary depending on final coding, medical necessity determinations, and other factors.
-                                            </p>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-                                        <div className="text-gray-400 mb-4">
-                                            <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                            </svg>
-                                        </div>
-                                        <h3 className="text-lg font-medium text-gray-800 mb-2">No Calculation Yet</h3>
-                                        <p className="text-gray-600">Enter benefits information and select services to see the cost calculation</p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Footer */}
-                        <div className="mt-8 text-center text-sm text-gray-500">
-                            <p>Free Insurance Benefits Calculator - No registration required</p>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        ReactDOM.render(<InsuranceBenefitsCalculator />, document.getElementById('root'));
-    </script>
+  // scroll reveal
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
 </body>
 </html>
