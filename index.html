@@ -3,573 +3,97 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kathors Peptides — Certified Reference Standards for Research</title>
-<meta name="description" content="Kathors Peptides supplies certified peptide reference standards to qualified research institutions. HPLC purity data, mass-spec identity confirmation, and a Certificate of Analysis per lot. For laboratory research use only — not for human or veterinary use." />
+<title>Kathors Peptides — Research-grade peptides, supplied for laboratory use</title>
+<meta name="description" content="Kathors Peptides is a U.S.-based supplier of research-grade peptides, characterized for identity and purity and documented per lot. Sold for laboratory research use only." />
+<link rel="icon" type="image/png" href="favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root{
-    --ink:#0A1524;
-    --navy:#0B2A4A;
-    --navy-deep:#081F38;
-    --steel:#2E6FA7;
-    --steel-soft:#5B8FC0;
-    --paper:#F7F9FB;
-    --panel:#FFFFFF;
-    --hair:#D9E2EC;
-    --hair-strong:#C3D0DE;
-    --slate:#4A5C6E;
-    --slate-light:#6B7C8E;
-    --mono:"IBM Plex Mono",ui-monospace,monospace;
-    --sans:"IBM Plex Sans",system-ui,sans-serif;
-    --display:"Archivo",system-ui,sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:var(--sans);
-    color:var(--ink);
-    background:var(--paper);
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
-
-  /* ---- utility eyebrow / mono labels ---- */
-  .eyebrow{
-    font-family:var(--mono);
-    font-size:11px;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    color:var(--steel);
-    font-weight:500;
-  }
-
-  /* ---- compliance top bar ---- */
-  .compliance-bar{
-    background:var(--navy-deep);
-    color:#B9CBDD;
-    font-family:var(--mono);
-    font-size:11.5px;
-    letter-spacing:.04em;
-  }
-  .compliance-bar .wrap{
-    display:flex;justify-content:center;align-items:center;gap:10px;
-    min-height:34px;text-align:center;flex-wrap:wrap;
-  }
-  .compliance-bar strong{color:#EAF1F8;font-weight:600}
-
-  /* ---- header ---- */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:rgba(247,249,251,.92);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--hair);
-  }
-  header .wrap{display:flex;align-items:center;justify-content:space-between;min-height:70px;gap:24px}
-  .brand{display:flex;align-items:baseline;gap:11px;flex-shrink:0}
-  .brand .mark{
-    font-family:var(--display);font-weight:800;font-size:26px;color:var(--navy);
-    letter-spacing:-.01em;line-height:1;
-  }
-  .brand .mark span{color:var(--steel)}
-  .brand .sub{
-    font-family:var(--mono);font-size:10px;letter-spacing:.22em;
-    text-transform:uppercase;color:var(--slate-light);
-  }
-  nav.main{display:flex;gap:30px;align-items:center}
-  nav.main a{
-    font-size:14px;color:var(--slate);font-weight:500;
-    transition:color .15s;
-  }
-  nav.main a:hover{color:var(--navy)}
-  .btn{
-    font-family:var(--sans);font-size:14px;font-weight:600;
-    padding:10px 18px;border-radius:2px;cursor:pointer;border:1px solid transparent;
-    transition:background .15s,border-color .15s,color .15s;display:inline-block;
-  }
-  .btn-primary{background:var(--navy);color:#fff}
-  .btn-primary:hover{background:var(--steel)}
-  .btn-ghost{background:transparent;border-color:var(--hair-strong);color:var(--navy)}
-  .btn-ghost:hover{border-color:var(--steel);color:var(--steel)}
-  .nav-toggle{display:none;background:none;border:1px solid var(--hair-strong);border-radius:2px;padding:8px 10px;cursor:pointer}
-  .nav-toggle span{display:block;width:20px;height:2px;background:var(--navy);margin:4px 0}
-
-  /* ---- hero ---- */
-  .hero{
-    background:
-      radial-gradient(circle at 88% 12%, rgba(46,111,167,.10), transparent 42%),
-      linear-gradient(180deg,#fff 0%, var(--paper) 100%);
-    border-bottom:1px solid var(--hair);
-    overflow:hidden;
-  }
-  .hero .wrap{
-    display:grid;grid-template-columns:1.12fr .88fr;gap:56px;
-    padding-top:76px;padding-bottom:76px;align-items:center;
-  }
-  .hero h1{
-    font-family:var(--display);font-weight:700;
-    font-size:clamp(34px,4.4vw,54px);line-height:1.04;letter-spacing:-.02em;
-    color:var(--ink);margin:18px 0 20px;
-  }
-  .hero h1 em{font-style:normal;color:var(--steel)}
-  .hero p.lead{
-    font-size:17px;color:var(--slate);max-width:42ch;margin-bottom:30px;
-  }
-  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:28px}
-  .hero-note{
-    font-family:var(--mono);font-size:11.5px;color:var(--slate-light);
-    letter-spacing:.03em;line-height:1.7;border-left:2px solid var(--hair-strong);
-    padding-left:14px;max-width:44ch;
-  }
-
-  /* credential panel (hero right) */
-  .cred{
-    background:var(--navy);color:#EAF1F8;border-radius:4px;
-    padding:30px 30px 26px;position:relative;overflow:hidden;
-    box-shadow:0 24px 48px -28px rgba(8,31,56,.6);
-  }
-  .cred::before{
-    content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;
-    background:radial-gradient(circle,rgba(91,143,192,.45),transparent 70%);
-  }
-  .cred .eyebrow{color:var(--steel-soft);position:relative}
-  .cred h2{
-    font-family:var(--display);font-weight:600;font-size:19px;
-    margin:8px 0 20px;position:relative;letter-spacing:-.01em;
-  }
-  .cred ul{list-style:none;position:relative}
-  .cred li{
-    display:flex;gap:12px;align-items:flex-start;
-    padding:13px 0;border-top:1px solid rgba(255,255,255,.10);
-    font-size:13.5px;color:#CFDEEC;
-  }
-  .cred li:first-of-type{border-top:none}
-  .cred li .k{
-    font-family:var(--mono);font-size:10px;letter-spacing:.12em;
-    color:var(--steel-soft);text-transform:uppercase;flex-shrink:0;width:66px;padding-top:2px;
-  }
-  .cred li b{color:#fff;font-weight:600;display:block;font-size:13.5px}
-
-  /* ---- QC strip ---- */
-  .qc{background:var(--panel);border-bottom:1px solid var(--hair)}
-  .qc .wrap{
-    display:grid;grid-template-columns:repeat(4,1fr);
-  }
-  .qc .cell{
-    padding:26px 22px;border-left:1px solid var(--hair);
-  }
-  .qc .cell:first-child{border-left:none;padding-left:0}
-  .qc .n{font-family:var(--mono);font-size:12px;color:var(--steel);letter-spacing:.08em;margin-bottom:8px}
-  .qc .t{font-family:var(--display);font-weight:600;font-size:15px;color:var(--navy);margin-bottom:4px}
-  .qc .d{font-size:12.5px;color:var(--slate-light);line-height:1.5}
-
-  /* ---- section scaffold ---- */
-  section{padding:78px 0}
-  .sec-head{max-width:60ch;margin-bottom:40px}
-  .sec-head h2{
-    font-family:var(--display);font-weight:700;font-size:clamp(26px,3vw,34px);
-    letter-spacing:-.02em;color:var(--ink);margin:12px 0 12px;line-height:1.1;
-  }
-  .sec-head p{color:var(--slate);font-size:16px;max-width:52ch}
-
-  /* ---- catalog ---- */
-  #catalog{background:var(--paper)}
-  .catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .card{
-    background:var(--panel);border:1px solid var(--hair);border-radius:5px;
-    display:flex;flex-direction:column;overflow:hidden;
-    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
-  }
-  .card:hover{transform:translateY(-3px);box-shadow:0 22px 40px -30px rgba(8,31,56,.5);border-color:var(--hair-strong)}
-  .card-top{
-    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);
-    color:#fff;padding:20px 22px 18px;
-  }
-  .card-cat{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--steel-soft)}
-  .card-top h3{font-family:var(--display);font-weight:700;font-size:23px;letter-spacing:.01em;margin:6px 0 3px}
-  .card-top .inn{font-size:12.5px;color:#B9CBDD}
-  .spec{padding:6px 22px 8px}
-  .spec dl{display:grid;grid-template-columns:auto 1fr;gap:0}
-  .spec .row{display:contents}
-  .spec dt,.spec dd{
-    font-family:var(--mono);font-size:12px;padding:9px 0;border-top:1px solid var(--hair);
-  }
-  .spec dt{color:var(--slate-light);letter-spacing:.03em}
-  .spec dd{color:var(--ink);text-align:right;font-weight:500;word-break:break-word}
-  .spec .row:first-child dt,.spec .row:first-child dd{border-top:none}
-  .card-foot{margin-top:auto;padding:16px 22px 20px;border-top:1px solid var(--hair)}
-  .doc-tags{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
-  .doc-tags span{
-    font-family:var(--mono);font-size:10px;letter-spacing:.06em;
-    background:#EDF3F9;color:var(--steel);padding:4px 8px;border-radius:2px;
-  }
-  .card-actions{display:flex;gap:8px}
-  .card-actions .btn{flex:1;text-align:center;font-size:13px;padding:9px 10px}
-  .card .price-note{font-family:var(--mono);font-size:11px;color:var(--slate-light);margin-bottom:12px;letter-spacing:.02em}
-  .catalog-foot{
-    font-family:var(--mono);font-size:11.5px;color:var(--slate-light);
-    margin-top:22px;letter-spacing:.02em;line-height:1.7;text-align:center;
-  }
-
-  /* ---- eligibility ---- */
-  #eligibility{background:var(--panel);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
-  .elig-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-  .steps{counter-reset:step;list-style:none}
-  .steps li{
-    display:flex;gap:18px;padding:20px 0;border-top:1px solid var(--hair);
-  }
-  .steps li:first-child{border-top:none;padding-top:0}
-  .steps li::before{
-    counter-increment:step;content:counter(step,decimal-leading-zero);
-    font-family:var(--mono);font-size:13px;color:var(--steel);font-weight:600;
-    flex-shrink:0;padding-top:2px;
-  }
-  .steps h4{font-family:var(--display);font-weight:600;font-size:16px;margin-bottom:4px;color:var(--navy)}
-  .steps p{font-size:14px;color:var(--slate)}
-  .elig-panel{
-    background:var(--paper);border:1px solid var(--hair);border-radius:5px;padding:30px;
-  }
-  .elig-panel h3{font-family:var(--display);font-weight:700;font-size:18px;color:var(--ink);margin-bottom:6px}
-  .elig-panel > p{font-size:14px;color:var(--slate);margin-bottom:22px}
-  .field{margin-bottom:15px}
-  .field label{display:block;font-size:12px;font-weight:600;color:var(--slate);margin-bottom:6px;letter-spacing:.02em}
-  .field input,.field select{
-    width:100%;font-family:var(--sans);font-size:14px;color:var(--ink);
-    padding:11px 13px;border:1px solid var(--hair-strong);border-radius:3px;background:#fff;
-  }
-  .field input:focus,.field select:focus{outline:2px solid var(--steel);outline-offset:0;border-color:var(--steel)}
-  .attest{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--slate);margin:6px 0 18px}
-  .attest input{margin-top:3px;flex-shrink:0}
-  .elig-panel .btn-primary{width:100%;text-align:center}
-  .form-note{font-family:var(--mono);font-size:11px;color:var(--slate-light);margin-top:14px;text-align:center;letter-spacing:.02em}
-
-  /* ---- documentation ---- */
-  #docs{background:var(--paper)}
-  .doc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-  .doc-card{background:var(--panel);border:1px solid var(--hair);border-radius:5px;padding:24px 22px}
-  .doc-card .code{font-family:var(--mono);font-size:11px;color:var(--steel);letter-spacing:.1em;margin-bottom:12px}
-  .doc-card h4{font-family:var(--display);font-weight:600;font-size:16px;color:var(--navy);margin-bottom:7px}
-  .doc-card p{font-size:13.5px;color:var(--slate)}
-
-  /* ---- footer ---- */
-  footer{background:var(--navy-deep);color:#AFC2D6;padding:56px 0 30px;font-size:13.5px}
-  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.10)}
-  .foot-brand .mark{font-family:var(--display);font-weight:800;font-size:24px;color:#fff}
-  .foot-brand .mark span{color:var(--steel-soft)}
-  .foot-brand p{margin-top:12px;max-width:34ch;color:#94A9BF;font-size:13px}
-  footer h5{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7791AB;margin-bottom:14px}
-  footer ul{list-style:none}
-  footer ul li{margin-bottom:9px}
-  footer ul a{color:#AFC2D6;transition:color .15s}
-  footer ul a:hover{color:#fff}
-  .foot-legal{
-    margin-top:26px;font-family:var(--mono);font-size:11px;line-height:1.8;color:#8AA0B6;letter-spacing:.02em;
-  }
-  .foot-legal strong{color:#CFDEEC;font-weight:600}
-  .foot-copy{margin-top:20px;font-size:12px;color:#6C84 9C;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-
-  /* ---- reveal ---- */
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
-  .reveal.in{opacity:1;transform:none}
-
-  /* ---- responsive ---- */
-  @media(max-width:900px){
-    nav.main{
-      display:none;position:absolute;top:70px;left:0;right:0;
-      background:var(--paper);border-bottom:1px solid var(--hair);
-      flex-direction:column;gap:0;padding:8px 24px 18px;
-    }
-    nav.main.open{display:flex}
-    nav.main a{padding:12px 0;border-bottom:1px solid var(--hair);width:100%}
-    nav.main .btn{margin-top:10px;text-align:center}
-    .nav-toggle{display:block}
-    .hero .wrap{grid-template-columns:1fr;gap:40px;padding-top:52px;padding-bottom:52px}
-    .qc .wrap{grid-template-columns:1fr 1fr}
-    .qc .cell{border-left:none;border-top:1px solid var(--hair);padding-left:0}
-    .qc .cell:first-child,.qc .cell:nth-child(2){border-top:none}
-    .catalog-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
-    .elig-grid{grid-template-columns:1fr;gap:40px}
-    .doc-grid{grid-template-columns:1fr 1fr}
-    .foot-top{grid-template-columns:1fr 1fr;gap:30px}
-  }
-  @media(max-width:520px){
-    .doc-grid{grid-template-columns:1fr}
-    .foot-top{grid-template-columns:1fr}
-  }
-  @media(prefers-reduced-motion:reduce){
-    *{scroll-behavior:auto}
-    .reveal{opacity:1;transform:none;transition:none}
-    .card:hover{transform:none}
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<!-- compliance bar -->
-<div class="compliance-bar">
-  <div class="wrap">
-    <span><strong>For laboratory research use only.</strong> Not for human or veterinary use. Sold exclusively to qualified institutions.</span>
+  <div class="topbar">
+    <div class="wrap">
+      <a href="index.html" class="brand" aria-label="Kathors Peptides home">
+        <img class="brand-emblem" src="emblem.png" alt="" />
+        <span class="brand-text"><span class="chrome">KATHORS</span><span class="brand-sub">Peptides</span></span>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#quality">Quality</a>
+        <a href="standards.html">Standards</a>
+        <a href="research.html">Reference</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </div>
-</div>
 
-<!-- header -->
-<header>
-  <div class="wrap">
-    <a class="brand" href="#top" aria-label="Kathors Peptides home">
-      <span class="mark">K<span>·</span>athors</span>
-      <span class="sub">Reference Standards</span>
-    </a>
-    <nav class="main" id="menu">
-      <a href="#catalog">Catalog</a>
-      <a href="#eligibility">Ordering &amp; Eligibility</a>
-      <a href="#docs">Documentation</a>
-      <a href="#eligibility" class="btn btn-primary">Request account access</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
+  <main id="top">
 
-<main id="top">
-
-<!-- hero -->
-<section class="hero" style="padding:0">
-  <div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow">Analytical &amp; research reference standards</span>
-      <h1>Certified peptide reference standards for <em>research and analytical labs.</em></h1>
-      <p class="lead">Kathors supplies characterized peptide standards to qualified research institutions — each lot backed by HPLC purity data, mass-spec identity confirmation, and a Certificate of Analysis.</p>
-      <div class="hero-cta">
-        <a href="#eligibility" class="btn btn-primary">Request institutional access</a>
-        <a href="#catalog" class="btn btn-ghost">View catalog</a>
+    <header class="hero-banner">
+      <h1 class="visually-hidden">Kathors Peptides — high-quality research peptides. Lab tested for quality, pure research grade, backed by science. Research only, not for human consumption.</h1>
+      <img class="banner rise" src="hero-banner.jpg" alt="Kathors Peptides — high-quality research peptides. Lab tested for quality, pure research grade, high quality peptides, backed by science. Research only — not for human consumption." />
+      <div class="wrap">
+        <p class="hero-sub rise d1"><b>U.S.-based supplier of research-grade peptides.</b> Characterized for identity and purity, and documented lot by lot.</p>
       </div>
-      <p class="hero-note">Products are supplied as laboratory reference materials for in-vitro research use only. Kathors does not sell to individuals and makes no therapeutic, performance, or human-use claims. Ordering requires a verified institutional account.</p>
-    </div>
+    </header>
 
-    <aside class="cred reveal" aria-label="Supply standards">
-      <span class="eyebrow">What ships with every lot</span>
-      <h2>Documentation, not marketing.</h2>
-      <ul>
-        <li><span class="k">COA</span><div><b>Certificate of Analysis</b>Lot-specific, released before dispatch.</div></li>
-        <li><span class="k">HPLC</span><div><b>Purity by RP-HPLC</b>Chromatogram included with each report.</div></li>
-        <li><span class="k">MS</span><div><b>Identity by mass spectrometry</b>Observed vs. theoretical mass.</div></li>
-        <li><span class="k">SDS</span><div><b>Safety data sheet</b>Handling, storage, and disposal guidance.</div></li>
-      </ul>
-    </aside>
-  </div>
-</section>
-
-<!-- QC strip -->
-<div class="qc">
-  <div class="wrap">
-    <div class="cell"><div class="n">01</div><div class="t">Purity verified</div><div class="d">RP-HPLC purity reported per lot, typically ≥98%.</div></div>
-    <div class="cell"><div class="n">02</div><div class="t">Identity confirmed</div><div class="d">Mass-spec confirmation of molecular weight.</div></div>
-    <div class="cell"><div class="n">03</div><div class="t">Batch traceability</div><div class="d">Every unit tied to a documented production lot.</div></div>
-    <div class="cell"><div class="n">04</div><div class="t">Cold-chain dispatch</div><div class="d">Lyophilized and shipped to preserve stability.</div></div>
-  </div>
-</div>
-
-<!-- catalog -->
-<section id="catalog">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Catalog</span>
-      <h2>Reference standards</h2>
-      <p>Representative catalog entries. Pricing and ordering are available to verified institutional accounts. Final specifications are defined by the lot-specific Certificate of Analysis.</p>
-    </div>
-
-    <div class="catalog-grid">
-
-      <!-- BPC-157 -->
-      <article class="card reveal">
-        <div class="card-top">
-          <div class="card-cat">CAT · KP-0157</div>
-          <h3>BPC-157</h3>
-          <div class="inn">Pentadecapeptide · lyophilized</div>
+    <section id="about">
+      <div class="wrap">
+        <p class="sec-label">01 — About</p>
+        <h2 class="sec-h">A materials company, focused on consistency and documentation.</h2>
+        <div class="prose">
+          <p>Kathors Peptides is a United States–based supplier of research-grade peptides. We concentrate on the parts that matter to a research buyer: <strong>consistent material, verified identity, and clear documentation</strong> that travels with every lot.</p>
+          <p>Production is domestic. Each lot is analyzed before release and accompanied by a certificate of analysis, so the material you receive matches what the paperwork says it is. No guesswork, no mystery sourcing.</p>
+          <p>We describe our products in plain, factual terms — what a compound is, and how it was characterized. We don't make health, performance, or treatment claims, because that isn't what a reference-materials supplier does.</p>
         </div>
-        <div class="spec">
-          <dl>
-            <div class="row"><dt>CAS</dt><dd>137525-51-0</dd></div>
-            <div class="row"><dt>Formula</dt><dd>C62H98N16O22</dd></div>
-            <div class="row"><dt>Mol. weight</dt><dd>1419.5 g/mol</dd></div>
-            <div class="row"><dt>Sequence</dt><dd>GEPPPGKPADDAGLV</dd></div>
-            <div class="row"><dt>Purity</dt><dd>≥98% (HPLC)</dd></div>
-            <div class="row"><dt>Format</dt><dd>10&nbsp;mg / vial</dd></div>
-          </dl>
-        </div>
-        <div class="card-foot">
-          <div class="doc-tags"><span>COA</span><span>HPLC</span><span>MS</span><span>SDS</span></div>
-          <div class="price-note">Pricing visible to verified accounts</div>
-          <div class="card-actions">
-            <a href="#eligibility" class="btn btn-primary">Request quote</a>
-            <a href="#docs" class="btn btn-ghost">Spec sheet</a>
-          </div>
-        </div>
-      </article>
+      </div>
+    </section>
 
-      <!-- TB-500 -->
-      <article class="card reveal">
-        <div class="card-top">
-          <div class="card-cat">CAT · KP-0500</div>
-          <h3>TB-500</h3>
-          <div class="inn">Thymosin β4 fragment · lyophilized</div>
-        </div>
-        <div class="spec">
-          <dl>
-            <div class="row"><dt>CAS</dt><dd>77591-33-4</dd></div>
-            <div class="row"><dt>Formula</dt><dd>per COA</dd></div>
-            <div class="row"><dt>Mol. weight</dt><dd>per COA</dd></div>
-            <div class="row"><dt>Sequence</dt><dd>Ac-LKKTETQ (fragment)</dd></div>
-            <div class="row"><dt>Purity</dt><dd>≥98% (HPLC)</dd></div>
-            <div class="row"><dt>Format</dt><dd>10&nbsp;mg / vial</dd></div>
-          </dl>
-        </div>
-        <div class="card-foot">
-          <div class="doc-tags"><span>COA</span><span>HPLC</span><span>MS</span><span>SDS</span></div>
-          <div class="price-note">Pricing visible to verified accounts</div>
-          <div class="card-actions">
-            <a href="#eligibility" class="btn btn-primary">Request quote</a>
-            <a href="#docs" class="btn btn-ghost">Spec sheet</a>
-          </div>
-        </div>
-      </article>
+    <section id="quality">
+      <div class="wrap">
+        <p class="sec-label">02 — Quality &amp; documentation</p>
+        <h2 class="sec-h">Every lot is characterized before it leaves.</h2>
+        <ul class="quality-list">
+          <li><span class="num">HPLC</span><div><p class="qt">Purity by chromatography</p><p class="qd">Each lot is analyzed by high-performance liquid chromatography to assess purity of the material.</p></div></li>
+          <li><span class="num">MS</span><div><p class="qt">Identity by mass spectrometry</p><p class="qd">Molecular weight is confirmed by mass spectrometry so the identity of the peptide is verified, not assumed.</p></div></li>
+          <li><span class="num">COA</span><div><p class="qt">Certificate of analysis</p><p class="qd">Documentation is generated per lot and made available to the customer, recording the analytical results for that batch.</p></div></li>
+          <li><span class="num">USA</span><div><p class="qt">Domestic manufacturing</p><p class="qd">Material is produced in the United States, keeping the supply chain accountable and traceable.</p></div></li>
+        </ul>
+        <p class="more-link"><a href="standards.html">Read how we document each lot →</a></p>
+      </div>
+    </section>
 
-      <!-- CJC-1295 -->
-      <article class="card reveal">
-        <div class="card-top">
-          <div class="card-cat">CAT · KP-1295</div>
-          <h3>CJC-1295</h3>
-          <div class="inn">Modified GRF (1–29) · lyophilized</div>
+    <section id="contact">
+      <div class="wrap">
+        <p class="sec-label">03 — Contact</p>
+        <h2 class="sec-h">Get in touch.</h2>
+        <div class="prose"><p>For general inquiries, reach us directly by email or phone. We're glad to answer questions about our materials and documentation.</p></div>
+        <div class="contact-card">
+          <div class="cc-head"><span>Direct contact</span><span>Mon–Fri</span></div>
+          <div class="crow"><div class="ck">Email</div><div class="cv"><a href="mailto:Myleswhitt4657@gmail.com">Myleswhitt4657@gmail.com</a></div></div>
+          <div class="crow"><div class="ck">Phone</div><div class="cv"><a href="tel:+19495584394">(949) 558-4394</a></div></div>
+          <div class="crow"><div class="ck">Location</div><div class="cv">United States</div></div>
         </div>
-        <div class="spec">
-          <dl>
-            <div class="row"><dt>CAS</dt><dd>863288-34-0</dd></div>
-            <div class="row"><dt>Formula</dt><dd>C152H252N44O42</dd></div>
-            <div class="row"><dt>Mol. weight</dt><dd>3367.9 g/mol</dd></div>
-            <div class="row"><dt>Sequence</dt><dd>29-aa (see COA)</dd></div>
-            <div class="row"><dt>Purity</dt><dd>≥98% (HPLC)</dd></div>
-            <div class="row"><dt>Format</dt><dd>10&nbsp;mg / vial</dd></div>
-          </dl>
-        </div>
-        <div class="card-foot">
-          <div class="doc-tags"><span>COA</span><span>HPLC</span><span>MS</span><span>SDS</span></div>
-          <div class="price-note">Pricing visible to verified accounts</div>
-          <div class="card-actions">
-            <a href="#eligibility" class="btn btn-primary">Request quote</a>
-            <a href="#docs" class="btn btn-ghost">Spec sheet</a>
-          </div>
-        </div>
-      </article>
+      </div>
+    </section>
 
-    </div>
-    <p class="catalog-foot">Values shown are representative reference data for display and must be confirmed against the lot-specific Certificate of Analysis. Supplied for in-vitro laboratory research only.</p>
-  </div>
-</section>
+  </main>
 
-<!-- eligibility -->
-<section id="eligibility">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Ordering &amp; eligibility</span>
-      <h2>Who we sell to</h2>
-      <p>Kathors supplies verified research organizations only. Accounts are reviewed before any pricing, quoting, or dispatch. We do not sell to individual consumers.</p>
-    </div>
-
-    <div class="elig-grid">
-      <ol class="steps reveal">
-        <li><div><h4>Submit institutional details</h4><p>Provide your organization, role, and a work email on an institutional domain.</p></div></li>
-        <li><div><h4>Verification review</h4><p>Our team confirms the account represents a qualified research institution or laboratory.</p></div></li>
-        <li><div><h4>Purpose attestation</h4><p>You confirm materials are for in-vitro research use only — not for human or veterinary administration.</p></div></li>
-        <li><div><h4>Account activation</h4><p>Once approved, pricing and quoting unlock, and orders ship with full lot documentation.</p></div></li>
-      </ol>
-
-      <div class="elig-panel reveal">
-        <h3>Request account access</h3>
-        <p>For qualified institutions. This is a display mockup — the form does not submit.</p>
-        <div class="field"><label for="org">Institution / organization</label><input id="org" type="text" placeholder="e.g. University research lab" /></div>
-        <div class="field"><label for="email">Institutional email</label><input id="email" type="email" placeholder="name@institution.edu" /></div>
-        <div class="field"><label for="role">Role</label>
-          <select id="role">
-            <option>Principal investigator</option>
-            <option>Lab manager</option>
-            <option>Procurement</option>
-            <option>Research staff</option>
-          </select>
-        </div>
-        <label class="attest"><input type="checkbox" /> I confirm materials will be used for in-vitro laboratory research only, and not for human or veterinary use.</label>
-        <button class="btn btn-primary" type="button" onclick="return false;">Submit for review</button>
-        <p class="form-note">Accounts are manually verified before activation.</p>
+  <div class="notband"><span>Research only — not for human consumption</span></div>
+  <footer class="compliance">
+    <div class="wrap">
+      <p class="ruo">Research use only</p>
+      <p>All materials supplied by Kathors Peptides are sold strictly for laboratory research use only. They are not drugs, dietary supplements, cosmetics, or foods, and they are <strong>not intended for human or animal, clinical, diagnostic, or therapeutic use</strong>.</p>
+      <p>Nothing on this website is a medical, health, or performance claim, and no product described here has been evaluated or approved for such use. Customers are responsible for handling all materials lawfully and in accordance with applicable regulations, and for confirming they are permitted to purchase and use research materials in their jurisdiction.</p>
+      <div class="footline">
+        <span>© <span id="yr">2026</span> Kathors Peptides</span>
+        <span>Made in the USA</span>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- documentation -->
-<section id="docs">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Documentation</span>
-      <h2>Every lot, fully documented</h2>
-      <p>Analytical records accompany each shipment and are available to account holders on request.</p>
-    </div>
-    <div class="doc-grid">
-      <div class="doc-card reveal"><div class="code">DOC-01</div><h4>Certificate of Analysis</h4><p>Lot-specific results for identity, purity, and content, released prior to dispatch.</p></div>
-      <div class="doc-card reveal"><div class="code">DOC-02</div><h4>HPLC report</h4><p>Reverse-phase chromatogram with reported purity for the supplied lot.</p></div>
-      <div class="doc-card reveal"><div class="code">DOC-03</div><h4>Mass spectrometry</h4><p>Observed molecular mass compared against the theoretical value.</p></div>
-      <div class="doc-card reveal"><div class="code">DOC-04</div><h4>Safety data sheet</h4><p>Handling, storage, transport, and disposal guidance for laboratory settings.</p></div>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<!-- footer -->
-<footer>
-  <div class="wrap">
-    <div class="foot-top">
-      <div class="foot-brand">
-        <div class="mark">K<span>·</span>athors</div>
-        <p>Certified peptide reference standards supplied to qualified research institutions worldwide.</p>
-      </div>
-      <div>
-        <h5>Catalog</h5>
-        <ul><li><a href="#catalog">Reference standards</a></li><li><a href="#docs">Documentation</a></li><li><a href="#eligibility">Request access</a></li></ul>
-      </div>
-      <div>
-        <h5>Ordering</h5>
-        <ul><li><a href="#eligibility">Eligibility</a></li><li><a href="#eligibility">Institutional accounts</a></li><li><a href="#docs">Spec sheets</a></li></ul>
-      </div>
-      <div>
-        <h5>Company</h5>
-        <ul><li><a href="#top">About</a></li><li><a href="#top">Contact</a></li><li><a href="#top">Terms</a></li></ul>
-      </div>
-    </div>
-    <p class="foot-legal">
-      <strong>For laboratory research use only. Not for human or veterinary use.</strong><br />
-      Products are sold exclusively as reference materials for in-vitro research to qualified institutions. Kathors makes no claim, express or implied, that any product is a drug, supplement, or therapeutic agent, and provides no dosing, medical, or human-use guidance. Purchasers are responsible for lawful use and for compliance with all applicable local, state, and federal regulations.
-    </p>
-    <p class="foot-copy"><span>© 2026 Kathors Peptides. Display mockup — not a live storefront.</span><span>Science · Purity · Traceability</span></p>
-  </div>
-</footer>
-
-<script>
-  // mobile nav
-  var t=document.getElementById('navToggle'),m=document.getElementById('menu');
-  t.addEventListener('click',function(){
-    var open=m.classList.toggle('open');
-    t.setAttribute('aria-expanded',open?'true':'false');
-  });
-  m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');t.setAttribute('aria-expanded','false');});});
-
-  // scroll reveal
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-  },{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-</script>
+  <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
 </body>
 </html>
