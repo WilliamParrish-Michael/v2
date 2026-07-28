@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lab reports — Kathors Peptides</title>
+<meta name="description" content="Certificates of analysis for Kathors Peptides research materials — view, download, and share per-lot lab reports. Research use only." />
+<link rel="icon" type="image/png" href="favicon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Kathors Peptides" />
+<meta property="og:title" content="Lab reports — Kathors Peptides" />
+<meta property="og:description" content="Certificates of analysis for research materials — view, download, and share per-lot lab reports." />
+<meta property="og:image" content="https://williamparrish-michael.github.io/v2/hero-banner.jpg" />
+<meta property="og:url" content="https://williamparrish-michael.github.io/v2/reports.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <a href="index.html" class="brand" aria-label="Kathors Peptides home">
+        <img class="brand-emblem" src="emblem.png" alt="" />
+        <span class="brand-text"><span class="chrome">KATHORS</span><span class="brand-sub">Peptides</span></span>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="index.html#about">About</a>
+        <a href="standards.html">Standards</a>
+        <a href="research.html">Reference</a>
+        <a href="reports.html" class="here">Lab reports</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+    <header class="subhero">
+      <div class="wrap">
+        <a href="index.html" class="backlink">← Kathors</a>
+        <p class="label">Lab reports</p>
+        <h1>Certificates of analysis, by lot.</h1>
+        <p class="lede">Each lot is released with its own certificate of analysis. Open a report to view the tested parameters, download the PDF for your records, or share a direct link.</p>
+        <div class="note"><p>The reports below are formatting samples with illustrative placeholder values, shown to demonstrate the layout. Real per-lot certificates replace them once released.</p></div>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <p class="sec-label">Available reports</p>
+        <div class="grid">
+
+          <article class="cpd" id="KP-BPC157-0000">
+            <div class="cpd-head"><h3>BPC-157</h3><span class="tag">Lot KP-BPC157-0000 · sample</span></div>
+            <p class="cpd-def">Certificate of analysis — identity by ESI-MS, purity by RP-HPLC, with net peptide content, water, and counterion. Report date 2026-07-01.</p>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="coa-bpc157-sample.pdf" target="_blank" rel="noopener">View / download PDF</a>
+              <button class="btn" data-share="BPC-157 certificate of analysis" data-id="KP-BPC157-0000">Share link</button>
+            </div>
+          </article>
+
+          <article class="cpd" id="KP-TB500-0000">
+            <div class="cpd-head"><h3>TB-500</h3><span class="tag">Lot KP-TB500-0000 · sample</span></div>
+            <p class="cpd-def">Certificate of analysis — identity by ESI-MS, purity by RP-HPLC, with net peptide content, water, and counterion. Report date 2026-07-01.</p>
+            <div class="report-actions">
+              <a class="btn btn-primary" href="coa-tb500-sample.pdf" target="_blank" rel="noopener">View / download PDF</a>
+              <button class="btn" data-share="TB-500 certificate of analysis" data-id="KP-TB500-0000">Share link</button>
+            </div>
+          </article>
+
+        </div>
+        <p class="more-link"><a href="standards.html">How to read a certificate of analysis →</a></p>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="notband"><span>Research only — not for human consumption</span></div>
+  <footer class="compliance">
+    <div class="wrap">
+      <p class="ruo">Research use only</p>
+      <p>All materials supplied by Kathors Peptides are sold strictly for laboratory research use only. They are not drugs, dietary supplements, cosmetics, or foods, and they are <strong>not intended for human or animal, clinical, diagnostic, or therapeutic use</strong>. Certificates on this page characterize the physical and chemical properties of research material and are not medical, health, or performance claims.</p>
+      <div class="footline">
+        <span>© <span id="yr">2026</span> Kathors Peptides · California, USA</span>
+        <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="index.html">Home</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent=new Date().getFullYear();
+    function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},2200);}
+    document.querySelectorAll('[data-share]').forEach(function(b){
+      b.addEventListener('click', async function(){
+        var url=location.origin+location.pathname+'#'+b.dataset.id;
+        var title=b.dataset.share+' — Kathors Peptides';
+        try{
+          if(navigator.share){ await navigator.share({title:title,url:url}); }
+          else { await navigator.clipboard.writeText(url); toast('Link copied to clipboard'); }
+        }catch(e){ try{ await navigator.clipboard.writeText(url); toast('Link copied to clipboard'); }catch(_){ toast(url); } }
+      });
+    });
+  </script>
+</body>
+</html>
