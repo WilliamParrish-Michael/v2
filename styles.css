@@ -224,6 +224,10 @@ section{padding:60px 0;border-top:1px solid var(--line);}
 .cform .btn{margin-top:4px;}
 .cform-note{margin:16px 0 0;font-size:13.5px;color:var(--faint);max-width:60ch;}
 .cform-note a{color:var(--blue-2);}
+.cform-ack{display:flex;gap:11px;align-items:flex-start;text-align:left;background:var(--bg-2);border:1px solid var(--line);border-radius:9px;padding:14px 15px;margin:4px 0 18px;cursor:pointer;font-size:14px;color:var(--muted);line-height:1.5;max-width:620px;}
+.cform-ack input{margin-top:2px;width:18px;height:18px;flex:0 0 auto;accent-color:var(--blue);cursor:pointer;}
+.cform-ack strong{color:var(--ink);font-weight:600;}
+.cform-ack .req{color:var(--blue-2);}
 
 /* ---------- age / research-use acknowledgement gate ---------- */
 .agegate-lock{overflow:hidden;}

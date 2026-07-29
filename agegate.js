@@ -21,11 +21,11 @@
         '<h2 id="agegate-h">Before you enter</h2>' +
         '<p class="agegate-copy">All materials on this site are supplied strictly for ' +
           '<strong>laboratory research use only</strong> — they are not drugs, supplements, ' +
-          'or foods, and are <strong>not for human or animal consumption</strong>.</p>' +
+          'or foods, and are <strong>not for human, animal, or veterinary use</strong>.</p>' +
         '<label class="agegate-check">' +
           '<input type="checkbox" id="agegate-cb" />' +
           '<span>I am <strong>21 years of age or older</strong>, and I acknowledge these ' +
-          'materials are for research use only.</span>' +
+          'materials are for laboratory research use only — not for human, animal, or veterinary use.</span>' +
         '</label>' +
         '<div class="agegate-actions">' +
           '<button type="button" class="btn btn-primary" id="agegate-enter" disabled>Enter site</button>' +
