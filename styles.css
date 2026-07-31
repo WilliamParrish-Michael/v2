@@ -330,3 +330,12 @@ html.anim .mega-cta h2 .ln>span{transition:transform 1s cubic-bezier(.19,1,.22,1
   #preloader{padding:1.4rem 1.5rem;}
   .mega-cta{padding:64px 0 56px;}
 }
+
+/* First phone screen must carry the message: headline + sub visible
+   without scrolling. */
+@media (max-width:680px){
+  .k-hero{padding:30px 0 4px;}
+  .k-eyebrow{margin-bottom:12px;}
+  .hero-mega{font-size:clamp(2.1rem,10.5vw,3.6rem);}
+  .hero-sub{margin-top:12px;font-size:16px;}
+}
