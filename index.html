@@ -19,7 +19,14 @@
 <link rel="stylesheet" href="styles.css" />
 <script src="agegate.js"></script>
 </head>
-<body>
+<body class="loading">
+
+  <div id="preloader" aria-hidden="true">
+    <span class="pre-brand chrome">KATHORS</span>
+    <span class="pre-count" id="pre-count">00</span>
+  </div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
 
   <div class="topbar">
     <div class="wrap">
@@ -41,12 +48,30 @@
   <main id="top">
 
     <header class="hero-banner">
-      <h1 class="visually-hidden">Kathors Peptides — high-quality research peptides. Lab tested for quality, pure research grade, backed by science. Research only, not for human consumption.</h1>
-      <img class="banner rise" src="hero-banner.jpg" alt="Kathors Peptides — high-quality research peptides. Lab tested for quality, pure research grade, high quality peptides, backed by science. Research only — not for human consumption." />
-      <div class="wrap">
+      <div class="wrap k-hero">
+        <p class="k-eyebrow rise">Kathors Peptides · US-made · research use only</p>
+        <h1 class="hero-mega" aria-label="Research-grade peptides, lot by lot.">
+          <span class="ln" aria-hidden="true"><span>Research-grade</span></span>
+          <span class="ln" aria-hidden="true"><span class="outline">peptides,</span></span>
+          <span class="ln" aria-hidden="true"><span class="chrome">lot by lot.</span></span>
+        </h1>
         <p class="hero-sub rise d1"><b>U.S.-based supplier of research-grade peptides.</b> Characterized for identity and purity, and documented lot by lot.</p>
       </div>
+      <img class="banner rise" src="hero-banner.jpg" alt="Kathors Peptides — high-quality research peptides. Lab tested for quality, pure research grade, high quality peptides, backed by science. Research only — not for human consumption." />
     </header>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="mq-item">HPLC</span><span class="mq-star">✦</span>
+        <span class="mq-item outline">Mass spec</span><span class="mq-star">✦</span>
+        <span class="mq-item accent">COA every lot</span><span class="mq-star">✦</span>
+        <span class="mq-item">Made in USA</span><span class="mq-star">✦</span>
+        <span class="mq-item">HPLC</span><span class="mq-star">✦</span>
+        <span class="mq-item outline">Mass spec</span><span class="mq-star">✦</span>
+        <span class="mq-item accent">COA every lot</span><span class="mq-star">✦</span>
+        <span class="mq-item">Made in USA</span><span class="mq-star">✦</span>
+      </div>
+    </div>
 
     <section id="about">
       <div class="wrap">
@@ -71,6 +96,19 @@
           <li><span class="num">USA</span><div><p class="qt">Domestic manufacturing</p><p class="qd">Material is produced in the United States, keeping the supply chain accountable and traceable.</p></div></li>
         </ul>
         <p class="more-link"><a href="standards.html">Read how we document each lot →</a></p>
+      </div>
+    </section>
+
+    <section class="mega-cta">
+      <div class="wrap">
+        <h2 aria-label="Need the paperwork?">
+          <span class="ln" aria-hidden="true"><span>Need the</span></span>
+          <span class="ln" aria-hidden="true"><span class="chrome">paperwork?</span></span>
+        </h2>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-big magnetic" href="#contact">Request documentation</a>
+          <span class="cta-note">COA · HPLC · MS — for every lot</span>
+        </div>
       </div>
     </section>
 
@@ -132,6 +170,137 @@
     </div>
   </footer>
 
-  <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    /* Award-site layer: preloader, smooth scroll, masked type reveals,
+       marquee skew, custom cursor, magnetic buttons. Degrades gracefully:
+       no GSAP / reduced motion -> a normal, fully visible site. */
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var pre = document.getElementById('preloader');
+      if (reduce || !window.gsap) {
+        document.body.classList.remove('loading');
+        if (pre) pre.remove();
+        return;
+      }
+      document.documentElement.classList.add('anim');
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.set('.hero-mega .ln > span', { yPercent: 112 });
+      gsap.set('.mega-cta h2 .ln > span', { yPercent: 112 });
+
+      /* Watchdog: if rAF is frozen (hidden/occluded window), force all
+         masked text visible. No-op when animations run normally. */
+      var t0 = gsap.ticker.time;
+      setTimeout(function () {
+        if (gsap.ticker.time - t0 < 0.5) {
+          document.querySelectorAll('.hero-mega .ln > span, .mega-cta h2 .ln > span').forEach(function (el) {
+            el.style.transform = 'none';
+          });
+        }
+      }, 2500);
+
+      /* Preloader counter with a hard 4s cap (background-tab throttling). */
+      var countEl = document.getElementById('pre-count');
+      var n = 0, finished = false;
+      function finishPreloader() {
+        if (finished) return;
+        finished = true;
+        clearInterval(iv);
+        countEl.textContent = '100';
+        document.body.classList.remove('loading');
+        pre.classList.add('done');
+        gsap.to('.hero-mega .ln > span', { yPercent: 0, duration: 1.1, ease: 'power4.out', stagger: 0.09, delay: 0.35 });
+        setTimeout(function () { pre.remove(); }, 1000);
+      }
+      var iv = setInterval(function () {
+        n = Math.min(100, n + Math.ceil(Math.random() * 16));
+        countEl.textContent = (n < 10 ? '0' : '') + n;
+        if (n >= 100) finishPreloader();
+      }, 65);
+      setTimeout(finishPreloader, 4000);
+
+      /* Smooth inertial scroll */
+      if (window.Lenis) {
+        var lenis = new Lenis({ lerp: 0.1 });
+        (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
+        lenis.on('scroll', ScrollTrigger.update);
+        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+          a.addEventListener('click', function (e) {
+            var id = a.getAttribute('href');
+            if (id.length > 1 && document.querySelector(id)) { e.preventDefault(); lenis.scrollTo(id, { offset: -70 }); }
+          });
+        });
+      }
+
+      /* Mega CTA + section reveals */
+      gsap.to('.mega-cta h2 .ln > span', {
+        yPercent: 0, duration: 1, ease: 'power4.out', stagger: 0.1,
+        scrollTrigger: { trigger: '.mega-cta', start: 'top 75%' }
+      });
+      gsap.utils.toArray('.sec-h, .quality-list li, .badge, .cform, .contact-card').forEach(function (el) {
+        gsap.from(el, {
+          y: 34, opacity: 0, duration: 0.9, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%' }
+        });
+      });
+
+      /* Banner parallax */
+      gsap.to('.banner', {
+        yPercent: 10, ease: 'none',
+        scrollTrigger: { trigger: '.hero-banner', start: 'top top', end: 'bottom top', scrub: true }
+      });
+
+      /* Marquee skew with scroll velocity */
+      var mq = document.querySelector('.marquee');
+      if (mq) {
+        var clampSkew = gsap.utils.clamp(-7, 7);
+        var proxy = { skew: 0 };
+        ScrollTrigger.create({
+          onUpdate: function (self) {
+            var skew = clampSkew(self.getVelocity() / -280);
+            if (Math.abs(skew) > Math.abs(proxy.skew)) {
+              proxy.skew = skew;
+              gsap.to(proxy, {
+                skew: 0, duration: 0.7, ease: 'power3', overwrite: true,
+                onUpdate: function () { mq.style.transform = 'skewX(' + proxy.skew + 'deg)'; }
+              });
+            }
+          }
+        });
+      }
+
+      /* Custom cursor + magnetic buttons (fine pointers only) */
+      if (window.matchMedia('(pointer: fine)').matches) {
+        document.documentElement.classList.add('has-cursor');
+        var dot = document.querySelector('.cursor-dot');
+        var ring = document.querySelector('.cursor-ring');
+        var tx = -100, ty = -100, rx = -100, ry = -100;
+        window.addEventListener('mousemove', function (e) {
+          tx = e.clientX; ty = e.clientY;
+          dot.style.left = tx + 'px'; dot.style.top = ty + 'px';
+        });
+        gsap.ticker.add(function () {
+          rx += (tx - rx) * 0.16; ry += (ty - ry) * 0.16;
+          ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+        });
+        document.addEventListener('mouseover', function (e) {
+          if (e.target.closest('a, button')) ring.classList.add('on'); else ring.classList.remove('on');
+        });
+        document.querySelectorAll('.btn.magnetic, .hero-banner ~ * .btn-primary').forEach(function (el) {
+          el.addEventListener('mousemove', function (e) {
+            var r = el.getBoundingClientRect();
+            gsap.to(el, { x: (e.clientX - r.left - r.width / 2) * 0.3, y: (e.clientY - r.top - r.height / 2) * 0.3, duration: 0.3 });
+          });
+          el.addEventListener('mouseleave', function () {
+            gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.45)' });
+          });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
