@@ -246,35 +246,62 @@
 
       if (hasST) {
       /* Section content reveals (decorative — safe to lose) */
-      gsap.utils.toArray('.sec-h, .quality-list li, .badge, .cform, .contact-card').forEach(function (el) {
+      gsap.utils.toArray('.sec-h, .badge, .cform, .contact-card').forEach(function (el) {
         gsap.from(el, {
           y: 34, opacity: 0, duration: 0.9, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 88%' }
         });
       });
 
-      /* Banner parallax */
-      gsap.to('.banner', {
-        yPercent: 10, ease: 'none',
-        scrollTrigger: { trigger: '.hero-banner', start: 'top top', end: 'bottom top', scrub: true }
-      });
+      /* Scroll story 1 — pinned hero: the three headline lines drift
+         apart in depth layers while the banner swells, driven by your
+         scroll. */
+      if (window.innerHeight > 540) {
+        gsap.timeline({
+          scrollTrigger: { trigger: '.hero-banner', start: 'top top', end: '+=90%', pin: true, scrub: 0.6 }
+        })
+        .to('.hero-mega .ln:nth-child(1)', { yPercent: -70, ease: 'none' }, 0)
+        .to('.hero-mega .ln:nth-child(2)', { yPercent: -40, ease: 'none' }, 0)
+        .to('.hero-mega .ln:nth-child(3)', { yPercent: -16, ease: 'none' }, 0)
+        .to('.k-eyebrow, .hero-sub', { autoAlpha: 0, ease: 'none' }, 0)
+        .to('.banner', { scale: 1.06, ease: 'none' }, 0);
+      }
 
-      /* Marquee skew with scroll velocity */
+      /* Scroll story 2 — pinned Quality section: HPLC -> MS -> COA ->
+         USA light up in sequence as you scroll through the pin. */
+      var qItems = gsap.utils.toArray('#quality .quality-list li');
+      if (qItems.length && window.innerHeight > 600) {
+        gsap.set(qItems, { opacity: 0.22 });
+        var qtl = gsap.timeline({
+          scrollTrigger: { trigger: '#quality', start: 'top 10%', end: '+=' + (qItems.length * 50) + '%', pin: true, scrub: 0.5 }
+        });
+        qItems.forEach(function (li, i) { qtl.to(li, { opacity: 1, x: 8, ease: 'none' }, i * 0.24); });
+      } else {
+        qItems.forEach(function (el) {
+          gsap.from(el, { y: 34, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+        });
+      }
+
+      /* Marquee rides your scroll: direction and speed follow it,
+         with a velocity skew on fast flicks. */
       var mq = document.querySelector('.marquee');
-      if (mq) {
+      var track = document.querySelector('.marquee-track');
+      if (mq && track) {
+        track.style.animation = 'none';
+        var mqTween = gsap.to(track, { xPercent: -50, ease: 'none', duration: 26, repeat: -1 });
         var clampSkew = gsap.utils.clamp(-7, 7);
-        var proxy = { skew: 0 };
         ScrollTrigger.create({
           onUpdate: function (self) {
-            var skew = clampSkew(self.getVelocity() / -280);
-            if (Math.abs(skew) > Math.abs(proxy.skew)) {
-              proxy.skew = skew;
-              gsap.to(proxy, {
-                skew: 0, duration: 0.7, ease: 'power3', overwrite: true,
-                onUpdate: function () { mq.style.transform = 'skewX(' + proxy.skew + 'deg)'; }
-              });
-            }
+            var v = self.getVelocity();
+            mqTween.timeScale(gsap.utils.clamp(-4, 4, (self.direction || 1) * (1 + Math.abs(v) / 900)));
+            mq.style.transform = 'skewX(' + clampSkew(v / -280) + 'deg)';
           }
+        });
+        gsap.ticker.add(function () {
+          var ts = mqTween.timeScale();
+          mqTween.timeScale(ts + ((ts < 0 ? -1 : 1) - ts) * 0.04);
+          var m = /skewX\((-?[\d.]+)deg\)/.exec(mq.style.transform);
+          if (m) mq.style.transform = 'skewX(' + (parseFloat(m[1]) * 0.92) + 'deg)';
         });
       }
       }
