@@ -256,7 +256,7 @@
       /* Scroll story 1 — pinned hero: the three headline lines drift
          apart in depth layers while the banner swells, driven by your
          scroll. */
-      if (window.innerHeight > 540) {
+      {
         gsap.timeline({
           scrollTrigger: { trigger: '.hero-banner', start: 'top top', end: '+=90%', pin: true, scrub: 0.6 }
         })
@@ -270,7 +270,7 @@
       /* Scroll story 2 — pinned Quality section: HPLC -> MS -> COA ->
          USA light up in sequence as you scroll through the pin. */
       var qItems = gsap.utils.toArray('#quality .quality-list li');
-      if (qItems.length && window.innerHeight > 600) {
+      if (qItems.length) {
         gsap.set(qItems, { opacity: 0.22 });
         var qtl = gsap.timeline({
           scrollTrigger: { trigger: '#quality', start: 'top 10%', end: '+=' + (qItems.length * 50) + '%', pin: true, scrub: 0.5 }
@@ -333,7 +333,7 @@
           });
         });
       }
-      } catch (e) { /* decorative layer failed — content unaffected */ }
+      } catch (e) { window.__animErr = e; if (window.console && console.error) console.error('anim layer:', e); }
     })();
   </script>
 </body>
