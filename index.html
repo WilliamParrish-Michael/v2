@@ -133,9 +133,14 @@
               <input type="email" name="email" required autocomplete="email" />
             </label>
           </div>
-          <label class="field">Organization <span class="opt">(optional)</span>
-            <input type="text" name="organization" autocomplete="organization" />
-          </label>
+          <div class="fgrid">
+            <label class="field">Organization <span class="opt">(optional)</span>
+              <input type="text" name="organization" autocomplete="organization" />
+            </label>
+            <label class="field">Phone <span class="opt">(optional)</span>
+              <input type="tel" name="phone" autocomplete="tel" />
+            </label>
+          </div>
           <label class="field">Message <span class="req">*</span>
             <textarea name="message" rows="5" required></textarea>
           </label>
@@ -146,13 +151,6 @@
           <button type="submit" class="btn btn-primary">Send inquiry</button>
           <p class="cform-note">We reply within <strong>five business days</strong>. Please do not include personal health information in your message. Submissions are relayed by FormSubmit and delivered to us by email.</p>
         </form>
-
-        <div class="contact-card">
-          <div class="cc-head"><span>Other requests</span><span>Mon–Fri · 5-business-day reply</span></div>
-          <div class="crow"><div class="ck">Accessibility</div><div class="cv"><a href="mailto:accessibility@kathorspeptides.com">accessibility@kathorspeptides.com</a></div></div>
-          <div class="crow"><div class="ck">Privacy requests</div><div class="cv"><a href="mailto:privacy@kathorspeptides.com">privacy@kathorspeptides.com</a></div></div>
-          <div class="crow"><div class="ck">Location</div><div class="cv">California, United States</div></div>
-        </div>
       </div>
     </section>
 
@@ -173,7 +171,6 @@
 
   <script src="js/gsap.min.js"></script>
   <script src="js/ScrollTrigger.min.js"></script>
-  <script src="js/lenis.min.js"></script>
   <script src="shatter.js"></script>
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
@@ -237,79 +234,30 @@
       var hasST = !!window.ScrollTrigger;
       if (hasST) gsap.registerPlugin(ScrollTrigger);
 
-      /* Smooth inertial scroll */
-      if (window.Lenis) {
-        var lenis = new Lenis({ lerp: 0.1 });
-        (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
-        if (hasST) lenis.on('scroll', ScrollTrigger.update);
-        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-          a.addEventListener('click', function (e) {
-            var id = a.getAttribute('href');
-            if (id.length > 1 && document.querySelector(id)) { e.preventDefault(); lenis.scrollTo(id, { offset: -70 }); }
-          });
-        });
-      }
-
-      if (hasST) {
-      /* Section content reveals (decorative — safe to lose) */
-      gsap.utils.toArray('.sec-h, .badge, .cform, .contact-card').forEach(function (el) {
-        gsap.from(el, {
-          y: 34, opacity: 0, duration: 0.9, ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 88%' }
+      /* Native scroll — no smooth-scroll library, so the wheel stays
+         responsive. Anchor links jump with a small offset for the header. */
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = a.getAttribute('href');
+          var target = id.length > 1 ? document.querySelector(id) : null;
+          if (target) {
+            e.preventDefault();
+            var y = target.getBoundingClientRect().top + window.pageYOffset - 70;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
         });
       });
 
-      /* Scroll story 1 — pinned hero: the three headline lines drift
-         apart in depth layers while the banner swells, driven by your
-         scroll. */
-      {
-        gsap.timeline({
-          scrollTrigger: { trigger: '.hero-banner', start: 'top top', end: '+=90%', pin: true, scrub: 0.6 }
-        })
-        .to('.hero-mega .ln:nth-child(1)', { yPercent: -70, ease: 'none' }, 0)
-        .to('.hero-mega .ln:nth-child(2)', { yPercent: -40, ease: 'none' }, 0)
-        .to('.hero-mega .ln:nth-child(3)', { yPercent: -16, ease: 'none' }, 0)
-        .to('.k-eyebrow, .hero-sub', { autoAlpha: 0, ease: 'none' }, 0)
-        .to('.banner', { scale: 1.06, ease: 'none' }, 0);
-      }
-
-      /* Scroll story 2 — pinned Quality section: HPLC -> MS -> COA ->
-         USA light up in sequence as you scroll through the pin. */
-      var qItems = gsap.utils.toArray('#quality .quality-list li');
-      if (qItems.length) {
-        gsap.set(qItems, { opacity: 0.22 });
-        var qtl = gsap.timeline({
-          scrollTrigger: { trigger: '#quality', start: 'top 10%', end: '+=' + (qItems.length * 50) + '%', pin: true, scrub: 0.5 }
+      if (hasST) {
+      /* Light, non-pinned reveals as elements enter the viewport — no
+         pinning or scrubbing, so nothing "sticks" while you scroll. The
+         marquee runs on its own CSS animation. */
+      gsap.utils.toArray('.sec-h, .cform, #quality .quality-list li').forEach(function (el) {
+        gsap.from(el, {
+          y: 26, opacity: 0, duration: 0.7, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 90%' }
         });
-        qItems.forEach(function (li, i) { qtl.to(li, { opacity: 1, x: 8, ease: 'none' }, i * 0.24); });
-      } else {
-        qItems.forEach(function (el) {
-          gsap.from(el, { y: 34, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
-        });
-      }
-
-      /* Marquee rides your scroll: direction and speed follow it,
-         with a velocity skew on fast flicks. */
-      var mq = document.querySelector('.marquee');
-      var track = document.querySelector('.marquee-track');
-      if (mq && track) {
-        track.style.animation = 'none';
-        var mqTween = gsap.to(track, { xPercent: -50, ease: 'none', duration: 26, repeat: -1 });
-        var clampSkew = gsap.utils.clamp(-7, 7);
-        ScrollTrigger.create({
-          onUpdate: function (self) {
-            var v = self.getVelocity();
-            mqTween.timeScale(gsap.utils.clamp(-4, 4, (self.direction || 1) * (1 + Math.abs(v) / 900)));
-            mq.style.transform = 'skewX(' + clampSkew(v / -280) + 'deg)';
-          }
-        });
-        gsap.ticker.add(function () {
-          var ts = mqTween.timeScale();
-          mqTween.timeScale(ts + ((ts < 0 ? -1 : 1) - ts) * 0.04);
-          var m = /skewX\((-?[\d.]+)deg\)/.exec(mq.style.transform);
-          if (m) mq.style.transform = 'skewX(' + (parseFloat(m[1]) * 0.92) + 'deg)';
-        });
-      }
+      });
       }
 
       /* Custom cursor + magnetic buttons (fine pointers only) */
