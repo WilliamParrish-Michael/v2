@@ -62,7 +62,7 @@ a:hover{color:#8CCBFF;}
 .navlinks a:hover,.navlinks a.here{color:var(--blue-2);}
 .navtoggle{display:none;}
 @media(max-width:680px){
-  .navtoggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;background:transparent;border:1px solid var(--line-2);border-radius:8px;color:var(--ink);cursor:pointer;}
+  .navtoggle{-webkit-appearance:none;appearance:none;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;background:transparent;border:1px solid var(--line-2);border-radius:8px;color:var(--ink);cursor:pointer;-webkit-tap-highlight-color:transparent;flex:0 0 auto;}
   .navtoggle .bar,.navtoggle .bar::before,.navtoggle .bar::after{display:block;width:20px;height:2px;background:currentColor;border-radius:2px;}
   .navtoggle .bar{position:relative;transition:background .1s ease;}
   .navtoggle .bar::before,.navtoggle .bar::after{content:"";position:absolute;left:0;transition:transform .2s ease,top .2s ease;}
