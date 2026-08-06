@@ -186,6 +186,8 @@ section{padding:60px 0;border-top:1px solid var(--line);}
 
 /* ---------- full-banner hero (home) ---------- */
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+.skip-link{position:absolute;left:12px;top:-56px;z-index:100;background:var(--blue);color:#fff;font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase;padding:11px 18px;border-radius:8px;text-decoration:none;transition:top .15s ease;}
+.skip-link:focus{top:12px;}
 .hero-banner{padding:0 0 34px;text-align:center;}
 .hero-banner .banner{display:block;width:100%;max-width:1536px;height:auto;margin:0 auto;}
 .hero-banner .hero-sub{max-width:54ch;margin:30px auto 0;color:var(--muted);font-size:18px;}
@@ -209,6 +211,11 @@ section{padding:60px 0;border-top:1px solid var(--line);}
 .legal p{color:var(--muted);font-size:16px;margin:0 0 14px;line-height:1.65;}
 .legal strong{color:var(--ink);font-weight:600;}
 .legal .legal-note{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--faint);}
+.a11y-list{margin:6px 0 18px;padding-left:22px;list-style:disc;}
+.a11y-list li{color:var(--muted);font-size:16px;line-height:1.65;margin:0 0 11px;}
+.a11y-list li::marker{color:var(--blue-2);}
+.a11y-list strong{color:var(--ink);font-weight:600;}
+.a11y-list a{color:var(--blue-2);}
 
 /* ---------- contact form ---------- */
 .cform{margin-top:24px;max-width:620px;}
