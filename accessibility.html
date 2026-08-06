@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Saira:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+<script src="nav.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -27,7 +28,8 @@
         <img class="brand-emblem" src="emblem.png" alt="" />
         <span class="brand-text"><span class="chrome">KATHORS</span><span class="brand-sub">Peptides</span></span>
       </a>
-      <nav class="navlinks" aria-label="Primary">
+      <button class="navtoggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks"><span class="bar"></span></button>
+      <nav class="navlinks" id="navlinks" aria-label="Primary">
         <a href="index.html#about">About</a>
         <a href="standards.html">Standards</a>
         <a href="research.html">Reference</a>

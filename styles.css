@@ -60,7 +60,20 @@ a:hover{color:#8CCBFF;}
 .navlinks{display:flex;gap:26px;font-family:var(--display);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
 .navlinks a{color:var(--muted);text-decoration:none;}
 .navlinks a:hover,.navlinks a.here{color:var(--blue-2);}
-@media(max-width:680px){.navlinks{display:none;}}
+.navtoggle{display:none;}
+@media(max-width:680px){
+  .navtoggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;background:transparent;border:1px solid var(--line-2);border-radius:8px;color:var(--ink);cursor:pointer;}
+  .navtoggle .bar,.navtoggle .bar::before,.navtoggle .bar::after{display:block;width:20px;height:2px;background:currentColor;border-radius:2px;}
+  .navtoggle .bar{position:relative;transition:background .1s ease;}
+  .navtoggle .bar::before,.navtoggle .bar::after{content:"";position:absolute;left:0;transition:transform .2s ease,top .2s ease;}
+  .navtoggle .bar::before{top:-6px;} .navtoggle .bar::after{top:6px;}
+  .navtoggle[aria-expanded="true"] .bar{background:transparent;}
+  .navtoggle[aria-expanded="true"] .bar::before{top:0;transform:rotate(45deg);}
+  .navtoggle[aria-expanded="true"] .bar::after{top:0;transform:rotate(-45deg);}
+  .navlinks{position:absolute;top:66px;left:0;right:0;flex-direction:column;gap:0;background:rgba(7,10,16,.98);backdrop-filter:saturate(150%) blur(10px);border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:max-height .25s ease;z-index:19;}
+  .navlinks.open{max-height:75vh;}
+  .navlinks a{padding:16px 28px;border-top:1px solid var(--line);font-size:14px;}
+}
 
 /* ---------- hero (home) ---------- */
 .hero{padding:64px 0 30px;position:relative;overflow:hidden;text-align:center;}
